@@ -1,4 +1,6 @@
 ﻿using Rejuvena.Assets;
+using Rejuvena.Content.Players.AccessoryHandlers;
+using Terraria;
 
 namespace Rejuvena.Content.Items.Accessories.Classless
 {
@@ -8,5 +10,11 @@ namespace Rejuvena.Content.Items.Accessories.Classless
     [FallbackAsset(FallbackAssetType.Tome)]
     public class WhirlwindAccessory : AccessoryItem
     {
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            base.UpdateAccessory(player, hideVisual);
+
+            player.GetModPlayer<WhirlwindPlayer>().Whirlwind = true;
+        }
     }
 }
