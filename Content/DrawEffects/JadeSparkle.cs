@@ -13,6 +13,7 @@ namespace Rejuvena.Content.DrawEffects
 
         public float Timer;
         public float Rotation;
+        public NPC NPC;
         public float TargetScale = Main.rand.NextFloat(0.2f, 0.5f);
         public float RotationIncrementation = Main.rand.NextFloat(-3f, 3f);
 
@@ -31,15 +32,22 @@ namespace Rejuvena.Content.DrawEffects
 
             Timer++;
             if (Timer < 10f)
+            {
                 Scale = MathHelper.Lerp(Scale, TargetScale, 0.3f);
+
+                position += NPC.velocity;
+            }
             else
             {
                 RotationIncrementation *= 0.93f;
                 Scale = MathHelper.Lerp(Scale, TargetScale, -0.23f);
 
+                position += NPC.velocity * 0.6f;
+
                 if (Scale <= 0)
                     Destroy();
             }
+
 
             Rotation += RotationIncrementation;
         }
@@ -50,7 +58,7 @@ namespace Rejuvena.Content.DrawEffects
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null,
                 Main.GameViewMatrix.ZoomMatrix);
 
-            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54), new Color(136, 190, 151),
+            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54), new Color(82, 128, 140),
                 MathHelper.ToRadians(Rotation), new Vector2(54f / 2f, 54f / 2f), Scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();

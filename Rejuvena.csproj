@@ -10,4 +10,8 @@
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\DrawEffects\" />
+    <Folder Include="Masks\" />
+  </ItemGroup>
 </Project>
