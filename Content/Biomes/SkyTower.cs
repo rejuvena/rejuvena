@@ -31,14 +31,14 @@ namespace Rejuvena.Content.Biomes
             int center_x = pos.X;
             int center_y = pos.Y;
 
-            Asset<Texture2D> perlin = ModContent.Request<Texture2D>("Rejuvena/Masks/Perlin");
+            //Asset<Texture2D> perlin = ModContent.Request<Texture2D>("Rejuvena/Masks/Perlin");
 
-            Color[,] texturecolor = Rejuvena.TextureTo2DArray(perlin.Value);
+            //Color[,] texturecolor = Rejuvena.TextureTo2DArray(perlin.Value);
 
-            IslandGen(new Point(center_x, center_y), 200, 100, perlin.Value, texturecolor);
+            IslandGen(new Point(center_x, center_y), Main.rand.Next(10, 20), Main.rand.Next(10, 20));//, perlin.Value, texturecolor);
         }
 
-        public static void IslandGen(Point position, int width, int height, Texture2D perlin, Color[,] textureColor)
+        public static void IslandGen(Point position, int width, int height)//, Texture2D? perlin, Color[,]? textureColor)
         {
             int GrassID = TileID.Grass; // change this to Sky Grass
             int DirtID = TileID.Dirt; // change this to Pale Dirt
@@ -53,9 +53,9 @@ namespace Rejuvena.Content.Biomes
                 int xx = CenterX + i;
                 int xx2 = CenterX - i;
 
-                int ymod = textureColor[xx % perlin.Width, CenterY % perlin.Height].R / 20;
+                //int ymod = textureColor[xx % perlin.Width, CenterY % perlin.Height].R / 20;
 
-                for (int j = 0; j < (int)(Math.Ceiling((float)MathHelper.Lerp(1, height, MathHelper.Lerp(1, 0, (float)Math.Pow((float)i / width, 2))) / 2) + ymod); j++)
+                for (int j = 0; j < (int)(Math.Ceiling((float)MathHelper.Lerp(1, height, MathHelper.Lerp(1, 0, (float)Math.Pow((float)i / width, 2))) / 2)); j++)
                 {
                     int yy = CenterY + j;
 
