@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Content.DrawEffects
 {
-    public class TestSparkle : RejuvenaDrawEffect
+    public class JadeSparkle : RejuvenaDrawEffect
     {
         public override Asset<Texture2D> Asset => ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle");
 
@@ -18,7 +18,7 @@ namespace Rejuvena.Content.DrawEffects
 
         public override float Scale { get; set; } = 0.15f;
 
-        public TestSparkle(Vector2 pos, Vector2 vel)
+        public JadeSparkle(Vector2 pos, Vector2 vel)
         {
             position = pos;
             velocity = vel;
