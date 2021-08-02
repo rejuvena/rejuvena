@@ -1,54 +1,38 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Terraria.Audio;
-using Terraria.GameContent.Generation;
+﻿using Terraria.Audio;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace Rejuvena.Core.CoreSystems.MusicSystem
 {
     public class MusicPlayer : ModSystem
     {
-        public MP3AudioTrack Audio;
-
         public override void OnModLoad()
         {
             base.OnModLoad();
 
-            Stream stream = Mod.GetFileStream("Assets/Music/Sky_Tower.mp3");
-
-            Audio = new MP3AudioTrack(stream);
-            Audio.SetVariable("Volume", 1f);
-            Audio.Play();
+#if MUSICFIX
+            int music = MusicLoader.GetMusicSlot("Rejuvena/Sounds/Music/Sky_Tower");
+            Mod.Logger.Debug(music);
+            Mod.Logger.Debug(((LegacyAudioSystem)Terraria.Main.audioSystem).AudioTracks.Length);
+            ;
+#endif
         }
 
-        public override void PostUpdateEverything()
+        public override void PostSetupContent()
         {
-            base.PostUpdateEverything();
-            
-            if (Audio is null)
-                return;
+            base.PostSetupContent();
 
-            Audio.Update();
-
-            if (Audio.IsStopped)
-            {
-                Audio.Reuse();
-                Audio.Play();
-            }
-
-            Mod.Logger.Debug(Audio.IsPlaying);
-        }
-
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
-        {
-            base.ModifyWorldGenTasks(tasks, ref totalWeight);
-
-            totalWeight += 1f;
-            tasks.Add(new PassLegacy("OurMod:OurName", (progress, configuration) =>
-            {
-                progress.Value += 1f;
-            }));
+#if MUSICFIX
+            Mod.Logger.Debug(((LegacyAudioSystem)Terraria.Main.audioSystem).AudioTracks.Length);
+            IAudioTrack musicTrack = ModContent.GetMusic("Rejuvena/Sounds/Music/Sky_Tower");
+            ;
+#endif
         }
     }
+
+#if MUSICFIX
+    public class TestMenu : ModMenu
+    {
+        public override int Music => MusicLoader.GetMusicSlot("Rejuvena/Sounds/Music/Sky_Tower");
+    }
+#endif
 }

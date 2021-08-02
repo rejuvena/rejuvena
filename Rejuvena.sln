@@ -8,11 +8,14 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		MusicFix|Any CPU = MusicFix|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{29534E4F-6209-488D-896C-B238B552BE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29534E4F-6209-488D-896C-B238B552BE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29534E4F-6209-488D-896C-B238B552BE1E}.MusicFix|Any CPU.ActiveCfg = MusicFix|Any CPU
+		{29534E4F-6209-488D-896C-B238B552BE1E}.MusicFix|Any CPU.Build.0 = MusicFix|Any CPU
 		{29534E4F-6209-488D-896C-B238B552BE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29534E4F-6209-488D-896C-B238B552BE1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
