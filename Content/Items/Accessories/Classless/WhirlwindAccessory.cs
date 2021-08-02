@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Players.AccessoryHandlers;
+using Rejuvena.Content.DrawEffects;
 using Terraria;
 
 namespace Rejuvena.Content.Items.Accessories.Classless
@@ -21,6 +22,8 @@ namespace Rejuvena.Content.Items.Accessories.Classless
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             base.UpdateAccessory(player, hideVisual);
+
+            new TestSparkle(player.position + new Vector2(Main.rand.Next(player.width), Main.rand.Next(player.height)), Vector2.Zero);
 
             player.GetModPlayer<WhirlwindPlayer>().Whirlwind = true;
         }
