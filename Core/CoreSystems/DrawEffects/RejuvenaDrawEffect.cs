@@ -16,9 +16,11 @@ namespace Rejuvena.Core.CoreSystems.DrawEffects
 
         public Action Destroy { get; }
 
+        public bool ScheduledForDeletion { get; set; }
+
         protected RejuvenaDrawEffect()
         {
-            Destroy += () => DrawEffectManager.Instance.DrawEffects.Remove(this);
+            Destroy += () => ScheduledForDeletion = true;
         }
         
         public virtual void PreDrawAll(SpriteBatch spriteBatch)

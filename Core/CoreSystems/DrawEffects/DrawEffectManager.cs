@@ -23,15 +23,16 @@ namespace Rejuvena.Core.CoreSystems.DrawEffects
         public override void PostUpdateProjectiles()
         {
             // Update all IDrawEffect instances.
-
             foreach (IDrawEffect effect in DrawEffects) 
                 effect.Update();
+
+            // Delete all IDrawEffect instances that were schedules for deletion.
+            DrawEffects.RemoveAll(x => x.ScheduledForDeletion);
         }
 
         public override void PostDrawTiles()
         {
             // Draw all IDrawEffect instances
-            
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Main.GameViewMatrix.ZoomMatrix);
 
             // Call PreDrawAll separately

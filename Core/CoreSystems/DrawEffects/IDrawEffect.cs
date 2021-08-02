@@ -24,6 +24,11 @@ namespace Rejuvena.Core.CoreSystems.DrawEffects
         Action Destroy { get; }
 
         /// <summary>
+        ///     Whether this effect is schedules to get deleted after an <see cref="Update"/> enumeration operation.
+        /// </summary>
+        bool ScheduledForDeletion { get; }
+
+        /// <summary>
         ///     Called before and drawing-related hooks are called.
         /// </summary>
         void PreDrawAll(SpriteBatch spriteBatch);
