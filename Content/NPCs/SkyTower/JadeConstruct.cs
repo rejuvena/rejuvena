@@ -1,9 +1,12 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Rejuvena.Content.NPCs;
 using System;
 using Rejuvena.Core.CoreSystems.DrawEffects;
 using Rejuvena.Content.DrawEffects;
+using Rejuvena.Content.Items.Materials;
+using Rejuvena.Content.Items;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +25,8 @@ namespace Rejuvena.Content.NPCs.SkyTower
             NPC.aiStyle = -1;
             NPC.noGravity = true;
             NPC.damage = 50;
+            NPC.HitSound = SoundID.DD2_SkeletonHurt; // placeholder
+            NPC.DeathSound = SoundID.DD2_SkeletonDeath; // placeholder
         }
 
         public override void AI()
@@ -39,6 +44,28 @@ namespace Rejuvena.Content.NPCs.SkyTower
             sparkle.NPC = NPC;
             sparkle.TargetScale = 0.42f;
             DrawEffectManager.Instance.DrawEffects.Add(sparkle);
+        }
+
+        public override void OnKill()
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                JadeSparkle sparkle = new JadeSparkle(NPC.Center + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4), new Vector2(0, -1.7f).RotatedBy(MathHelper.ToRadians(i * (360 / 16))));
+                sparkle.TargetScale = 0.3f;
+                sparkle.NPC = null;
+                DrawEffectManager.Instance.DrawEffects.Add(sparkle);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 dustSpawnPoint = NPC.Center + new Vector2(10, -10).RotatedBy(MathHelper.ToRadians(90 * i));
+
+                for (i = 0; i < 20; i++)
+                {
+                    Dust.NewDust(dustSpawnPoint - new Vector2(5, 5), 10, 10, DustID.Stone);
+                }
+            }
+            int item = Item.NewItem(NPC.Center, ModContent.ItemType<JadeGemstone>(), Main.rand.Next(4, 9)); // TODO: Set JadeGemstone.Floating to true here, and false in the base code for the item
+            Main.item[item].velocity = Vector2.Zero;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

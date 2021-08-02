@@ -30,19 +30,23 @@ namespace Rejuvena.Content.DrawEffects
             velocity.X *= 0.9f;
             velocity.Y *= 0.9f;
 
+            position += velocity;
+
             Timer++;
             if (Timer < 10f)
             {
                 Scale = MathHelper.Lerp(Scale, TargetScale, 0.3f);
 
-                position += NPC.velocity;
+                if (NPC != null)
+                    position += NPC.velocity;
             }
             else
             {
                 RotationIncrementation *= 0.93f;
                 Scale = MathHelper.Lerp(Scale, TargetScale, -0.23f);
 
-                position += NPC.velocity * 0.6f;
+                if (NPC != null)
+                    position += NPC.velocity * 0.6f;
 
                 if (Scale <= 0)
                     Destroy();
