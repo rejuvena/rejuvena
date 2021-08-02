@@ -23,7 +23,7 @@ namespace Rejuvena.Content.Items.Accessories.Classless
         {
             base.UpdateAccessory(player, hideVisual);
 
-            new TestSparkle(player.position + new Vector2(Main.rand.Next(player.width), Main.rand.Next(player.height)), Vector2.Zero);
+            Core.CoreSystems.DrawEffects.DrawEffectManager.Instance.DrawEffects.Add(new TestSparkle(player.position + new Vector2(Main.rand.Next(player.width), Main.rand.Next(player.height)), Vector2.Zero));
 
             player.GetModPlayer<WhirlwindPlayer>().Whirlwind = true;
         }
