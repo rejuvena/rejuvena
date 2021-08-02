@@ -9,13 +9,14 @@ namespace Rejuvena.Content.DrawEffects
 {
     public class TestSparkle : RejuvenaDrawEffect
     {
-        public override Asset<Texture2D> Asset =>
-            ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/TestSparkle");
+        public override Asset<Texture2D> Asset => ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle");
 
         public float Timer;
         public float Rotation;
-        public float TargetScale = Main.rand.NextFloat(1f, 2f);
+        public float TargetScale = Main.rand.NextFloat(0.2f, 0.5f);
         public float RotationIncrementation = Main.rand.NextFloat(-3f, 3f);
+
+        public override float Scale { get; set; } = 0.15f;
 
         public TestSparkle(Vector2 pos, Vector2 vel)
         {
@@ -49,7 +50,7 @@ namespace Rejuvena.Content.DrawEffects
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null,
                 Main.GameViewMatrix.ZoomMatrix);
 
-            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54), Color.White,
+            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54), new Color(136, 190, 151),
                 MathHelper.ToRadians(Rotation), new Vector2(54f / 2f, 54f / 2f), Scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();
