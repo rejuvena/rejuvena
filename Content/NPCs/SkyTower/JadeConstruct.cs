@@ -1,6 +1,8 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Rejuvena.Content.NPCs;
 using System;
 using Rejuvena.Core.CoreSystems.DrawEffects;
@@ -10,11 +12,36 @@ using Rejuvena.Content.Items;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent.Bestiary;
 
 namespace Rejuvena.Content.NPCs.SkyTower
 {
     class JadeConstruct : RejuvenaNPC
     {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Jade Construct");
+
+            Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Zombie];
+
+            NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            { //Influences how the NPC looks in the Bestiary
+                Velocity = 1f, //Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+            };
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            // We can use AddRange instead of calling Add multiple times in order to add multiple items at once
+            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
+                // Sets the spawning conditions of this NPC that is listed in the bestiary.
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+
+                // Sets the description of this NPC that is listed in the bestiary.
+                new FlavorTextBestiaryInfoElement("Remnants of ancient technology, these constructs hold a cluster of Jade in their centers. If you can dismantle the floating stone, the gemstone is yours to keep.")
+            });
+        }
 
         public override void SetDefaults()
         {
@@ -39,15 +66,19 @@ namespace Rejuvena.Content.NPCs.SkyTower
             NPC.velocity *= 0.95f;
 
             NPC.ai[0]++;
+        }
 
-            JadeSparkle sparkle = new JadeSparkle(NPC.Center + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4), Vector2.Zero);
-            sparkle.NPC = NPC;
-            sparkle.TargetScale = 0.42f;
-            DrawEffectManager.Instance.DrawEffects.Add(sparkle);
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<JadeGemstone>(), 1, 4, 9)); //Drop 4-9 Jade Gemstones. 
         }
 
         public override void OnKill()
         {
+            JadeSparkle sparkle1 = new JadeSparkle(NPC.Center + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4), new Vector2(0, -1.7f));
+            sparkle1.TargetScale = 0.3f;
+            sparkle1.NPC = null;
+            DrawEffectManager.Instance.DrawEffects.Add(sparkle1);
             for (int i = 0; i < 16; i++)
             {
                 JadeSparkle sparkle = new JadeSparkle(NPC.Center + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4), new Vector2(0, -1.7f).RotatedBy(MathHelper.ToRadians(i * (360 / 16))));
@@ -64,8 +95,6 @@ namespace Rejuvena.Content.NPCs.SkyTower
                     Dust.NewDust(dustSpawnPoint - new Vector2(5, 5), 10, 10, DustID.Stone);
                 }
             }
-            int item = Item.NewItem(NPC.Center, ModContent.ItemType<JadeGemstone>(), Main.rand.Next(4, 9)); // TODO: Set JadeGemstone.Floating to true here, and false in the base code for the item
-            Main.item[item].velocity = Vector2.Zero;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -75,14 +104,14 @@ namespace Rejuvena.Content.NPCs.SkyTower
 
             spriteBatch.Draw(core.Value, NPC.Center - screenPos + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4),
                 new Rectangle(0, 0, core.Value.Width, core.Value.Height),
-                Lighting.GetColor(new Point((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16)),
+                Color.White,
                 0f, new Vector2(core.Value.Width / 2, core.Value.Height / 2), 1, SpriteEffects.None, 0f);
 
             for (int i = 0; i < 4; i++)
             {
                 spriteBatch.Draw(debris.Value, NPC.Center - screenPos + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20 + (0.5f * i)) * 8),
                     new Rectangle(0, 0 + (debris.Value.Height / 4 * i), debris.Value.Width, debris.Value.Height / 4),
-                    Lighting.GetColor(new Point((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16)),
+                    drawColor,
                     0f, new Vector2(debris.Value.Width / 2, debris.Value.Height / 4 / 2), 1, SpriteEffects.None, 0f);
             }
 

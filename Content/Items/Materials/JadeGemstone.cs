@@ -21,6 +21,7 @@ namespace Rejuvena.Content.Items.Materials
         {
             base.SetDefaults();
 
+            Item.maxStack = 250;
             Item.Size = new Vector2(16f, 16f);
         }
 
