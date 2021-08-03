@@ -87,6 +87,40 @@ namespace Rejuvena.Content.Biomes
                     Math.Min(Main.rand.Next(width / 4, width / 3),
                         Math.Abs(centerY - offsetY + upperOffsetIncrementerY)), cloudID, WallID.None);
             }
+
+            for (int i = 0; i < (int)(width * 0.9f); i++)
+            {
+                int upperOffsetX = centerX + i;
+                int lowerOffsetX = centerX - i;
+
+                int upperModifierX = Main.rand.Next(-2, 2);
+                int lowerModifierX = Main.rand.Next(-2, 2);
+
+                int offsetY = centerY + (int)Math.Ceiling((float)MathHelper.Lerp(1, height * 0.6f, MathHelper.Lerp(1, 0, (float)Math.Pow((float)i / width, 2))) / 2);
+
+                int upperOffsetIncrementerY = Main.rand.Next(0, 4);
+                int lowerOffsetIncrementerY = Main.rand.Next(0, 4);
+
+                CloudRunner(new Point(upperOffsetX + upperModifierX, offsetY + upperOffsetIncrementerY - 1), 
+                    Math.Min(Main.rand.Next(width / 4, width / 2), Math.Abs(offsetY + upperOffsetIncrementerY)), cloudID, WallID.None);
+
+                CloudRunner(new Point(lowerOffsetX + lowerModifierX, offsetY + lowerOffsetIncrementerY - 1), 
+                    Math.Min(Main.rand.Next(width / 4, width / 2), Math.Abs(offsetY + lowerOffsetIncrementerY)), cloudID, WallID.None);
+            }
+
+            for (int j = 1; j <= 3; j++)
+            {
+                for (int i = 0; i < width + j; i++)
+                {
+                    int upperXDelete = centerX + i;
+                    int lowerXDelete = centerX - i;
+
+                    int offsetY = centerY - j;
+
+                    if (Main.tile[upperXDelete, offsetY].type == cloudID) WorldGen.KillTile(upperXDelete, offsetY, noItem: true);
+                    if (Main.tile[lowerXDelete, offsetY].type == cloudID) WorldGen.KillTile(lowerXDelete, offsetY, noItem: true);
+                }
+            }
         }
 
         /// <summary>
@@ -102,6 +136,18 @@ namespace Rejuvena.Content.Biomes
 
                 WorldGen.PlaceTile(x, y, type);
                 WorldGen.PlaceWall(x, y, wallID);
+            }
+        }
+
+
+        /// <summary>
+        ///     Places multiple SmoothCircleRunners in a smooth horizontal formation.
+        /// </summary>
+        public static void CloudRunner(Point position, int size, int type, int wallID)
+        {
+            for (int x = position.X - size; x <= position.X + size; x++)
+            {
+                SmoothCircleRunner(new Point(x, position.Y), 4 - (Math.Abs(x - position.X) / 2), type, wallID);
             }
         }
     }
