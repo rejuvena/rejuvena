@@ -48,7 +48,8 @@ namespace Rejuvena.Content.Items
             FallbackAssetType? assetType = GetType().GetCustomAttribute<FallbackAssetAttribute>()?.AssetType;
 
             if (assetType is null)
-                throw new NullReferenceException("Attempted to retrieve a fallback asset from an unspecified asset type.");
+                throw new NullReferenceException(
+                    "Attempted to retrieve a fallback asset from an unspecified asset type.");
 
             return assetType switch
             {

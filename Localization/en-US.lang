@@ -4,3 +4,9 @@ ItemTooltip.WhirlwindAccessory=Whoosh lol
 
 ItemName.JadeGemstone=Jade Gemstone
 ItemTooltip.JadeGemstone=It glimmers a pale green.
+
+# NPCs
+NPCName.JadeConstruct=Jade Construct
+
+# Bestiary
+BestiaryText.JadeConstruct=Remnants of ancient technology, these constructs hold a cluster of Jade in their centers. If you can dismantle the floating stone, the gemstone is yours to keep.

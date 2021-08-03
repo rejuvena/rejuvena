@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Core.CoreSystems.DrawEffects;
 using ReLogic.Content;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.DrawEffects
@@ -62,7 +62,8 @@ namespace Rejuvena.Content.DrawEffects
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null,
                 Main.GameViewMatrix.ZoomMatrix);
 
-            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54), new Color(82, 128, 140),
+            spriteBatch.Draw(Asset.Value, position - Main.screenPosition, new Rectangle(0, 0, 54, 54),
+                new Color(82, 128, 140),
                 MathHelper.ToRadians(Rotation), new Vector2(54f / 2f, 54f / 2f), Scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();

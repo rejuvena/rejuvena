@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using NPC = On.Terraria.NPC;
 
 namespace Rejuvena.Content.Players.AccessoryHandlers
 {
@@ -16,7 +17,7 @@ namespace Rejuvena.Content.Players.AccessoryHandlers
         {
             base.Load();
 
-            On.Terraria.NPC.StrikeNPC += ModifyHitDirection;
+            NPC.StrikeNPC += ModifyHitDirection;
         }
 
         public override void ResetEffects()
@@ -26,7 +27,7 @@ namespace Rejuvena.Content.Players.AccessoryHandlers
             Whirlwind = false;
         }
 
-        private static double ModifyHitDirection(On.Terraria.NPC.orig_StrikeNPC orig, NPC self, int damage,
+        private static double ModifyHitDirection(NPC.orig_StrikeNPC orig, Terraria.NPC self, int damage,
             float knockback, int hitDirection, bool crit, bool noEffect, bool fromNet)
         {
             WhirlwindPlayer whirlwind = Main.LocalPlayer.GetModPlayer<WhirlwindPlayer>();

@@ -2,6 +2,7 @@
 using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
 using Terraria;
+using Terraria.ID;
 
 namespace Rejuvena.Content.Items.Debug
 {
@@ -16,7 +17,7 @@ namespace Rejuvena.Content.Items.Debug
             base.SetDefaults();
 
             Item.Size = new Vector2(28f, 32f);
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 1;
             Item.useTime = 1;
             Item.autoReuse = false;

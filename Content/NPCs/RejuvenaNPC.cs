@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
 using ReLogic.Content;
@@ -8,7 +7,7 @@ using Terraria.ModLoader;
 namespace Rejuvena.Content.NPCs
 {
     /// <summary>
-    ///     Abstract base class shared between all <see cref="Rejuvena"/> items.
+    ///     Abstract base class shared between all <see cref="Rejuvena"/> NPCs.
     /// </summary>
     public abstract class RejuvenaNPC : ModNPC, IModContent
     {
@@ -43,18 +42,7 @@ namespace Rejuvena.Content.NPCs
             }
         }
 
-        public FallbackAsset GetFallbackAsset()
-        {
-            FallbackAssetType? assetType = GetType().GetCustomAttribute<FallbackAssetAttribute>()?.AssetType;
-
-            if (assetType is null)
-                throw new NullReferenceException("Attempted to retrieve a fallback asset from an unspecified asset type.");
-
-            return assetType switch
-            {
-                FallbackAssetType.Default => new FallbackAsset("ModLoader/UnloadedItem", 20, 20),
-                _ => throw new NotImplementedException("Unable to fall back to an unexpected asset.")
-            };
-        }
+        public FallbackAsset GetFallbackAsset() => 
+            throw new NotImplementedException("There are no fallback NPC assets.");
     }
 }

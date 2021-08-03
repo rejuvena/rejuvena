@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
-using Terraria;
 
 namespace Rejuvena.Content.Items.Materials
 {
@@ -25,20 +24,15 @@ namespace Rejuvena.Content.Items.Materials
             Item.Size = new Vector2(16f, 16f);
         }
 
-        public override void UpdateInventory(Player player)
-        {
-            base.UpdateInventory(player);
-
-            Floating = false;
-        }
-
         public override void Update(ref float gravity, ref float maxFallSpeed)
         {
+            _ = gravity;
+
             if (Floating)
             {
                 gravity = 0f;
 
-                if (Item.timeSinceItemSpawned > 30f) 
+                if (Item.timeSinceItemSpawned > 30f)
                     Floating = false;
             }
             else

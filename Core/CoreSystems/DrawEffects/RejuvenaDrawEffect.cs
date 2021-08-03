@@ -22,13 +22,13 @@ namespace Rejuvena.Core.CoreSystems.DrawEffects
         {
             Destroy += () => ScheduledForDeletion = true;
         }
-        
+
         public virtual void PreDrawAll(SpriteBatch spriteBatch)
         {
         }
-        
+
         public virtual bool PreDraw(SpriteBatch spriteBatch) => true;
-        
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
         }
@@ -36,7 +36,7 @@ namespace Rejuvena.Core.CoreSystems.DrawEffects
         public virtual void PostDraw(SpriteBatch spriteBatch)
         {
         }
-        
+
         public virtual void Update()
         {
         }
