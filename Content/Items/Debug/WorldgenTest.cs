@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
-using Rejuvena.Content.Players.AccessoryHandlers;
 using Terraria;
 
 namespace Rejuvena.Content.Items.Debug

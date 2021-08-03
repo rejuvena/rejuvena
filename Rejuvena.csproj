@@ -6,16 +6,13 @@
     <TargetFramework>net5.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
-    <Configurations>Debug;Release;MusicFix</Configurations>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MusicFix|AnyCPU'">
-    <DefineConstants>TRACE;MUSICFIX;DEBUG</DefineConstants>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\DrawEffects\" />
-    <Folder Include="Masks\" />
+    <Folder Include="Assets\Masks\" />
   </ItemGroup>
 </Project>
