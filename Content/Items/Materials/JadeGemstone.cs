@@ -25,20 +25,24 @@ namespace Rejuvena.Content.Items.Materials
             Item.Size = new Vector2(16f, 16f);
         }
 
+        public override void UpdateInventory(Player player)
+        {
+            base.UpdateInventory(player);
+
+            Floating = false;
+        }
+
         public override void Update(ref float gravity, ref float maxFallSpeed)
         {
             if (Floating)
             {
                 gravity = 0f;
-                if (Item.timeSinceItemSpawned > 30)
-                {
+
+                if (Item.timeSinceItemSpawned > 30f) 
                     Floating = false;
-                }
             }
             else
-            {
                 gravity = 0.1f;
-            }
         }
     }
 }

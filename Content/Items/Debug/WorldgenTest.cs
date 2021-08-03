@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
-using Rejuvena.Content.Players.AccessoryHandlers;
 using Terraria;
 
 namespace Rejuvena.Content.Items.Debug
@@ -9,6 +8,7 @@ namespace Rejuvena.Content.Items.Debug
     /// <summary>
     ///     Classless accessory that allows for reversing knock-back inflicted on NPCs.
     /// </summary>
+    [FallbackAsset(FallbackAssetType.Default)]
     public class WorldgenTest : RejuvenaItem
     {
         public override void SetDefaults()
