@@ -32,8 +32,8 @@ namespace Rejuvena.Content.Biomes
                 Main.rand.Next(10, 40)); //, perlin.Value, texturecolor);
         }
 
-        public static void
-            IslandGen(Point position, int width, int height) //, Texture2D? perlin, Color[,]? textureColor)
+        //, Texture2D? perlin, Color[,]? textureColor)
+        public static void IslandGen(Point position, int width, int height)
         {
             const int grassId = TileID.Grass; // change this to Sky Grass
             const int dirtId = TileID.Dirt; // change this to Pale Dirt
