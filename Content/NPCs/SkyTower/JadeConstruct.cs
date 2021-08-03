@@ -73,7 +73,7 @@ namespace Rejuvena.Content.NPCs.SkyTower
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<JadeGemstone>(), 1, 4, 9)); //Drop 4-9 Jade Gemstones. 
         }
 
-        public override void OnKill()
+        public override bool SpecialOnKill()
         {
             JadeSparkle sparkle1 = new JadeSparkle(NPC.Center + new Vector2(0, (float)Math.Cos(NPC.ai[0] / 20) * 4), new Vector2(0, -1.7f));
             sparkle1.TargetScale = 0.3f;
@@ -95,6 +95,10 @@ namespace Rejuvena.Content.NPCs.SkyTower
                     Dust.NewDust(dustSpawnPoint - new Vector2(5, 5), 10, 10, DustID.Stone);
                 }
             }
+            int item = Item.NewItem(NPC.Center, ModContent.ItemType<JadeGemstone>(), Main.rand.Next(4, 10));
+            Main.item[item].velocity = Vector2.Zero;
+
+            return true;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
