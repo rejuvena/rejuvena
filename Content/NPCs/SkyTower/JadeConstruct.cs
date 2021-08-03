@@ -30,11 +30,10 @@ namespace Rejuvena.Content.NPCs.SkyTower
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Zombie];
-
-            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            BestiaryDrawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
-                Velocity = 1f
-            });
+                Rotation = 0f
+            };
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -115,8 +114,12 @@ namespace Rejuvena.Content.NPCs.SkyTower
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (NPC.IsABestiaryIconDummy)
-                NPC.ai[0]++;
+            if (NPC.IsABestiaryIconDummy &&
+                NPCID.Sets.NPCBestiaryDrawOffset.TryGetValue(Type, out NPCID.Sets.NPCBestiaryDrawModifiers modifiers))
+            {
+                if (!modifiers.Hide)
+                    NPC.ai[0]++;
+            }
 
             spriteBatch.Draw(CoreTexture.Value,
                 NPC.Center - screenPos + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20) * 4),

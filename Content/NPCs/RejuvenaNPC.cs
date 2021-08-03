@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
 using ReLogic.Content;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.NPCs
@@ -40,6 +41,13 @@ namespace Rejuvena.Content.NPCs
                     throw;
                 }
             }
+        }
+
+        public virtual NPCID.Sets.NPCBestiaryDrawModifiers BestiaryDrawModifiers
+        {
+            get => NPCID.Sets.NPCBestiaryDrawOffset[Type];
+
+            set => NPCID.Sets.NPCBestiaryDrawOffset[Type] = value;
         }
 
         public FallbackAsset GetFallbackAsset() => 
