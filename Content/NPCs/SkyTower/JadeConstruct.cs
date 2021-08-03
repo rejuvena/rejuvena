@@ -115,21 +115,24 @@ namespace Rejuvena.Content.NPCs.SkyTower
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            if (NPC.IsABestiaryIconDummy)
+                NPC.ai[0]++;
+
             spriteBatch.Draw(CoreTexture.Value,
                 NPC.Center - screenPos + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20) * 4),
                 new Rectangle(0, 0, CoreTexture.Value.Width, CoreTexture.Value.Height),
                 Color.White,
-                0f, new Vector2(CoreTexture.Value.Width / 2f, CoreTexture.Value.Height / 2f), 1, SpriteEffects.None,
+                0f, new Vector2(CoreTexture.Value.Width / 2f, CoreTexture.Value.Height / 2f), NPC.scale, SpriteEffects.None,
                 0f);
 
             for (int i = 0; i < 4; i++)
             {
                 spriteBatch.Draw(DebrisTexture.Value,
-                    NPC.Center - screenPos + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20 + (0.5f * i)) * 8),
-                    new Rectangle(0, 0 + (DebrisTexture.Value.Height / 4 * i), DebrisTexture.Value.Width,
+                    NPC.Center - screenPos + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20 + 0.5f * i) * 8),
+                    new Rectangle(0, 0 + DebrisTexture.Value.Height / 4 * i, DebrisTexture.Value.Width,
                         DebrisTexture.Value.Height / 4),
                     drawColor,
-                    0f, new Vector2(DebrisTexture.Value.Width / 2f, DebrisTexture.Value.Height / 4f / 2f), 1,
+                    0f, new Vector2(DebrisTexture.Value.Width / 2f, DebrisTexture.Value.Height / 4f / 2f), NPC.scale,
                     SpriteEffects.None, 0f);
             }
 
