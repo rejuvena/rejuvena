@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.ModLoader;
+
 // ReSharper disable CommentTypo
 // ReSharper disable UnusedMember.Global
 
@@ -2831,5 +2834,7 @@ namespace Rejuvena.Assets
                 zr += vz * warpAmp;
             }
         }
+
+        public static Noise DefaultPerlinMask => new(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin"));
     }
 }

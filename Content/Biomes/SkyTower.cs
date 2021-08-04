@@ -29,8 +29,6 @@ namespace Rejuvena.Content.Biomes
             int centerX = pos.X;
             int centerY = pos.Y;
 
-            //Asset<Texture2D> perlin = ModContent.Request<Texture2D>("Rejuvena/Masks/Perlin");
-
             IslandGen(new Point(centerX, centerY), Main.rand.Next(10, 40), Main.rand.Next(10, 40), ref progress);
         }
 
