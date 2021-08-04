@@ -44,13 +44,12 @@ namespace Rejuvena.Content.Biomes
             int centerX = position.X;
             int centerY = position.Y;
 
-            for (int i = 0; i < width; i++)
+            for (int i = -width; i <= width; i++)
             {
-                int upperOffsetX = centerX + i;
-                int lowerOffsetX = centerX - i;
+                int offsetX = centerX + i;
 
-                int yModifier = NoiseSampler.DefaultPerlinMask.NoiseData[Math.Min(upperOffsetX % NoiseSampler.DefaultPerlinMask.Texture.Value.Width * 3, NoiseSampler.DefaultPerlinMask.NoiseData.GetLength(0) - 1), centerY % NoiseSampler.DefaultPerlinMask.Texture.Value.Height].R / 40; //Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
-
+                int yModifier = NoiseSampler.DefaultPerlinMask.NoiseData[Math.Min(offsetX % NoiseSampler.DefaultPerlinMask.Texture.Value.Width * 2, NoiseSampler.DefaultPerlinMask.NoiseData.GetLength(0) - 1), centerY % NoiseSampler.DefaultPerlinMask.Texture.Value.Height].R / 30; //Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
+                
                 for (int j = 0;
                     j < (int) Math.Ceiling(MathHelper.Lerp(1, height,
                         MathHelper.Lerp(1, 0, (float) Math.Pow((float) i / width, 2))) / 2) + yModifier;
@@ -58,12 +57,10 @@ namespace Rejuvena.Content.Biomes
                 {
                     int offsetY = centerY + j;
 
-                    TileHelpers.ParanoidTilePlacement(upperOffsetX, offsetY, dirtId, TileHelpers.PlacementType.Tile);
-                    TileHelpers.ParanoidTilePlacement(lowerOffsetX, offsetY, dirtId, TileHelpers.PlacementType.Tile);
+                    TileHelpers.ParanoidTilePlacement(offsetX, offsetY, dirtId, TileHelpers.PlacementType.Tile);
                 }
 
-                TileHelpers.ParanoidTilePlacement(upperOffsetX, centerY, grassId, TileHelpers.PlacementType.Tile);
-                TileHelpers.ParanoidTilePlacement(lowerOffsetX, centerY, grassId, TileHelpers.PlacementType.Tile);
+                TileHelpers.ParanoidTilePlacement(offsetX, centerY, grassId, TileHelpers.PlacementType.Tile);
             }
 
             progress.Value++;
@@ -118,7 +115,7 @@ namespace Rejuvena.Content.Biomes
 
             progress.Value++;
 
-            for (int j = 1; j <= 3; j++)
+            for (int j = 1; j <= 4; j++)
             for (int i = 0; i < width + j; i++)
             {
                 int upperXDelete = centerX + i;
@@ -126,11 +123,18 @@ namespace Rejuvena.Content.Biomes
 
                 int offsetY = centerY - j;
 
-                if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
-                    TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
+                    if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
+                        TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
 
-                if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
-                    TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
+                    if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
+                        TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
+
+                    if (Main.tile[upperXDelete, offsetY].type == cloudID)
+                        WorldGen.KillTile(upperXDelete, offsetY, noItem: true);
+
+                    if (Main.tile[lowerXDelete, offsetY].type == cloudID)
+                        WorldGen.KillTile(lowerXDelete, offsetY, noItem: true);
+
             }
 
             progress.Value++;
@@ -142,7 +146,7 @@ namespace Rejuvena.Content.Biomes
         public static void CloudRunner(Point position, int size, int type, int wallID)
         {
             for (int x = position.X - size; x <= position.X + size; x++)
-                TileHelpers.SmoothCircleRunner(new Point(x, position.Y), 4 - Math.Abs(x - position.X) / 2, type, wallID);
+                TileHelpers.SmoothCircleRunner(new Point(x, position.Y), 5, type, wallID);
         }
     }
 }
