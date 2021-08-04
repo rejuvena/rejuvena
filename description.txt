@@ -1,1 +1,3 @@
-Rejuvena is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Rejuvena is a content mod that adds sexy men.
+
+This mod utilizes FastNoiseLite, a single-file library for generating noise, licensed under the MIT license. Copyright 2020 Jorden Peck (jordan.me2@gmail.com) and FastNoiseLite contributors.
