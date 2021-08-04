@@ -3,6 +3,7 @@ using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
 using Terraria;
 using Terraria.ID;
+using Terraria.WorldBuilding;
 
 namespace Rejuvena.Content.Items.Debug
 {
@@ -25,7 +26,8 @@ namespace Rejuvena.Content.Items.Debug
 
         public override bool? UseItem(Player player)
         {
-            SkyTowerGeneration.GenTower(new Point((int)Main.MouseWorld.X / 16, (int)Main.MouseWorld.Y / 16));
+            GenerationProgress discard = new();
+            SkyTowerGeneration.GenTower(new Point((int)Main.MouseWorld.X / 16, (int)Main.MouseWorld.Y / 16), ref discard);
 
             return base.UseItem(player);
         }
