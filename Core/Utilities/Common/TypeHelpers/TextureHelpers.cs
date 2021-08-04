@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Rejuvena.Core.CoreSystems;
 using Terraria;
 
 namespace Rejuvena.Core.Utilities.Common.TypeHelpers
@@ -19,14 +20,11 @@ namespace Rejuvena.Core.Utilities.Common.TypeHelpers
             Color[] colors1D = new Color[texture.Width * texture.Height]; //The hard to read,1D array
             Color[,] colors2D = new Color[texture.Width, texture.Height]; //The new, easy to read 2D array
 
-            Main.QueueMainThreadAction(() =>
-            {
-                texture.GetData(colors1D); //Get the colors and add them to the array
+            texture.GetData(colors1D); //Get the colors and add them to the array
 
-                for (int x = 0; x < texture.Width; x++) //Convert!
-                for (int y = 0; y < texture.Height; y++)
-                    colors2D[x, y] = colors1D[x + y * texture.Width];
-            });
+            for (int x = 0; x < texture.Width; x++) //Convert!
+            for (int y = 0; y < texture.Height; y++)
+                colors2D[x, y] = colors1D[x + y * texture.Width];
 
             return colors2D; //Done!
         }

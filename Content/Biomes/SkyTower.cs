@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Rejuvena.Assets;
 using Rejuvena.Core.Utilities.Common.TypeHelpers;
 using Terraria;
 using Terraria.GameContent.Generation;
@@ -20,7 +21,7 @@ namespace Rejuvena.Content.Biomes
             {
                 progress.Message = "Generating sky tower...";
 
-                GenTower(new Point(Main.rand.Next(-200, 200), 240), ref progress);
+                GenTower(new Point(Main.rand.Next(200, 600), 240), ref progress);
             }));
         }
 
@@ -48,7 +49,7 @@ namespace Rejuvena.Content.Biomes
                 int upperOffsetX = centerX + i;
                 int lowerOffsetX = centerX - i;
 
-                int yModifier = Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
+                int yModifier = NoiseSampler.DefaultPerlinMask.NoiseData[Math.Min(upperOffsetX % NoiseSampler.DefaultPerlinMask.Texture.Value.Width * 3, NoiseSampler.DefaultPerlinMask.NoiseData.GetLength(0) - 1), centerY % NoiseSampler.DefaultPerlinMask.Texture.Value.Height].R / 40; //Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
 
                 for (int j = 0;
                     j < (int) Math.Ceiling(MathHelper.Lerp(1, height,

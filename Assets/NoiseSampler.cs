@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
 using Terraria.ModLoader;
 
 // ReSharper disable CommentTypo
@@ -8,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Assets
 {
-    public static class NoiseSampler
+    public class NoiseSampler : ModSystem
     {
         /* MIT License
          *
@@ -2835,6 +2838,33 @@ namespace Rejuvena.Assets
             }
         }
 
-        public static Noise DefaultPerlinMask => new(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin"));
+        public static bool Initialized { get; private set; }
+        public static Noise DefaultPerlinMask;
+
+        public override void Load()
+        {
+            base.Load();
+
+            On.Terraria.Main.Update += LoadNoise;
+        }
+
+        public override void Unload()
+        {
+            base.Unload();
+
+            On.Terraria.Main.Update -= LoadNoise;
+        }
+
+        private void LoadNoise(On.Terraria.Main.orig_Update orig, Main self, GameTime gameTime)
+        {
+            if (!Initialized)
+            {
+                DefaultPerlinMask = new Noise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
+
+                Initialized = true;
+            }
+
+            orig(self, gameTime);
+        }
     }
 }
