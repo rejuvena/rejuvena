@@ -129,11 +129,11 @@ namespace Rejuvena.Content.Biomes
                     if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
                         TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
 
-                    if (Main.tile[upperXDelete, offsetY].type == cloudID)
-                        WorldGen.KillTile(upperXDelete, offsetY, noItem: true);
+                    if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
+                        TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
 
-                    if (Main.tile[lowerXDelete, offsetY].type == cloudID)
-                        WorldGen.KillTile(lowerXDelete, offsetY, noItem: true);
+                    if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
+                        TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
 
             }
 
