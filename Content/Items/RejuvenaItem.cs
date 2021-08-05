@@ -2,6 +2,7 @@
 using System.Reflection;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
+using Rejuvena.Core.Utilities.Common.Interfaces;
 using ReLogic.Content;
 using Terraria.ModLoader;
 

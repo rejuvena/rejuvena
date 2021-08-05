@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Core.Utilities.Common;
+using Rejuvena.Core.Utilities.Common.Interfaces;
 using ReLogic.Content;
 using Terraria;
 

@@ -1,6 +1,6 @@
 ﻿using Rejuvena.Assets;
 
-namespace Rejuvena.Content
+namespace Rejuvena.Core.Utilities.Common.Interfaces
 {
     /// <summary>
     ///     Interface for adding rarely-useful features to <c>ModX</c> types.

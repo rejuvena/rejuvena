@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
-using Rejuvena.Core.Utilities.Common.TypeHelpers;
+using Rejuvena.Core.Utilities.Common.Helpers;
 using Terraria;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
@@ -37,8 +37,8 @@ namespace Rejuvena.Content.Biomes
         {
             const int grassId = TileID.Grass; // change this to Sky Grass
             const int dirtId = TileID.Dirt; // change this to Pale Dirt
-            const int stoneId = TileID.Stone; // change this to Skystone
-            const int brickId = TileID.GrayBrick; // change this to Dark Bricks
+            // const int stoneId = TileID.Stone; // change this to Skystone
+            // const int brickId = TileID.GrayBrick; // change this to Dark Bricks
             const int cloudID = TileID.Cloud; // change this to funnier rain cloud
 
             int centerX = position.X;

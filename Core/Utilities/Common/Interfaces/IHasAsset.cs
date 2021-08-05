@@ -1,6 +1,6 @@
 ﻿using ReLogic.Content;
 
-namespace Rejuvena.Core.Utilities.Common
+namespace Rejuvena.Core.Utilities.Common.Interfaces
 {
     /// <summary>
     ///     Indicates that an object has an associated asset.

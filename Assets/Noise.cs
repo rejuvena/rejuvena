@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Core.Utilities.Common.TypeHelpers;
+using Rejuvena.Core.Utilities.Common.Helpers;
 using ReLogic.Content;
 
 namespace Rejuvena.Assets
@@ -8,7 +8,11 @@ namespace Rejuvena.Assets
     /// <summary>
     ///     Holds an <see cref="Asset{T}"/>-wrapped <see cref="Texture2D"/> asset as well was a two-dimensional <see cref="Color"/> array.
     /// </summary>
-    public sealed class Noise
+    /// <remarks>
+    ///     You must be careful when creating a new noise instance, as <see cref="TextureHelpers.GetColors"/> is used. <br />
+    ///     This will break if the instance is not created on the main thread. Thanks, FNA.
+    /// </remarks>
+    public readonly struct Noise
     {
         /// <summary>
         ///     The noise's texture, wrapped in an <see cref="Asset{T}"/>.
@@ -21,7 +25,7 @@ namespace Rejuvena.Assets
         public Color[,] NoiseData { get; }
 
         /// <summary>
-        ///     Initialized a new instance.
+        ///     Initializes a new instance.
         /// </summary>
         public Noise(Asset<Texture2D> texture)
         {

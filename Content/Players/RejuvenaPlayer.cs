@@ -1,5 +1,6 @@
 ﻿using System;
 using Rejuvena.Assets;
+using Rejuvena.Core.Utilities.Common.Interfaces;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Players

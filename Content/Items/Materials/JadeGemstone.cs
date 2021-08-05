@@ -13,8 +13,19 @@ namespace Rejuvena.Content.Items.Materials
     /// </summary>
     public class JadeGemstone : RejuvenaItem
     {
+        /// <summary>
+        ///     Whether newly-dropped effects are initialized and should be shown.
+        /// </summary>
         public bool InitializedEffects;
+
+        /// <summary>
+        ///     Whether the item is floating when it's first spawned.
+        /// </summary>
         public bool Floating;
+
+        /// <summary>
+        ///     The saved spawn time, allowing for calculating the difference between the time it was initialized and its current real spawn time.
+        /// </summary>
         public int SavedSpawnTime;
 
         public override void SetDefaults()
@@ -25,7 +36,8 @@ namespace Rejuvena.Content.Items.Materials
             Item.Size = new Vector2(16f, 16f);
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale,
+        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor,
+            float rotation, float scale,
             int whoAmI)
         {
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
@@ -33,13 +45,15 @@ namespace Rejuvena.Content.Items.Materials
             if (!InitializedEffects)
                 return;
 
-            byte difference = (byte) Math.Clamp(Item.timeSinceItemSpawned - SavedSpawnTime, byte.MinValue, byte.MaxValue);
+            byte difference =
+                (byte) Math.Clamp(Item.timeSinceItemSpawned - SavedSpawnTime, byte.MinValue, byte.MaxValue);
 
             lightColor.A = (byte) (byte.MaxValue - difference);
 
             spriteBatch.Draw(TextureAssets.Item[Type].Value,
                 Item.Center - Main.screenPosition, null,
-                new Color(lightColor.A, lightColor.A, lightColor.A, lightColor.A), rotation, TextureAssets.Item[Type].Size() / 2f, scale,
+                new Color(lightColor.A, lightColor.A, lightColor.A, lightColor.A), rotation,
+                TextureAssets.Item[Type].Size() / 2f, scale,
                 SpriteEffects.None, 0f);
 
             float divisor = 3f + difference / 25f;
@@ -65,7 +79,8 @@ namespace Rejuvena.Content.Items.Materials
             else if (gravity == 0f)
                 gravity = 0.1f;
 
-            byte difference = (byte)Math.Clamp(Item.timeSinceItemSpawned - SavedSpawnTime, byte.MinValue, byte.MaxValue);
+            byte difference =
+                (byte) Math.Clamp(Item.timeSinceItemSpawned - SavedSpawnTime, byte.MinValue, byte.MaxValue);
 
             switch (difference)
             {
@@ -82,6 +97,9 @@ namespace Rejuvena.Content.Items.Materials
             }
         }
 
+        /// <summary>
+        ///     Sets/resets initial NPC-dropped spawn effects.
+        /// </summary>
         public void SetInitialSpawn()
         {
             Floating = true;

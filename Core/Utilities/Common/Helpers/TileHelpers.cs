@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 
-namespace Rejuvena.Core.Utilities.Common.TypeHelpers
+namespace Rejuvena.Core.Utilities.Common.Helpers
 {
     /// <summary>
     ///     Helpful Tile-related methods.

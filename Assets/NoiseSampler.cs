@@ -11,6 +11,9 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Assets
 {
+    /// <summary>
+    ///     Handles the loading of <see cref="Noise"/> instances used in <see cref="Rejuvena"/>.
+    /// </summary>
     public class NoiseSampler : ModSystem
     {
         /* MIT License
@@ -349,17 +352,13 @@ namespace Rejuvena.Assets
             {
                 TransformNoiseCoordinate(ref x, ref y);
 
-                switch (_mFractalType)
+                return _mFractalType switch
                 {
-                    default:
-                        return GenNoiseSingle(_mSpeed, x, y);
-                    case FractalType.FBm:
-                        return GenFractalFBm(x, y);
-                    case FractalType.Ridged:
-                        return GenFractalRidged(x, y);
-                    case FractalType.PingPong:
-                        return GenFractalPingPong(x, y);
-                }
+                    FractalType.FBm => GenFractalFBm(x, y),
+                    FractalType.Ridged => GenFractalRidged(x, y),
+                    FractalType.PingPong => GenFractalPingPong(x, y),
+                    _ => GenNoiseSingle(_mSpeed, x, y)
+                };
             }
 
             /// <summary>
@@ -373,17 +372,13 @@ namespace Rejuvena.Assets
             {
                 TransformNoiseCoordinate(ref x, ref y, ref z);
 
-                switch (_mFractalType)
+                return _mFractalType switch
                 {
-                    default:
-                        return GenNoiseSingle(_mSpeed, x, y, z);
-                    case FractalType.FBm:
-                        return GenFractalFBm(x, y, z);
-                    case FractalType.Ridged:
-                        return GenFractalRidged(x, y, z);
-                    case FractalType.PingPong:
-                        return GenFractalPingPong(x, y, z);
-                }
+                    FractalType.FBm => GenFractalFBm(x, y, z),
+                    FractalType.Ridged => GenFractalRidged(x, y, z),
+                    FractalType.PingPong => GenFractalPingPong(x, y, z),
+                    _ => GenNoiseSingle(_mSpeed, x, y, z)
+                };
             }
 
 
@@ -979,44 +974,30 @@ namespace Rejuvena.Assets
 
             private float GenNoiseSingle(int seed, float x, float y)
             {
-                switch (_mNoiseType)
+                return _mNoiseType switch
                 {
-                    case NoiseType.OpenSimplex2:
-                        return SingleSimplex(seed, x, y);
-                    case NoiseType.OpenSimplex2S:
-                        return SingleOpenSimplex2S(seed, x, y);
-                    case NoiseType.Cellular:
-                        return SingleCellular(seed, x, y);
-                    case NoiseType.Perlin:
-                        return SinglePerlin(seed, x, y);
-                    case NoiseType.ValueCubic:
-                        return SingleValueCubic(seed, x, y);
-                    case NoiseType.Value:
-                        return SingleValue(seed, x, y);
-                    default:
-                        return 0;
-                }
+                    NoiseType.OpenSimplex2 => SingleSimplex(seed, x, y),
+                    NoiseType.OpenSimplex2S => SingleOpenSimplex2S(seed, x, y),
+                    NoiseType.Cellular => SingleCellular(seed, x, y),
+                    NoiseType.Perlin => SinglePerlin(seed, x, y),
+                    NoiseType.ValueCubic => SingleValueCubic(seed, x, y),
+                    NoiseType.Value => SingleValue(seed, x, y),
+                    _ => 0
+                };
             }
 
             private float GenNoiseSingle(int seed, float x, float y, float z)
             {
-                switch (_mNoiseType)
+                return _mNoiseType switch
                 {
-                    case NoiseType.OpenSimplex2:
-                        return SingleOpenSimplex2(seed, x, y, z);
-                    case NoiseType.OpenSimplex2S:
-                        return SingleOpenSimplex2S(seed, x, y, z);
-                    case NoiseType.Cellular:
-                        return SingleCellular(seed, x, y, z);
-                    case NoiseType.Perlin:
-                        return SinglePerlin(seed, x, y, z);
-                    case NoiseType.ValueCubic:
-                        return SingleValueCubic(seed, x, y, z);
-                    case NoiseType.Value:
-                        return SingleValue(seed, x, y, z);
-                    default:
-                        return 0;
-                }
+                    NoiseType.OpenSimplex2 => SingleOpenSimplex2(seed, x, y, z),
+                    NoiseType.OpenSimplex2S => SingleOpenSimplex2S(seed, x, y, z),
+                    NoiseType.Cellular => SingleCellular(seed, x, y, z),
+                    NoiseType.Perlin => SinglePerlin(seed, x, y, z),
+                    NoiseType.ValueCubic => SingleValueCubic(seed, x, y, z),
+                    NoiseType.Value => SingleValue(seed, x, y, z),
+                    _ => 0
+                };
             }
 
 
@@ -1086,28 +1067,16 @@ namespace Rejuvena.Assets
 
             private void UpdateTransformType3D()
             {
-                switch (_mRotationType3D)
+                _mTransformType = _mRotationType3D switch
                 {
-                    case RotationType3D.ImproveXyPlanes:
-                        _mTransformType = TransformType3D.ImproveXyPlanes;
-                        break;
-                    case RotationType3D.ImproveXzPlanes:
-                        _mTransformType = TransformType3D.ImproveXzPlanes;
-                        break;
-                    default:
-                        switch (_mNoiseType)
-                        {
-                            case NoiseType.OpenSimplex2:
-                            case NoiseType.OpenSimplex2S:
-                                _mTransformType = TransformType3D.DefaultOpenSimplex2;
-                                break;
-                            default:
-                                _mTransformType = TransformType3D.None;
-                                break;
-                        }
-
-                        break;
-                }
+                    RotationType3D.ImproveXyPlanes => TransformType3D.ImproveXyPlanes,
+                    RotationType3D.ImproveXzPlanes => TransformType3D.ImproveXzPlanes,
+                    _ => _mNoiseType switch
+                    {
+                        NoiseType.OpenSimplex2 or NoiseType.OpenSimplex2S => TransformType3D.DefaultOpenSimplex2,
+                        _ => TransformType3D.None,
+                    },
+                };
             }
 
 
@@ -1170,28 +1139,16 @@ namespace Rejuvena.Assets
 
             private void UpdateWarpTransformType3D()
             {
-                switch (_mRotationType3D)
+                _mWarpTransformType3D = _mRotationType3D switch
                 {
-                    case RotationType3D.ImproveXyPlanes:
-                        _mWarpTransformType3D = TransformType3D.ImproveXyPlanes;
-                        break;
-                    case RotationType3D.ImproveXzPlanes:
-                        _mWarpTransformType3D = TransformType3D.ImproveXzPlanes;
-                        break;
-                    default:
-                        switch (_mDomainWarpType)
-                        {
-                            case DomainWarpType.OpenSimplex2:
-                            case DomainWarpType.OpenSimplex2Reduced:
-                                _mWarpTransformType3D = TransformType3D.DefaultOpenSimplex2;
-                                break;
-                            default:
-                                _mWarpTransformType3D = TransformType3D.None;
-                                break;
-                        }
-
-                        break;
-                }
+                    RotationType3D.ImproveXyPlanes => TransformType3D.ImproveXyPlanes,
+                    RotationType3D.ImproveXzPlanes => TransformType3D.ImproveXzPlanes,
+                    _ => _mDomainWarpType switch
+                    {
+                        DomainWarpType.OpenSimplex2 or DomainWarpType.OpenSimplex2Reduced => TransformType3D.DefaultOpenSimplex2,
+                        _ => TransformType3D.None,
+                    },
+                };
             }
 
 
@@ -1329,7 +1286,7 @@ namespace Rejuvena.Assets
 
             // Simplex/OpenSimplex2 Noise
 
-            private float SingleSimplex(int seed, float x, float y)
+            private static float SingleSimplex(int seed, float x, float y)
             {
                 // 2D OpenSimplex2 case uses the same algorithm as ordinary Simplex.
 
@@ -1400,7 +1357,7 @@ namespace Rejuvena.Assets
                 return (n0 + n1 + n2) * 99.83685446303647f;
             }
 
-            private float SingleOpenSimplex2(int seed, float x, float y, float z)
+            private static float SingleOpenSimplex2(int seed, float x, float y, float z)
             {
                 // 3D OpenSimplex2 case uses two offset rotated cube grids.
 
@@ -1500,7 +1457,7 @@ namespace Rejuvena.Assets
 
             // OpenSimplex2S Noise
 
-            private float SingleOpenSimplex2S(int seed, float x, float y)
+            private static float SingleOpenSimplex2S(int seed, float x, float y)
             {
                 // 2D OpenSimplex2S case is a modified 2D simplex noise.
 
@@ -1631,7 +1588,7 @@ namespace Rejuvena.Assets
                 return value * 18.24196194486065f;
             }
 
-            private float SingleOpenSimplex2S(int seed, float x, float y, float z)
+            private static float SingleOpenSimplex2S(int seed, float x, float y, float z)
             {
                 // 3D OpenSimplex2S case uses two offset rotated cube grids.
 
@@ -1942,25 +1899,17 @@ namespace Rejuvena.Assets
                     }
                 }
 
-                switch (_mCellularReturnType)
+                return _mCellularReturnType switch
                 {
-                    case CellularReturnType.CellValue:
-                        return closestHash * (1 / 2147483648.0f);
-                    case CellularReturnType.Distance:
-                        return distance0 - 1;
-                    case CellularReturnType.Distance2:
-                        return distance1 - 1;
-                    case CellularReturnType.Distance2Add:
-                        return (distance1 + distance0) * 0.5f - 1;
-                    case CellularReturnType.Distance2Sub:
-                        return distance1 - distance0 - 1;
-                    case CellularReturnType.Distance2Mul:
-                        return distance1 * distance0 * 0.5f - 1;
-                    case CellularReturnType.Distance2Div:
-                        return distance0 / distance1 - 1;
-                    default:
-                        return 0;
-                }
+                    CellularReturnType.CellValue => closestHash * (1 / 2147483648.0f),
+                    CellularReturnType.Distance => distance0 - 1,
+                    CellularReturnType.Distance2 => distance1 - 1,
+                    CellularReturnType.Distance2Add => (distance1 + distance0) * 0.5f - 1,
+                    CellularReturnType.Distance2Sub => distance1 - distance0 - 1,
+                    CellularReturnType.Distance2Mul => distance1 * distance0 * 0.5f - 1,
+                    CellularReturnType.Distance2Div => distance0 / distance1 - 1,
+                    _ => 0
+                };
             }
 
             private float SingleCellular(int seed, float x, float y, float z)
@@ -2107,31 +2056,23 @@ namespace Rejuvena.Assets
                     }
                 }
 
-                switch (_mCellularReturnType)
+                return _mCellularReturnType switch
                 {
-                    case CellularReturnType.CellValue:
-                        return closestHash * (1 / 2147483648.0f);
-                    case CellularReturnType.Distance:
-                        return distance0 - 1;
-                    case CellularReturnType.Distance2:
-                        return distance1 - 1;
-                    case CellularReturnType.Distance2Add:
-                        return (distance1 + distance0) * 0.5f - 1;
-                    case CellularReturnType.Distance2Sub:
-                        return distance1 - distance0 - 1;
-                    case CellularReturnType.Distance2Mul:
-                        return distance1 * distance0 * 0.5f - 1;
-                    case CellularReturnType.Distance2Div:
-                        return distance0 / distance1 - 1;
-                    default:
-                        return 0;
-                }
+                    CellularReturnType.CellValue => closestHash * (1 / 2147483648.0f),
+                    CellularReturnType.Distance => distance0 - 1,
+                    CellularReturnType.Distance2 => distance1 - 1,
+                    CellularReturnType.Distance2Add => (distance1 + distance0) * 0.5f - 1,
+                    CellularReturnType.Distance2Sub => distance1 - distance0 - 1,
+                    CellularReturnType.Distance2Mul => distance1 * distance0 * 0.5f - 1,
+                    CellularReturnType.Distance2Div => distance0 / distance1 - 1,
+                    _ => 0
+                };
             }
 
 
             // Perlin Noise
 
-            private float SinglePerlin(int seed, float x, float y)
+            private static float SinglePerlin(int seed, float x, float y)
             {
                 int x0 = FastFloor(x);
                 int y0 = FastFloor(y);
@@ -2155,7 +2096,7 @@ namespace Rejuvena.Assets
                 return Lerp(xf0, xf1, ys) * 1.4247691104677813f;
             }
 
-            private float SinglePerlin(int seed, float x, float y, float z)
+            private static float SinglePerlin(int seed, float x, float y, float z)
             {
                 int x0 = FastFloor(x);
                 int y0 = FastFloor(y);
@@ -2197,7 +2138,7 @@ namespace Rejuvena.Assets
 
             // Value Cubic Noise
 
-            private float SingleValueCubic(int seed, float x, float y)
+            private static float SingleValueCubic(int seed, float x, float y)
             {
                 int x1 = FastFloor(x);
                 int y1 = FastFloor(y);
@@ -2230,7 +2171,7 @@ namespace Rejuvena.Assets
                     ys) * (1 / (1.5f * 1.5f));
             }
 
-            private float SingleValueCubic(int seed, float x, float y, float z)
+            private static float SingleValueCubic(int seed, float x, float y, float z)
             {
                 int x1 = FastFloor(x);
                 int y1 = FastFloor(y);
@@ -2318,7 +2259,7 @@ namespace Rejuvena.Assets
 
             // Value Noise
 
-            private float SingleValue(int seed, float x, float y)
+            private static float SingleValue(int seed, float x, float y)
             {
                 int x0 = FastFloor(x);
                 int y0 = FastFloor(y);
@@ -2337,7 +2278,7 @@ namespace Rejuvena.Assets
                 return Lerp(xf0, xf1, ys);
             }
 
-            private float SingleValue(int seed, float x, float y, float z)
+            private static float SingleValue(int seed, float x, float y, float z)
             {
                 int x0 = FastFloor(x);
                 int y0 = FastFloor(y);
@@ -2525,7 +2466,7 @@ namespace Rejuvena.Assets
 
             // Domain Warp Basic Grid
 
-            private void SingleDomainWarpBasicGrid(int seed, float warpAmp, float frequency, float x, float y,
+            private static void SingleDomainWarpBasicGrid(int seed, float warpAmp, float frequency, float x, float y,
                 ref float xr, ref float yr)
             {
                 float xf = x * frequency;
@@ -2558,7 +2499,7 @@ namespace Rejuvena.Assets
                 yr += Lerp(ly0X, ly1X, ys) * warpAmp;
             }
 
-            private void SingleDomainWarpBasicGrid(int seed, float warpAmp, float frequency, float x, float y,
+            private static void SingleDomainWarpBasicGrid(int seed, float warpAmp, float frequency, float x, float y,
                 float z, ref float xr, ref float yr, ref float zr)
             {
                 float xf = x * frequency;
@@ -2619,7 +2560,7 @@ namespace Rejuvena.Assets
 
 
             // Domain Warp Simplex/OpenSimplex2
-            private void SingleDomainWarpSimplexGradient(int seed, float warpAmp, float frequency, float x,
+            private static void SingleDomainWarpSimplexGradient(int seed, float warpAmp, float frequency, float x,
                 float y, ref float xr, ref float yr, bool outGradOnly)
             {
                 const float sqrt3 = 1.7320508075688772935274463415059f;
@@ -2839,7 +2780,8 @@ namespace Rejuvena.Assets
         }
 
         public static bool Initialized { get; private set; }
-        public static Noise DefaultPerlinMask;
+
+        public static Noise DefaultPerlinMask { get; private set; }
 
         public override void Load()
         {

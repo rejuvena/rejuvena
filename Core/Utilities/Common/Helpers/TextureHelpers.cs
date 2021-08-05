@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Rejuvena.Core.Utilities.Common.TypeHelpers
+namespace Rejuvena.Core.Utilities.Common.Helpers
 {
     /// <summary>
     ///     Provides helper TextureXD-related methods. Often <see cref="Texture2D"/>.
