@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Content.DrawEffects;
@@ -106,10 +108,13 @@ namespace Rejuvena.Content.NPCs.SkyTower
                     Dust.NewDust(dustSpawnPoint - new Vector2(5, 5), 10, 10, DustID.Stone);
             }
 
+            // TODO: resolve chances if they're modified
             Main.item[Item.NewItem(NPC.Center, ModContent.ItemType<JadeGemstone>(), Main.rand.Next(4, 10))].velocity =
-                Vector2.Zero;
+               Vector2.Zero;
 
-            return true;
+            NPC.NPCLoot();
+
+            return false;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -125,7 +130,8 @@ namespace Rejuvena.Content.NPCs.SkyTower
                 NPC.Center - screenPos + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20) * 4),
                 new Rectangle(0, 0, CoreTexture.Value.Width, CoreTexture.Value.Height),
                 Color.White,
-                0f, new Vector2(CoreTexture.Value.Width / 2f, CoreTexture.Value.Height / 2f), NPC.scale, SpriteEffects.None,
+                0f, new Vector2(CoreTexture.Value.Width / 2f, CoreTexture.Value.Height / 2f), NPC.scale,
+                SpriteEffects.None,
                 0f);
 
             for (int i = 0; i < 4; i++)
@@ -138,6 +144,26 @@ namespace Rejuvena.Content.NPCs.SkyTower
                     0f, new Vector2(DebrisTexture.Value.Width / 2f, DebrisTexture.Value.Height / 4f / 2f), NPC.scale,
                     SpriteEffects.None, 0f);
             }
+
+            return false;
+        }
+
+        public override bool InterceptDropResolver(ref DropAttemptInfo info)
+        {
+            if (typeof(ItemDropResolver).GetField("_database", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?.GetValue(Main.ItemDropSolver) is not ItemDropDatabase dropDatabase)
+                return false;
+
+            MethodInfo resolveRuleMethod = typeof(ItemDropResolver)
+                .GetMethod("ResolveRule", BindingFlags.Instance | BindingFlags.NonPublic);
+            List<IItemDropRule> rules = dropDatabase.GetRulesForNPCID(Type);
+            int jade = ModContent.ItemType<JadeGemstone>();
+
+            // remove all jade common drops that we add
+            rules.RemoveAll(x => x is CommonDrop drop && drop.itemId == jade);
+
+            foreach (IItemDropRule rule in rules)
+                resolveRuleMethod?.Invoke(Main.ItemDropSolver, new object[] {rule, info});
 
             return false;
         }

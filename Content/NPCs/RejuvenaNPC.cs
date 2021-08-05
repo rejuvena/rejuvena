@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
 using ReLogic.Content;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,7 +11,7 @@ namespace Rejuvena.Content.NPCs
     /// <summary>
     ///     Abstract base class shared between all <see cref="Rejuvena"/> NPCs.
     /// </summary>
-    public abstract class RejuvenaNPC : ModNPC, IModContent
+    public abstract class RejuvenaNPC : ModNPC, IModContent, IResolvesItemDrops
     {
         public override string Texture
         {
@@ -52,5 +53,7 @@ namespace Rejuvena.Content.NPCs
 
         public FallbackAsset GetFallbackAsset() => 
             throw new NotImplementedException("There are no fallback NPC assets.");
+
+        public virtual bool InterceptDropResolver(ref DropAttemptInfo info) => true;
     }
 }
