@@ -41,6 +41,13 @@ namespace Rejuvena.Content.Items.Materials
                 Item.Center - Main.screenPosition, null,
                 new Color(lightColor.A, lightColor.A, lightColor.A, lightColor.A), rotation, TextureAssets.Item[Type].Size() / 2f, scale,
                 SpriteEffects.None, 0f);
+
+            float divisor = 3f + difference / 25f;
+
+            if (difference / 25f > 3f)
+                divisor -= 3f;
+
+            Lighting.AddLight(Item.Center, new Color(82, 128, 140).ToVector3() / divisor);
         }
 
         public override void Update(ref float gravity, ref float maxFallSpeed)
@@ -60,15 +67,19 @@ namespace Rejuvena.Content.Items.Materials
 
             byte difference = (byte)Math.Clamp(Item.timeSinceItemSpawned - SavedSpawnTime, byte.MinValue, byte.MaxValue);
 
-            if (difference >= byte.MaxValue)
-                return;
+            switch (difference)
+            {
+                case >= byte.MaxValue:
+                    return;
 
-            if (difference > 45 && Main.rand.NextBool(Math.Abs(-difference) / 5))
-                DrawEffectManager.Instance.DrawEffects.Add(
-                    new JadeSparkle(Item.Center, Main.rand.NextVector2Circular(5f, 5f))
-                    {
-                        TargetScale = Main.rand.NextFloat(0.2f, 0.4f)
-                    });
+                case > 45 when Main.rand.NextBool(difference / 5):
+                    DrawEffectManager.Instance.DrawEffects.Add(
+                        new JadeSparkle(Item.Center, Main.rand.NextVector2Circular(5f, 5f))
+                        {
+                            TargetScale = Main.rand.NextFloat(0.2f, 0.4f)
+                        });
+                    break;
+            }
         }
 
         public void SetInitialSpawn()
