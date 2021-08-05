@@ -2,17 +2,14 @@
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ModLoader;
 
-namespace Rejuvena.Core.CoreSystems.DrawEffects
+namespace Rejuvena.Common.Systems.DrawEffects
 {
     /// <summary>
     ///     Manages <see cref="IDrawEffect"/> instances.
     /// </summary>
-    public class DrawEffectManager : ModSystem
+    public class DrawEffectManager : SingletonSystem<DrawEffectManager>
     {
-        public static DrawEffectManager Instance => ModContent.GetInstance<DrawEffectManager>();
-
         public List<IDrawEffect> DrawEffects { get; protected set; }
 
         public DrawEffectManager()

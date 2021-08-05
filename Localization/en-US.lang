@@ -1,7 +1,6 @@
 ﻿# Items
 ItemName.WhirlwindAccessory=Whirlwind Tome
 ItemTooltip.WhirlwindAccessory=Gives a 10% chance of knocking your enemies toward you
-
 ItemName.JadeGemstone=Jade Gemstone
 ItemTooltip.JadeGemstone=It glimmers a pale green
 
@@ -13,3 +12,6 @@ BestiaryText.JadeConstruct=Remnants of ancient technology, these constructs hold
 
 # DropRules
 DropRule.UndroppableModification=This drop is handled specially and cannot be modified.
+
+# UI
+UI.GeneratingSkyTower=Generating sky tower...

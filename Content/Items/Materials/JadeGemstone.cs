@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Rejuvena.Common.Systems.DrawEffects;
 using Rejuvena.Content.DrawEffects;
-using Rejuvena.Core.CoreSystems.DrawEffects;
 using Terraria;
 using Terraria.GameContent;
 

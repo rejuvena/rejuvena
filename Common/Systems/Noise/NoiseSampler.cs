@@ -9,12 +9,12 @@ using Terraria.ModLoader;
 // ReSharper disable CommentTypo
 // ReSharper disable UnusedMember.Global
 
-namespace Rejuvena.Assets
+namespace Rejuvena.Common.Systems.Noise
 {
     /// <summary>
     ///     Handles the loading of <see cref="Noise"/> instances used in <see cref="Rejuvena"/>.
     /// </summary>
-    public class NoiseSampler : ModSystem
+    public class NoiseSampler : SingletonSystem<NoiseSampler>
     {
         /* MIT License
          *
@@ -2779,9 +2779,9 @@ namespace Rejuvena.Assets
             }
         }
 
-        public static bool Initialized { get; private set; }
+        public bool Initialized;
 
-        public static Noise DefaultPerlinMask { get; private set; }
+        public Assets.Noise DefaultPerlinMask;
 
         public override void Load()
         {
@@ -2797,11 +2797,12 @@ namespace Rejuvena.Assets
             On.Terraria.Main.Update -= LoadNoise;
         }
 
+        // Force our noise to get loaded on the main thread.
         private void LoadNoise(On.Terraria.Main.orig_Update orig, Main self, GameTime gameTime)
         {
             if (!Initialized)
             {
-                DefaultPerlinMask = new Noise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
+                DefaultPerlinMask = new Assets.Noise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
 
                 Initialized = true;
             }

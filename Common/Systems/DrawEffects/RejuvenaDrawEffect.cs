@@ -4,7 +4,7 @@ using Rejuvena.Core.Utilities.Common.Interfaces;
 using ReLogic.Content;
 using Terraria;
 
-namespace Rejuvena.Core.CoreSystems.DrawEffects
+namespace Rejuvena.Common.Systems.DrawEffects
 {
     public abstract class RejuvenaDrawEffect : Entity, IDrawEffect, IHasAsset<Texture2D>
     {

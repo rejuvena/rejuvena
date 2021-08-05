@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Rejuvena.Common.Systems.DrawEffects;
 using Rejuvena.Content.DrawEffects;
 using Rejuvena.Content.Items.Materials;
-using Rejuvena.Core.CoreSystems.DrawEffects;
 using Rejuvena.Core.Utilities.Common.Helpers;
 using ReLogic.Content;
 using Terraria;

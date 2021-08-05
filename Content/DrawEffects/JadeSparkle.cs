@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Core.CoreSystems.DrawEffects;
+using Rejuvena.Common.Systems.DrawEffects;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;

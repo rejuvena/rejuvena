@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Rejuvena.Core.CoreSystems.DrawEffects
+namespace Rejuvena.Common.Systems.DrawEffects
 {
     /// <summary>
     ///     Simple base for a effect drawing.

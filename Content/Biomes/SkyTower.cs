@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
+using Rejuvena.Common.Systems.Noise;
 using Rejuvena.Core.Utilities.Common.Helpers;
 using Terraria;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -19,7 +21,7 @@ namespace Rejuvena.Content.Biomes
 
             tasks.Add(new PassLegacy("Rejuvena:SkyTower", (progress, _) =>
             {
-                progress.Message = "Generating sky tower...";
+                progress.Message = Language.GetTextValue("Mods.Rejuvena.UI.GeneratingSkyTower");
 
                 GenTower(new Point(Main.rand.Next(200, 600), 240), ref progress);
             }));
@@ -48,12 +50,20 @@ namespace Rejuvena.Content.Biomes
             {
                 int offsetX = centerX + i;
 
-                int yModifier = NoiseSampler.DefaultPerlinMask.NoiseData[Math.Min(offsetX % NoiseSampler.DefaultPerlinMask.Texture.Value.Width * 2, NoiseSampler.DefaultPerlinMask.NoiseData.GetLength(0) - 1), centerY % NoiseSampler.DefaultPerlinMask.Texture.Value.Height].R / 30; //Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
-                
-                for (int j = 0;
-                    j < (int) Math.Ceiling(MathHelper.Lerp(1, height,
-                        MathHelper.Lerp(1, 0, (float) Math.Pow((float) i / width, 2))) / 2) + yModifier;
-                    j++)
+                Noise perlinMask = NoiseSampler.Instance.DefaultPerlinMask;
+                Color[,] data = NoiseSampler.Instance.DefaultPerlinMask.NoiseData;
+                int xData = Math.Min(offsetX % perlinMask.Texture.Value.Width * 2, data.GetLength(0) - 1);
+                int yData = centerY % perlinMask.Texture.Value.Height;
+
+                int yModifier =
+                    data[xData, yData].R /
+                    30; //Main.rand.Next(0, 2); // Replace this with Perlin sampling when that's done
+
+                float initialLerpAmount = MathHelper.Lerp(1f, 0f, (float) Math.Pow((float) i / width, 2f));
+                float properLerpAmount = MathHelper.Lerp(1f, height, initialLerpAmount) / 2f;
+                double raisedModifier = Math.Ceiling(properLerpAmount) + yModifier;
+
+                for (int j = 0; j < (int) raisedModifier; j++)
                 {
                     int offsetY = centerY + j;
 
@@ -79,11 +89,13 @@ namespace Rejuvena.Content.Biomes
                 int upperOffsetIncrementerY = Main.rand.Next(0, 4);
                 int lowerOffsetIncrementerY = Main.rand.Next(0, 4);
 
-                TileHelpers.SmoothCircleRunner(new Point(upperOffsetX + upperModifierX, offsetY + upperOffsetIncrementerY),
+                TileHelpers.SmoothCircleRunner(
+                    new Point(upperOffsetX + upperModifierX, offsetY + upperOffsetIncrementerY),
                     Math.Min(Main.rand.Next(width / 4, width / 3),
                         Math.Abs(centerY - offsetY + upperOffsetIncrementerY)), cloudID, WallID.None);
 
-                TileHelpers.SmoothCircleRunner(new Point(lowerOffsetX + lowerModifierX, offsetY + lowerOffsetIncrementerY),
+                TileHelpers.SmoothCircleRunner(
+                    new Point(lowerOffsetX + lowerModifierX, offsetY + lowerOffsetIncrementerY),
                     Math.Min(Main.rand.Next(width / 4, width / 3),
                         Math.Abs(centerY - offsetY + upperOffsetIncrementerY)), cloudID, WallID.None);
             }
@@ -123,17 +135,17 @@ namespace Rejuvena.Content.Biomes
 
                 int offsetY = centerY - j;
 
-                    if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
-                        TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
+                if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
+                    TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
 
-                    if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
-                        TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
+                if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
+                    TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
 
-                    if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
-                        TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
+                if (TileHelpers.ParanoidTileRetrieval(upperXDelete, offsetY).type == cloudID)
+                    TileHelpers.ParanoidKillTile(upperXDelete, offsetY, noItem: true);
 
-                    if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
-                        TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
+                if (TileHelpers.ParanoidTileRetrieval(lowerXDelete, offsetY).type == cloudID)
+                    TileHelpers.ParanoidKillTile(lowerXDelete, offsetY, noItem: true);
 
             }
 
