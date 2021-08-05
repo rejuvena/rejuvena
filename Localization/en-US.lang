@@ -1,12 +1,15 @@
 ﻿# Items
 ItemName.WhirlwindAccessory=Whirlwind Tome
-ItemTooltip.WhirlwindAccessory=Whoosh lol
+ItemTooltip.WhirlwindAccessory=Gives a 10% chance of knocking your enemies toward you
 
 ItemName.JadeGemstone=Jade Gemstone
-ItemTooltip.JadeGemstone=It glimmers a pale green.
+ItemTooltip.JadeGemstone=It glimmers a pale green
 
 # NPCs
 NPCName.JadeConstruct=Jade Construct
 
 # Bestiary
 BestiaryText.JadeConstruct=Remnants of ancient technology, these constructs hold a cluster of Jade in their centers. If you can dismantle the floating stone, the gemstone is yours to keep.
+
+# DropRules
+DropRule.UndroppableModification=This drop is handled specially and cannot be modified.

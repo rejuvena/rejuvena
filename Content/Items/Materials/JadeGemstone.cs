@@ -1,20 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Rejuvena.Assets;
 
 namespace Rejuvena.Content.Items.Materials
 {
     /// <summary>
     ///     Basic material dropped outside of the tower on the Island.
     /// </summary>
-    [FallbackAsset(FallbackAssetType.Tome)]
     public class JadeGemstone : RejuvenaItem
     {
         public bool Floating = true;
-
-        public override void SetStaticDefaults()
-        {
-            Tooltip.SetDefault("It glimmers a pale green");
-        }
 
         public override void SetDefaults()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
 using ReLogic.Content;
@@ -11,7 +12,7 @@ namespace Rejuvena.Content.NPCs
     /// <summary>
     ///     Abstract base class shared between all <see cref="Rejuvena"/> NPCs.
     /// </summary>
-    public abstract class RejuvenaNPC : ModNPC, IModContent, IResolvesItemDrops
+    public abstract class RejuvenaNPC : ModNPC, IModContent
     {
         public override string Texture
         {
@@ -51,9 +52,20 @@ namespace Rejuvena.Content.NPCs
             set => NPCID.Sets.NPCBestiaryDrawOffset[Type] = value;
         }
 
+        public virtual IEnumerable<IItemDropRule> DropData { get; }
+
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            base.ModifyNPCLoot(npcLoot);
+
+            if (DropData is null) 
+                return;
+
+            foreach (IItemDropRule dropRule in DropData)
+                npcLoot.Add(dropRule);
+        }
+
         public FallbackAsset GetFallbackAsset() => 
             throw new NotImplementedException("There are no fallback NPC assets.");
-
-        public virtual bool InterceptDropResolver(ref DropAttemptInfo info) => true;
     }
 }

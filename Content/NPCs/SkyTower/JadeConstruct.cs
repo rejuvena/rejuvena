@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Content.DrawEffects;
 using Rejuvena.Content.Items.Materials;
 using Rejuvena.Core.CoreSystems.DrawEffects;
+using Rejuvena.Core.Utilities.Common.TypeHelpers;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent.Bestiary;
@@ -18,8 +18,13 @@ namespace Rejuvena.Content.NPCs.SkyTower
 {
     public class JadeConstruct : RejuvenaNPC
     {
-        public static Asset<Texture2D> CoreTexture;
-        public static Asset<Texture2D> DebrisTexture;
+        private static Asset<Texture2D> CoreTexture;
+        private static Asset<Texture2D> DebrisTexture;
+
+        public override IEnumerable<IItemDropRule> DropData => new[]
+        {
+            ItemDropRule.Common(ModContent.ItemType<JadeGemstone>(), 1, 4, 9).AsUndroppable()
+        };
 
         public override void Load()
         {
@@ -69,12 +74,6 @@ namespace Rejuvena.Content.NPCs.SkyTower
             NPC.velocity *= 0.95f;
 
             NPC.ai[0]++;
-        }
-
-        public override void ModifyNPCLoot(NPCLoot npcLoot)
-        {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<JadeGemstone>(), minimumDropped: 4,
-                maximumDropped: 9)); //Drop 4-9 Jade Gemstones. 
         }
 
         public override bool SpecialOnKill()
@@ -144,26 +143,6 @@ namespace Rejuvena.Content.NPCs.SkyTower
                     0f, new Vector2(DebrisTexture.Value.Width / 2f, DebrisTexture.Value.Height / 4f / 2f), NPC.scale,
                     SpriteEffects.None, 0f);
             }
-
-            return false;
-        }
-
-        public override bool InterceptDropResolver(ref DropAttemptInfo info)
-        {
-            if (typeof(ItemDropResolver).GetField("_database", BindingFlags.Instance | BindingFlags.NonPublic)
-                ?.GetValue(Main.ItemDropSolver) is not ItemDropDatabase dropDatabase)
-                return false;
-
-            MethodInfo resolveRuleMethod = typeof(ItemDropResolver)
-                .GetMethod("ResolveRule", BindingFlags.Instance | BindingFlags.NonPublic);
-            List<IItemDropRule> rules = dropDatabase.GetRulesForNPCID(Type);
-            int jade = ModContent.ItemType<JadeGemstone>();
-
-            // remove all jade common drops that we add
-            rules.RemoveAll(x => x is CommonDrop drop && drop.itemId == jade);
-
-            foreach (IItemDropRule rule in rules)
-                resolveRuleMethod?.Invoke(Main.ItemDropSolver, new object[] {rule, info});
 
             return false;
         }
