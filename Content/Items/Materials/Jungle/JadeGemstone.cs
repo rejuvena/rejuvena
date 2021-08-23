@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.Systems.DrawEffects;
 using Rejuvena.Content.DrawEffects;
 using Terraria;
 using Terraria.GameContent;
+using TomatoLib.Common.Systems.DrawEffects;
 
-namespace Rejuvena.Content.Items.Materials
+namespace Rejuvena.Content.Items.Materials.Jungle
 {
     /// <summary>
     ///     Basic material dropped outside of the tower on the Island.

@@ -1,8 +1,8 @@
-using Terraria.ModLoader;
+using TomatoLib;
 
 namespace Rejuvena
 {
-    public class Rejuvena : Mod
+    public class Rejuvena : TomatoMod
     {
     }
 }

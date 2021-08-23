@@ -1,16 +1,11 @@
-﻿using System;
-using Rejuvena.Assets;
-using Rejuvena.Core.Utilities.Common.Interfaces;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Players
 {
     /// <summary>
     ///     Base <see cref="ModPlayer"/> class for <see cref="Rejuvena"/>.
     /// </summary>
-    public abstract class RejuvenaPlayer : ModPlayer, IModContent
+    public abstract class RejuvenaPlayer : ModPlayer
     {
-        public FallbackAsset GetFallbackAsset() =>
-            throw new NotImplementedException("Unimplemented as there are no attached assets.");
     }
 }

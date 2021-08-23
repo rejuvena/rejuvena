@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Rejuvena.Assets;
 using Rejuvena.Common.Systems.Noise;
-using Rejuvena.Core.Utilities.Common.Helpers;
 using Terraria;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using TomatoLib.Common.Assets;
+using TomatoLib.Common.Utilities;
 
 namespace Rejuvena.Content.Biomes
 {
+    // TODO: Finish this.
+    [Autoload(false)]
     public class SkyTowerGeneration : ModSystem
     {
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)

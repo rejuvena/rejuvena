@@ -2,7 +2,6 @@
 using System.Reflection;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
-using Rejuvena.Core.Utilities.Common.Interfaces;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
@@ -11,8 +10,14 @@ namespace Rejuvena.Content.Items
     /// <summary>
     ///     Abstract base class shared between all <see cref="Rejuvena"/> items.
     /// </summary>
-    public abstract class RejuvenaItem : ModItem, IModContent
+    public abstract class RejuvenaItem : ModItem
     {
+        [Flags]
+        public enum Defaults
+        {
+            Accessory = 0x1
+        }
+
         public override string Texture
         {
             get
@@ -42,6 +47,14 @@ namespace Rejuvena.Content.Items
                     throw;
                 }
             }
+        }
+
+        public void SetDefaultsFromEnum(Defaults defaultsToSet)
+        {
+            bool Any(Defaults defaults) => (defaults & defaultsToSet) != 0;
+
+            if (Any(Defaults.Accessory))
+                Item.DefaultToAccessory(Item.width, Item.height);
         }
 
         public FallbackAsset GetFallbackAsset()

@@ -20,4 +20,7 @@
     <Folder Include="Content\DrawEffects\" />
     <Folder Include="Assets\Masks\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TomatoLib\TomatoLib.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,11 +1,10 @@
 ﻿using Terraria;
+using Terraria.ModLoader;
+using TomatoLib.Core.Compatibility.Calls;
 
 namespace Rejuvena.Content.Players.AccessoryHandlers
 {
-    /// <summary>
-    ///     Handles reversing knock-back.
-    /// </summary>
-    public class WhirlwindPlayer : RejuvenaPlayer
+    public class WhirlwindPlayer : ModPlayerWithCalls
     {
         public bool Whirlwind;
 
@@ -36,6 +35,28 @@ namespace Rejuvena.Content.Players.AccessoryHandlers
                 hitDirection *= -1; // flip sign
 
             return orig(self, damage, knockback, hitDirection, crit, noEffect, fromNet);
+        }
+
+        public override string Accessor => "WhirlwindPlayer";
+
+        public override object Action(Mod mod, params object[] args)
+        {
+            DefaultModCaller.AssertArguments(args, typeof(string));
+
+            switch (((string) args[0]).ToLower())
+            {
+                // ReSharper disable once StringLiteralTypo
+                case "setchance" when args[1] is int chance:
+                    InXChance = chance;
+                    break;
+
+                // ReSharper disable once StringLiteralTypo
+                case "setenabled" when args[1] is bool enabled:
+                    Whirlwind = enabled;
+                    break;
+            }
+
+            return null;
         }
     }
 }

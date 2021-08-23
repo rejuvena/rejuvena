@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.Systems.DrawEffects;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
+using TomatoLib.Common.Systems.DrawEffects;
 
 namespace Rejuvena.Content.DrawEffects
 {
-    public class JadeSparkle : RejuvenaDrawEffect
+    public class JadeSparkle : BaseDrawEffect
     {
-        public override Asset<Texture2D> Asset => ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle");
+        public Asset<Texture2D> Asset => ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle");
 
         public float Timer;
         public float Rotation;

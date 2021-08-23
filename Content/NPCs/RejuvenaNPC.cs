@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
-using Rejuvena.Core.Utilities.Common.Interfaces;
 using ReLogic.Content;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -13,7 +12,7 @@ namespace Rejuvena.Content.NPCs
     /// <summary>
     ///     Abstract base class shared between all <see cref="Rejuvena"/> NPCs.
     /// </summary>
-    public abstract class RejuvenaNPC : ModNPC, IModContent
+    public abstract class RejuvenaNPC : ModNPC
     {
         public override string Texture
         {
@@ -34,11 +33,11 @@ namespace Rejuvena.Content.NPCs
                     // don't care enough about the stack trace
                     switch (e)
                     {
-                        case NullReferenceException:
-                            throw new NullReferenceException($"[Loading] {e.Message}, normal asset: {base.Texture}");
+                        case NullReferenceException inner:
+                            throw new NullReferenceException($"[Loading] {e.Message}, normal asset: {base.Texture}", inner);
 
-                        case NotImplementedException:
-                            throw new NotImplementedException($"[Loading] {e.Message}, normal asset: {base.Texture}");
+                        case NotImplementedException inner:
+                            throw new NotImplementedException($"[Loading] {e.Message}, normal asset: {base.Texture}", inner);
                     }
 
                     throw;
@@ -53,7 +52,7 @@ namespace Rejuvena.Content.NPCs
             set => NPCID.Sets.NPCBestiaryDrawOffset[Type] = value;
         }
 
-        public virtual IEnumerable<IItemDropRule> DropData { get; }
+        public virtual IEnumerable<IItemDropRule> DropData { get; protected set; }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {

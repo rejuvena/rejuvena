@@ -1,7 +1,7 @@
 ﻿using Rejuvena.Content.DropRules;
 using Terraria.GameContent.ItemDropRules;
 
-namespace Rejuvena.Core.Utilities.Common.Helpers
+namespace Rejuvena.Common.Utilities
 {
     /// <summary>
     ///     Provides numerous methods to aid in dealing with <see cref="IItemDropRule"/>-related fiascoes.

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.Systems.DrawEffects;
+using Rejuvena.Common.Utilities;
 using Rejuvena.Content.DrawEffects;
 using Rejuvena.Content.Items.Materials;
-using Rejuvena.Core.Utilities.Common.Helpers;
+using Rejuvena.Content.Items.Materials.Jungle;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent.Bestiary;
@@ -13,8 +13,9 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TomatoLib.Common.Systems.DrawEffects;
 
-namespace Rejuvena.Content.NPCs.SkyTower
+namespace Rejuvena.Content.NPCs.Hostile.Jungle
 {
     public class JadeConstruct : RejuvenaNPC
     {
@@ -30,8 +31,8 @@ namespace Rejuvena.Content.NPCs.SkyTower
         {
             base.Load();
 
-            CoreTexture = ModContent.Request<Texture2D>("Rejuvena/Content/NPCs/SkyTower/JadeConstructCore");
-            DebrisTexture = ModContent.Request<Texture2D>("Rejuvena/Content/NPCs/SkyTower/JadeConstructDebris");
+            CoreTexture = ModContent.Request<Texture2D>("Rejuvena/Content/NPCs/Hostile/Jungle/JadeConstructCore");
+            DebrisTexture = ModContent.Request<Texture2D>("Rejuvena/Content/NPCs/Hostile/Jungle/JadeConstructDebris");
         }
 
         public override void SetStaticDefaults()
@@ -113,7 +114,7 @@ namespace Rejuvena.Content.NPCs.SkyTower
                 for (i = 0; i < 20; i++)
                     Dust.NewDust(dustSpawnPoint - new Vector2(5, 5), 10, 10, DustID.Stone);
             }
-            
+
             int item = Item.NewItem(NPC.Center, ModContent.ItemType<JadeGemstone>(), Main.rand.Next(4, 10));
             ((JadeGemstone) Main.item[item].ModItem).SetInitialSpawn();
 

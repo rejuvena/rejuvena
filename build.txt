@@ -1,4 +1,6 @@
 displayName = Rejuvena
 author = Tomat and ENNWAY
-version = 0.1
-buildIgnore = .git/, .vs/, build/, obj/, .idea/, .vscode/, TomatoLib/
+version = 1.0.0
+sortAfter = TomatoLib
+modReferences = TomatoLib
+buildIgnore = .git/*, .vs/*, bin/*, obj/*, TomatoLib/*, workshop.json
