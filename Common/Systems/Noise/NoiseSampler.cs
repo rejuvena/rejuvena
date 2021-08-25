@@ -12,7 +12,7 @@ using ANoise = TomatoLib.Common.Assets.Noise;
 namespace Rejuvena.Common.Systems.Noise
 {
     /// <summary>
-    ///     Handles the loading of <see cref="Noise"/> instances used in <see cref="Rejuvena"/>.
+    ///     Handles the loading of <see cref="TomatoLib.Common.Assets.Noise"/> instances used in <see cref="Rejuvena"/>.
     /// </summary>
     public sealed class NoiseSampler : SingletonSystem<NoiseSampler>
     {
@@ -39,7 +39,7 @@ namespace Rejuvena.Common.Systems.Noise
         {
             if (!Initialized)
             {
-                DefaultPerlinMask = new TomatoLib.Common.Assets.Noise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
+                DefaultPerlinMask = new ANoise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
 
                 Initialized = true;
             }

@@ -24,13 +24,20 @@ namespace Rejuvena.Content.DrawEffects
             position = pos;
             velocity = vel;
         }
-
+        int angletimer;
         public override void Update()
         {
+            if (++angletimer > 360)
+                angletimer = 0;
+
+            Vector2 direction = Main.LocalPlayer.Center.DirectionFrom(position);
+            velocity = direction;
+            velocity += Vector2.One.RotatedBy(MathHelper.ToRadians(angletimer)) * new Vector2(3f, 1f);
+            position += velocity;
+            return;
             velocity.X *= 0.9f;
             velocity.Y *= 0.9f;
 
-            position += velocity;
 
             Timer++;
             if (Timer < 10f)
