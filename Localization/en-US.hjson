@@ -1,0 +1,29 @@
+Mods: {
+	Rejuvena: {
+		ItemName: {
+			Whirlwind: Whirlwind
+			JadeGemstone: Jade Gemstone
+		}
+
+		ItemTooltip: {
+			Whirlwind: Spawns a whirlwind in front of you that rotates
+			JadeGemstone: It glimmers a pale green
+		}
+
+		NPCName: {
+			JadeConstruct: Jade Construct
+		}
+
+		BestiaryText: {
+			JadeConstruct: Remnants of ancient technology, these constructs hold a cluster of Jade in their centers. If you can dismantle the floating stone, the gemstone is yours to keep.
+		}
+
+		DropRule: {
+			UndroppableModification: This drop is handled specially and cannot be modified.
+		}
+
+		UI: {
+			GeneratingSkyTower: Generating sky tower...
+		}
+	}
+}

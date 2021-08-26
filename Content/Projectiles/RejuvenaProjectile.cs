@@ -5,18 +5,18 @@ using Rejuvena.Assets;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
-namespace Rejuvena.Content.Items
+namespace Rejuvena.Content.Projectiles
 {
     /// <summary>
-    ///     Abstract base class shared between all <see cref="Rejuvena"/> items.
+    ///     Abstract base class shared between all <see cref="Rejuvena"/> projectiles.
     /// </summary>
-    public abstract class RejuvenaItem : ModItem
+    public abstract class RejuvenaProjectile : ModProjectile
     {
         [Flags]
         public enum Defaults
         {
-            Accessory = 0x1,
-            Staff = 0x2
+            Friendly = 0x1,
+            Hostile = 0x2
         }
 
         public override string Texture
@@ -54,11 +54,8 @@ namespace Rejuvena.Content.Items
         {
             bool Any(Defaults defaults) => (defaults & defaultsToSet) != 0;
 
-            if (Any(Defaults.Accessory))
-                Item.DefaultToAccessory(Item.width, Item.height);
-
-            if (Any(Defaults.Staff))
-                Item.DefaultToStaff(Item.shoot, Item.useAnimation, Item.useTime, Item.mana);
+            if (Any(Defaults.Friendly)) Projectile.friendly = true;
+            if (Any(Defaults.Hostile)) Projectile.hostile = true;
         }
 
         public FallbackAsset GetFallbackAsset()
