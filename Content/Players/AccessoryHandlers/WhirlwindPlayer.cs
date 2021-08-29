@@ -1,6 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using TomatoLib.Core.Compatibility.Calls;
+using TomatoLib.Core.Implementation.Compatibility.Calls;
 
 namespace Rejuvena.Content.Players.AccessoryHandlers
 {

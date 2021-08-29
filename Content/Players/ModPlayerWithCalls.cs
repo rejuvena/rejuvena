@@ -5,7 +5,7 @@
 
 using Terraria.ModLoader;
 using TomatoLib;
-using TomatoLib.Core.Utilities.Compatibility.Calls;
+using TomatoLib.Core.Interfaces.Compatibility.Calls;
 
 namespace Rejuvena.Content.Players
 {

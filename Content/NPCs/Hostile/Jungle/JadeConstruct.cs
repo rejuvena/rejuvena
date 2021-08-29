@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Common.Utilities;
 using Rejuvena.Content.DrawEffects;
-using Rejuvena.Content.Items.Materials;
 using Rejuvena.Content.Items.Materials.Jungle;
 using ReLogic.Content;
 using Terraria;

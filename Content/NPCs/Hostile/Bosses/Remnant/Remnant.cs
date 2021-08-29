@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.Utilities;
-using Rejuvena.Content.DrawEffects;
-using Rejuvena.Content.Items.Materials;
-using Rejuvena.Content.Items.Materials.Jungle;
-using ReLogic.Content;
-using Terraria;
+﻿using Microsoft.Xna.Framework;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
-using TomatoLib.Common.Systems.DrawEffects;
 
 namespace Rejuvena.Content.NPCs.Hostile.Bosses.Remnant
 {

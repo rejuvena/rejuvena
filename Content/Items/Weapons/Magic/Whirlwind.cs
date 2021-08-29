@@ -4,7 +4,6 @@ using Rejuvena.Content.Projectiles.Friendly.Magic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
 
 namespace Rejuvena.Content.Items.Weapons.Magic
 {

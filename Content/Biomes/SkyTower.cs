@@ -52,7 +52,7 @@ namespace Rejuvena.Content.Biomes
             {
                 int offsetX = centerX + i;
 
-                Noise perlinMask = NoiseSampler.Instance.DefaultPerlinMask;
+                NoiseAsset perlinMask = NoiseSampler.Instance.DefaultPerlinMask;
                 Color[,] data = NoiseSampler.Instance.DefaultPerlinMask.NoiseData;
                 int xData = Math.Min(offsetX % perlinMask.Texture.Value.Width * 2, data.GetLength(0) - 1);
                 int yData = centerY % perlinMask.Texture.Value.Height;

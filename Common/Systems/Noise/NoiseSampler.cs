@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
+using TomatoLib.Common.Assets;
 using TomatoLib.Common.Systems;
-using ANoise = TomatoLib.Common.Assets.Noise;
 
 // ReSharper disable CommentTypo
 // ReSharper disable UnusedMember.Global
@@ -12,13 +12,13 @@ using ANoise = TomatoLib.Common.Assets.Noise;
 namespace Rejuvena.Common.Systems.Noise
 {
     /// <summary>
-    ///     Handles the loading of <see cref="TomatoLib.Common.Assets.Noise"/> instances used in <see cref="Rejuvena"/>.
+    ///     Handles the loading of <see cref="NoiseAsset"/> instances used in <see cref="Rejuvena"/>.
     /// </summary>
     public sealed class NoiseSampler : SingletonSystem<NoiseSampler>
     {
         public bool Initialized;
 
-        public ANoise DefaultPerlinMask;
+        public NoiseAsset DefaultPerlinMask;
 
         public override void Load()
         {
@@ -39,7 +39,7 @@ namespace Rejuvena.Common.Systems.Noise
         {
             if (!Initialized)
             {
-                DefaultPerlinMask = new ANoise(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
+                DefaultPerlinMask = new NoiseAsset(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
 
                 Initialized = true;
             }
