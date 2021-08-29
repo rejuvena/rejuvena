@@ -12,7 +12,7 @@ namespace Rejuvena.Content.NPCs.Hostile.Bosses.Remnant
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Rejuvena.BestiaryText.JadeConstruct"))
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Rejuvena.BestiaryText.Remnant"))
             });
         }
 
