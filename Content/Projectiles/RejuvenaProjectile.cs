@@ -75,7 +75,7 @@ namespace Rejuvena.Content.Projectiles
             return assetType switch
             {
                 FallbackAssetType.Default => new FallbackAsset("ModLoader/UnloadedItem", 20, 20),
-                FallbackAssetType.Tome => new FallbackAsset("Rejuvena/Assets/Defaults/Fallbacks/Tome", 28, 32),
+                FallbackAssetType.Tome => new FallbackAsset("Rejuvena/Assets/Textures/Defaults/Fallbacks/Tome", 28, 32),
                 _ => throw new NotImplementedException("Unable to fall back to an unexpected asset.")
             };
         }

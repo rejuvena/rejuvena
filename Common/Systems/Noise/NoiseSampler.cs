@@ -39,7 +39,7 @@ namespace Rejuvena.Common.Systems.Noise
         {
             if (!Initialized)
             {
-                DefaultPerlinMask = new NoiseAsset(ModContent.Request<Texture2D>("Rejuvena/Assets/Masks/Perlin", AssetRequestMode.ImmediateLoad));
+                DefaultPerlinMask = new NoiseAsset(ModContent.Request<Texture2D>("Rejuvena/Assets/Textures/Masks/Perlin", AssetRequestMode.ImmediateLoad));
 
                 Initialized = true;
             }
