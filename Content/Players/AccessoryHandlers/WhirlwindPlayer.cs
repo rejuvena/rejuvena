@@ -41,18 +41,19 @@ namespace Rejuvena.Content.Players.AccessoryHandlers
 
         public override object Action(Mod mod, params object[] args)
         {
-            DefaultModCaller.AssertArguments(args, typeof(string));
+            DefaultModCaller.AssertArguments(args, typeof(Player), typeof(string));
+            Player player = args[0] as Player;
 
-            switch (((string) args[0]).ToLower())
+            switch (((string) args[1]).ToLower())
             {
                 // ReSharper disable once StringLiteralTypo
-                case "setchance" when args[1] is int chance:
-                    InXChance = chance;
+                case "setchance" when args[2] is int chance:
+                    player!.GetModPlayer<WhirlwindPlayer>().InXChance = chance;
                     break;
 
                 // ReSharper disable once StringLiteralTypo
-                case "setenabled" when args[1] is bool enabled:
-                    Whirlwind = enabled;
+                case "setenabled" when args[2] is bool enabled:
+                    player!.GetModPlayer<WhirlwindPlayer>().Whirlwind = enabled;
                     break;
             }
 
