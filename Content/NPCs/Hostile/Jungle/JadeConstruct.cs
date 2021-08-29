@@ -47,7 +47,7 @@ namespace Rejuvena.Content.NPCs.Hostile.Jungle
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
             {
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundJungle,
                 new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Rejuvena.BestiaryText.JadeConstruct"))
             });
         }
@@ -55,15 +55,17 @@ namespace Rejuvena.Content.NPCs.Hostile.Jungle
         public override void SetDefaults()
         {
             NPC.Size = new Vector2(30f, 32f);
-            NPC.lifeMax = 250;
-            NPC.life = 250;
-            NPC.defense = 3;
+            NPC.lifeMax = NPC.life = 50;
+            NPC.defense = 2;
             NPC.aiStyle = -1;
             NPC.noGravity = true;
-            NPC.damage = 50;
+            NPC.damage = 15;
             NPC.HitSound = SoundID.DD2_SkeletonHurt; // placeholder
             NPC.DeathSound = SoundID.DD2_SkeletonDeath; // placeholder
         }
+
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
+            spawnInfo.player.ZoneJungle && spawnInfo.player.ZoneRockLayerHeight ? 0.05f : 0f;
 
         public override void AI()
         {
