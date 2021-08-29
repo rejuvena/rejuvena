@@ -112,7 +112,7 @@ namespace Rejuvena.Content.Biomes
                 int upperModifierX = Main.rand.Next(-2, 2);
                 int lowerModifierX = Main.rand.Next(-2, 2);
 
-                int offsetY = centerY + (int) Math.Ceiling((float) MathHelper.Lerp(1, height * 0.6f,
+                int offsetY = centerY + (int) Math.Ceiling(MathHelper.Lerp(1, height * 0.6f,
                     MathHelper.Lerp(1, 0, (float) Math.Pow((float) i / width, 2))) / 2);
 
                 int upperOffsetIncrementerY = Main.rand.Next(0, 4);

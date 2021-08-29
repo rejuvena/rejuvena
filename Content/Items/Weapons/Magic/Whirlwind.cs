@@ -26,6 +26,7 @@ namespace Rejuvena.Content.Items.Weapons.Magic
             Item.shootSpeed = 0;
             Item.channel = true;
         }
+
         public override void UseItemFrame(Player player)
         {
             if (player.controlUseItem)
@@ -40,14 +41,11 @@ namespace Rejuvena.Content.Items.Weapons.Magic
             }
         }
 
-        public override bool CanUseItem(Player player)
-        {
-            return player.ownedProjectileCounts[Item.shoot] < 1;
-        }
+        public override bool CanUseItem(Player player) => player.ownedProjectileCounts[Item.shoot] < 1;
 
         public override void AddRecipes()
         {
-            CreateRecipe(1)
+            CreateRecipe()
                 .AddIngredient(ItemID.DirtBlock, 10)
                 .AddTile(TileID.WorkBenches)
                 .Register();

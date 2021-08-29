@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Assets;
 using ReLogic.Content;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Projectiles
@@ -54,9 +55,14 @@ namespace Rejuvena.Content.Projectiles
         {
             bool Any(Defaults defaults) => (defaults & defaultsToSet) != 0;
 
-            if (Any(Defaults.Friendly)) Projectile.friendly = true;
-            if (Any(Defaults.Hostile)) Projectile.hostile = true;
+            if (Any(Defaults.Friendly))
+                Projectile.friendly = true;
+
+            if (Any(Defaults.Hostile))
+                Projectile.hostile = true;
         }
+
+        public Player GetOwner() => Main.player[Projectile.owner];
 
         public FallbackAsset GetFallbackAsset()
         {

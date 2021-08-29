@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using On.Terraria;
 using ReLogic.Content;
-using Terraria;
 using Terraria.ModLoader;
 using TomatoLib.Common.Assets;
 using TomatoLib.Common.Systems;
@@ -23,19 +23,19 @@ namespace Rejuvena.Common.Systems.Noise
         public override void Load()
         {
             base.Load();
-
-            On.Terraria.Main.Update += LoadNoise;
+            
+            Main.Update += LoadNoise;
         }
 
         public override void Unload()
         {
             base.Unload();
 
-            On.Terraria.Main.Update -= LoadNoise;
+            Main.Update -= LoadNoise;
         }
 
         // Force our noise to get loaded on the main thread.
-        private void LoadNoise(On.Terraria.Main.orig_Update orig, Main self, GameTime gameTime)
+        private void LoadNoise(Main.orig_Update orig, Terraria.Main self, GameTime gameTime)
         {
             if (!Initialized)
             {

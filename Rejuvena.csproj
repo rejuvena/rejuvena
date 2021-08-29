@@ -9,8 +9,11 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\Items\Accessories\**" />
     <Compile Remove="TomatoLib\**" />
+    <EmbeddedResource Remove="Content\Items\Accessories\**" />
     <EmbeddedResource Remove="TomatoLib\**" />
+    <None Remove="Content\Items\Accessories\**" />
     <None Remove="TomatoLib\**" />
   </ItemGroup>
   <ItemGroup>
@@ -19,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Content\DrawEffects\" />
     <Folder Include="Assets\Masks\" />
-    <Folder Include="Content\Items\Accessories\Classless\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="TomatoLib\TomatoLib.csproj" />
