@@ -25,6 +25,8 @@ namespace Rejuvena.Content.Items.Weapons.Magic
             Item.knockBack = 5;
             Item.shootSpeed = 0;
             Item.channel = true;
+            Item.useTurn = true;
+            Item.mana = 6;
         }
 
         public override void UseItemFrame(Player player)

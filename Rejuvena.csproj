@@ -20,10 +20,6 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\DrawEffects\" />
-    <Folder Include="Assets\Masks\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="TomatoLib\TomatoLib.csproj" />
   </ItemGroup>
 </Project>
