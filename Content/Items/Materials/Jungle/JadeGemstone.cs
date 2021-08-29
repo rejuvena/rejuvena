@@ -34,6 +34,7 @@ namespace Rejuvena.Content.Items.Materials.Jungle
 
             Item.maxStack = 999;
             Item.Size = new Vector2(16f, 16f);
+            Item.value = Item.sellPrice(copper: 75);
         }
 
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor,
