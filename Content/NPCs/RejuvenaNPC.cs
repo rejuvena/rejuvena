@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
 using Rejuvena.Assets;
-using ReLogic.Content;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,36 +11,7 @@ namespace Rejuvena.Content.NPCs
     /// </summary>
     public abstract class RejuvenaNPC : ModNPC
     {
-        public override string Texture
-        {
-            get
-            {
-                if (ModContent.RequestIfExists<Texture2D>(base.Texture, out _, AssetRequestMode.ImmediateLoad))
-                {
-                    Mod.Logger.Debug($"[Loading] Texture exists: {base.Texture}, no fallback texture needed.");
-                    return base.Texture;
-                }
-
-                try
-                {
-                    return GetFallbackAsset().Path;
-                }
-                catch (Exception e)
-                {
-                    // don't care enough about the stack trace
-                    switch (e)
-                    {
-                        case NullReferenceException inner:
-                            throw new NullReferenceException($"[Loading] {e.Message}, normal asset: {base.Texture}", inner);
-
-                        case NotImplementedException inner:
-                            throw new NotImplementedException($"[Loading] {e.Message}, normal asset: {base.Texture}", inner);
-                    }
-
-                    throw;
-                }
-            }
-        }
+        public override string Texture => FallbackAsset.GetFallbackAsset(GetType(), base.Texture).Path;
 
         public virtual NPCID.Sets.NPCBestiaryDrawModifiers BestiaryDrawModifiers
         {
@@ -64,8 +32,5 @@ namespace Rejuvena.Content.NPCs
             foreach (IItemDropRule dropRule in DropData)
                 npcLoot.Add(dropRule);
         }
-
-        public FallbackAsset GetFallbackAsset() => 
-            throw new NotImplementedException("There are no fallback NPC assets.");
     }
 }
