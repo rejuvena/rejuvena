@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using On.Terraria;
 using ReLogic.Content;
 using Terraria.ModLoader;
 using TomatoLib.Common.Assets;
 using TomatoLib.Common.Systems;
+using TomatoLib.Core.Threading;
 
 // ReSharper disable CommentTypo
 // ReSharper disable UnusedMember.Global
@@ -20,31 +22,15 @@ namespace Rejuvena.Common.Systems.Noise
 
         public NoiseAsset DefaultPerlinMask;
 
-        public override void Load()
+        public override async void Load()
         {
             base.Load();
-            
-            Main.Update += LoadNoise;
-        }
 
-        public override void Unload()
-        {
-            base.Unload();
+            static async Task<NoiseAsset> GetAsset(Asset<Texture2D> texture) 
+                => await GLCallLocker.Instance.InvokeAsync(() => new NoiseAsset(texture));
 
-            Main.Update -= LoadNoise;
-        }
-
-        // Force our noise to get loaded on the main thread.
-        private void LoadNoise(Main.orig_Update orig, Terraria.Main self, GameTime gameTime)
-        {
-            if (!Initialized)
-            {
-                DefaultPerlinMask = new NoiseAsset(ModContent.Request<Texture2D>("Rejuvena/Assets/Textures/Masks/Perlin", AssetRequestMode.ImmediateLoad));
-
-                Initialized = true;
-            }
-
-            orig(self, gameTime);
+            DefaultPerlinMask = await GetAsset(ModContent.Request<Texture2D>("Rejuvena/Assets/Textures/Masks/Perlin",
+                AssetRequestMode.ImmediateLoad));
         }
     }
 }

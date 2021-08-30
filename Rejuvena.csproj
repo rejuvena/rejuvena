@@ -25,6 +25,7 @@
     <ProjectReference Include="TomatoLib\TomatoLib.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Common\DataStructures\" />
     <Folder Include="Content\Players\ModifyingPlayers\" />
   </ItemGroup>
 </Project>
