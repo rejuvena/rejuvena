@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using JetBrains.Annotations;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.ModLoader;
@@ -18,18 +19,21 @@ namespace Rejuvena.Assets
         public readonly int X;
         public readonly int Y;
 
-        public FallbackAsset(string path, int x, int y)
+        public FallbackAsset([NotNull] string path, int x, int y)
         {
             Path = path;
             X = x;
             Y = y;
         }
-
+        
         public Asset<Texture2D> GetTexture() => ModContent.Request<Texture2D>(Path);
 
-        public static FallbackAsset GetFallbackAsset<T>(string texture) => GetFallbackAsset(typeof(T), texture);
+        [MustUseReturnValue]
+        public static FallbackAsset GetFallbackAsset<T>([NotNull] string texture) =>
+            GetFallbackAsset(typeof(T), texture);
 
-        public static FallbackAsset GetFallbackAsset(Type type, string texture)
+        [MustUseReturnValue]
+        public static FallbackAsset GetFallbackAsset([NotNull] Type type, [NotNull] string texture)
         {
             if (ModContent.RequestIfExists<Texture2D>(texture, out _, AssetRequestMode.ImmediateLoad))
                 return new FallbackAsset(texture, 0, 0);

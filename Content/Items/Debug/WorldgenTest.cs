@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using JetBrains.Annotations;
+using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
 using Terraria;
@@ -8,6 +9,7 @@ using Terraria.WorldBuilding;
 namespace Rejuvena.Content.Items.Debug
 {
     [FallbackAsset(FallbackAssetType.Default)]
+    [UsedImplicitly]
     public class WorldgenTest : RejuvenaItem
     {
         public override void SetDefaults()

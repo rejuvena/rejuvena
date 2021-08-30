@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using JetBrains.Annotations;
+using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Projectiles.Friendly.Magic;
 using Terraria;
@@ -8,6 +9,7 @@ using Terraria.ModLoader;
 namespace Rejuvena.Content.Items.Weapons.Magic
 {
     [FallbackAsset(FallbackAssetType.Tome)]
+    [UsedImplicitly]
     public class Whirlwind : RejuvenaItem
     {
         public override void SetDefaults()

@@ -5,11 +5,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace Rejuvena.Content.Players.ModifyingPlayers
 {
+    [UsedImplicitly]
     public class DpsTrackerModifierPlayer : RejuvenaPlayer
     {
         public List<(int, uint)> DamageCollection { get; protected set; }

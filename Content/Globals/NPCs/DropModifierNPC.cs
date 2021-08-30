@@ -3,6 +3,7 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
+using JetBrains.Annotations;
 using Rejuvena.Content.Items.Weapons.Magic;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -11,6 +12,7 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Globals.NPCs
 {
+    [UsedImplicitly]
     public class DropModifierNPC : GlobalNPC
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
@@ -26,6 +28,6 @@ namespace Rejuvena.Content.Globals.NPCs
         }
 
         public static void ModifyHarpyLoot(ref NPCLoot npcLoot) =>
-            npcLoot.Add(new CommonDrop(ModContent.ItemType<Whirlwind>(), 80));
+            npcLoot.Add(new CommonDrop(ModContent.ItemType<Whirlwind>(), 90));
     }
 }
