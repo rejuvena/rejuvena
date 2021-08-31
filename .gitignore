@@ -4,3 +4,4 @@ bin/
 
 # Force git to pay attention to everything in /Assets/Effects
 !Assets/Effects/*
+TomatoLib
