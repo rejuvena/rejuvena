@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using Rejuvena.Assets;
+using Rejuvena.Common.DataStructures;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Items
@@ -18,14 +22,22 @@ namespace Rejuvena.Content.Items
 
         public override string Texture => FallbackAsset.GetFallbackAsset(GetType(), base.Texture).Path;
 
+        [CanBeNull] public virtual IEnumerable<(int, int)> SellEquivalent => null;
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            if (SellEquivalent is not null)
+                Item.value = new ItemShopProfile(SellEquivalent.ToArray()).ToValueCount();
+        }
+
         public void SetDefaultsFromEnum(Defaults defaultsToSet)
         {
-            bool Any(Defaults defaults) => (defaults & defaultsToSet) != 0;
-
-            if (Any(Defaults.Accessory))
+            if (defaultsToSet.HasFlag(Defaults.Accessory))
                 Item.DefaultToAccessory(Item.width, Item.height);
 
-            if (Any(Defaults.Staff))
+            if (defaultsToSet.HasFlag(Defaults.Staff))
                 Item.DefaultToStaff(Item.shoot, Item.useAnimation, Item.useTime, Item.mana);
         }
     }
