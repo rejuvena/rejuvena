@@ -3,27 +3,69 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Terraria;
 
 namespace Rejuvena.Common.DataStructures
 {
-    public struct ItemShopProfile
+    public class ItemShopProfile
     {
-        public (int, int)[] ItemData;
+        public List<(int, int)> ItemData;
+        public int ExtraValue;
 
         public ItemShopProfile(params (int, int)[] itemData)
         {
-            ItemData = itemData;
+            ItemData = itemData.ToList();
         }
 
         public ItemShopProfile(params int[] items)
         {
-            ItemData = items.Select(item => (item, 1)).ToArray();
+            ItemData = items.Select(x => (x, 1)).ToList();
         }
 
-        [MustUseReturnValue]
+        public ItemShopProfile(IEnumerable<(int, int)> itemData)
+        {
+            ItemData = itemData.ToList();
+        }
+
+        public ItemShopProfile(IEnumerable<int> items)
+        {
+            ItemData = items.Select(x => (x, 1)).ToList();
+        }
+
+        public ItemShopProfile WithItems(params (int, int)[] itemData)
+        {
+            ItemData = itemData.ToList();
+            return this;
+        }
+
+        public ItemShopProfile WithItems(params int[] items)
+        {
+            ItemData = items.Select(x => (x, 1)).ToList();
+            return this;
+        }
+
+        public ItemShopProfile WithItems(IEnumerable<(int, int)> itemData)
+        {
+            ItemData = itemData.ToList();
+            return this;
+        }
+
+        public ItemShopProfile WithItems(IEnumerable<int> items)
+        {
+            ItemData = items.Select(x => (x, 1)).ToList();
+            return this;
+        }
+
+        public ItemShopProfile WithExtraValue(int extraValue)
+        {
+            ExtraValue = extraValue;
+            return this;
+        }
+
+        [MustUseReturnValue("Wasted calculation if it isn't used.")]
         public int ToValueCount()
         {
             int total = 0;
@@ -42,7 +84,7 @@ namespace Rejuvena.Common.DataStructures
                 }
             }
 
-            return total;
+            return total + ExtraValue;
         }
     }
 }

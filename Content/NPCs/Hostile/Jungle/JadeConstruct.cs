@@ -81,7 +81,7 @@ namespace Rejuvena.Content.NPCs.Hostile.Jungle
                 DrawEffectManager.Instance.DrawEffects.Add(
                     new JadeSparkle(NPC.Center, Main.rand.NextVector2Circular(5f, 5f))
                     {
-                        TargetScale = Main.rand.NextFloat(0.2f, 0.4f)
+                        TargetScale = new Vector2(Main.rand.NextFloat(0.2f, 0.4f))
                     });
 
             Lighting.AddLight(NPC.Center, new Color(82, 128, 140).ToVector3() / 3f);
@@ -94,7 +94,7 @@ namespace Rejuvena.Content.NPCs.Hostile.Jungle
             JadeSparkle sparkle =
                 new(NPC.Center + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20) * 4), new Vector2(0, -1.7f))
                 {
-                    TargetScale = 0.3f
+                    TargetScale = new Vector2(0.3f)
                 };
 
             DrawEffectManager.Instance.DrawEffects.Add(sparkle);
@@ -104,7 +104,7 @@ namespace Rejuvena.Content.NPCs.Hostile.Jungle
                 sparkle = new JadeSparkle(NPC.Center + new Vector2(0, (float) Math.Cos(NPC.ai[0] / 20) * 4),
                     new Vector2(0, -1.7f).RotatedBy(MathHelper.ToRadians(i * (360 / 16))))
                 {
-                    TargetScale = 0.3f
+                    TargetScale = new Vector2(0.3f)
                 };
 
                 DrawEffectManager.Instance.DrawEffects.Add(sparkle);

@@ -94,7 +94,7 @@ namespace Rejuvena.Content.Items.Materials.Jungle
                     DrawEffectManager.Instance.DrawEffects.Add(
                         new JadeSparkle(Item.Center, Main.rand.NextVector2Circular(5f, 5f))
                         {
-                            TargetScale = Main.rand.NextFloat(0.2f, 0.4f)
+                            TargetScale = new Vector2(Main.rand.NextFloat(0.2f, 0.4f))
                         });
                     break;
             }

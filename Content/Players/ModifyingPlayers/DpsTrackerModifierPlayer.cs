@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Terraria;
-using Terraria.ModLoader.IO;
 
 namespace Rejuvena.Content.Players.ModifyingPlayers
 {
@@ -23,9 +22,9 @@ namespace Rejuvena.Content.Players.ModifyingPlayers
             DamageCollection = new List<(int, uint)>();
         }
 
-        public override void Load(TagCompound tag)
+        public override void Load()
         {
-            base.Load(tag);
+            base.Load();
 
             On.Terraria.Player.getDPS += DpsHijacker;
         }
