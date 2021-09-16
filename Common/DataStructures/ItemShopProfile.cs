@@ -10,56 +10,56 @@ using Terraria;
 
 namespace Rejuvena.Common.DataStructures
 {
-    public class ItemShopProfile
+    public class ItemCollectionProfile
     {
         public List<(int, int)> ItemData;
         public int ExtraValue;
 
-        public ItemShopProfile(params (int, int)[] itemData)
+        public ItemCollectionProfile(params (int, int)[] itemData)
         {
             ItemData = itemData.ToList();
         }
 
-        public ItemShopProfile(params int[] items)
+        public ItemCollectionProfile(params int[] items)
         {
             ItemData = items.Select(x => (x, 1)).ToList();
         }
 
-        public ItemShopProfile(IEnumerable<(int, int)> itemData)
+        public ItemCollectionProfile(IEnumerable<(int, int)> itemData)
         {
             ItemData = itemData.ToList();
         }
 
-        public ItemShopProfile(IEnumerable<int> items)
+        public ItemCollectionProfile(IEnumerable<int> items)
         {
             ItemData = items.Select(x => (x, 1)).ToList();
         }
 
-        public ItemShopProfile WithItems(params (int, int)[] itemData)
-        {
-            ItemData = itemData.ToList();
-            return this;
-        }
-
-        public ItemShopProfile WithItems(params int[] items)
-        {
-            ItemData = items.Select(x => (x, 1)).ToList();
-            return this;
-        }
-
-        public ItemShopProfile WithItems(IEnumerable<(int, int)> itemData)
+        public ItemCollectionProfile WithItems(params (int, int)[] itemData)
         {
             ItemData = itemData.ToList();
             return this;
         }
 
-        public ItemShopProfile WithItems(IEnumerable<int> items)
+        public ItemCollectionProfile WithItems(params int[] items)
         {
             ItemData = items.Select(x => (x, 1)).ToList();
             return this;
         }
 
-        public ItemShopProfile WithExtraValue(int extraValue)
+        public ItemCollectionProfile WithItems(IEnumerable<(int, int)> itemData)
+        {
+            ItemData = itemData.ToList();
+            return this;
+        }
+
+        public ItemCollectionProfile WithItems(IEnumerable<int> items)
+        {
+            ItemData = items.Select(x => (x, 1)).ToList();
+            return this;
+        }
+
+        public ItemCollectionProfile WithExtraValue(int extraValue)
         {
             ExtraValue = extraValue;
             return this;

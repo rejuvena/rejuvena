@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rejuvena", "Rejuvena.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomatoLib", "TomatoLib\TomatoLib.csproj", "{68ED1092-A1CB-4D35-A7DE-AF65B533E0F5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rejuvena.Tests", "Rejuvena.Tests\Rejuvena.Tests.csproj", "{8E92409E-39BE-4F60-8AF4-57D59130B79D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,12 @@ Global
 		{68ED1092-A1CB-4D35-A7DE-AF65B533E0F5}.MusicFix|Any CPU.Build.0 = Debug|Any CPU
 		{68ED1092-A1CB-4D35-A7DE-AF65B533E0F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68ED1092-A1CB-4D35-A7DE-AF65B533E0F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.MusicFix|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.MusicFix|Any CPU.Build.0 = Debug|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E92409E-39BE-4F60-8AF4-57D59130B79D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

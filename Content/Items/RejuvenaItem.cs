@@ -29,7 +29,7 @@ namespace Rejuvena.Content.Items
             base.SetDefaults();
 
             if (SellEquivalent is not null)
-                Item.value = new ItemShopProfile(SellEquivalent.ToArray()).ToValueCount();
+                Item.value = new ItemCollectionProfile(SellEquivalent.ToArray()).ToValueCount();
         }
 
         public void SetDefaultsFromEnum(Defaults defaultsToSet)
