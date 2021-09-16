@@ -9,13 +9,10 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Content\Items\Accessories\**" />
     <Compile Remove="Rejuvena.Tests\**" />
     <Compile Remove="TomatoLib\**" />
-    <EmbeddedResource Remove="Content\Items\Accessories\**" />
     <EmbeddedResource Remove="Rejuvena.Tests\**" />
     <EmbeddedResource Remove="TomatoLib\**" />
-    <None Remove="Content\Items\Accessories\**" />
     <None Remove="Rejuvena.Tests\**" />
     <None Remove="TomatoLib\**" />
   </ItemGroup>

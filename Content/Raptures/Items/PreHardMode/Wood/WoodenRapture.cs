@@ -5,10 +5,12 @@
 
 using System.Collections.Generic;
 using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.Raptures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Rejuvena.Common.Raptures.Items.PreHardMode.Wood
+namespace Rejuvena.Content.Raptures.Items.PreHardMode.Wood
 {
     public class WoodenRapture : ItemRapture
     {
@@ -28,8 +30,9 @@ namespace Rejuvena.Common.Raptures.Items.PreHardMode.Wood
             }
         }
 
-        public override void Update(ModItem updateableEntity)
+        public override void UpdateAsAccessory(ModItem modItem, Player player, bool hideVisual)
         {
+            Main.NewText("Hello from rapture-land!");
         }
     }
 }

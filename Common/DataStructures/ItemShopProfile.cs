@@ -65,6 +65,8 @@ namespace Rejuvena.Common.DataStructures
             return this;
         }
 
+        public virtual bool CanBeApplied() => true;
+
         [MustUseReturnValue("Wasted calculation if it isn't used.")]
         public int ToValueCount()
         {
