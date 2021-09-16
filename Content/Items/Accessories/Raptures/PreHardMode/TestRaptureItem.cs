@@ -4,7 +4,7 @@
 #endregion
 
 using Rejuvena.Assets;
-using Rejuvena.Content.Raptures.Items.PreHardMode.Wood;
+using Rejuvena.Content.Raptures.Tests;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Items.Accessories.Raptures.PreHardMode
@@ -15,7 +15,7 @@ namespace Rejuvena.Content.Items.Accessories.Raptures.PreHardMode
     [Autoload(false)]
 #endif
     [FallbackAsset(FallbackAssetType.Default)]
-    public class TestRaptureItem : RaptureItem<WoodenRapture>
+    public class TestRaptureItem : RaptureItem<InheritanceRaptureTest>
     {
     }
 }

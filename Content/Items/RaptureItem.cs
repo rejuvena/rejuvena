@@ -19,8 +19,9 @@ namespace Rejuvena.Content.Items
 
         [CanBeNull]
         public virtual TReturn ExecuteFromInheritedRaptures<TReturn>(Func<IRapture, TReturn, TReturn> action,
-            int inheritCount = -1)
+            IRapture rapture = default, int inheritCount = -1)
         {
+            rapture ??= MainRapture;
             inheritCount++;
 
             if (inheritCount > 50)
@@ -28,10 +29,10 @@ namespace Rejuvena.Content.Items
 
             TReturn retVal = default;
 
-            foreach (IRapture rapture in MainRapture.InheritedRaptures)
+            foreach (IRapture iRapture in rapture.InheritedRaptures)
             {
-                retVal = action(rapture, retVal);
-                retVal = ExecuteFromInheritedRaptures(action, inheritCount);
+                retVal = action(iRapture, retVal);
+                retVal = ExecuteFromInheritedRaptures(action, iRapture, inheritCount);
             }
 
             return retVal;

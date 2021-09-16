@@ -6,9 +6,7 @@
 using System.Collections.Generic;
 using Rejuvena.Common.DataStructures;
 using Rejuvena.Common.Raptures;
-using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Raptures.Items.PreHardMode.Wood
 {
@@ -28,11 +26,6 @@ namespace Rejuvena.Content.Raptures.Items.PreHardMode.Wood
                     (ItemID.WoodenHammer, 1)
                 );
             }
-        }
-
-        public override void UpdateAsAccessory(ModItem modItem, Player player, bool hideVisual)
-        {
-            Main.NewText("Hello from rapture-land!");
         }
     }
 }
