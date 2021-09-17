@@ -5,9 +5,10 @@
 
 using Rejuvena.Assets;
 using Rejuvena.Content.Raptures.Tests;
+using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Rejuvena.Content.Items.Accessories.Raptures.PreHardMode
+namespace Rejuvena.Content.Items.Accessories.Raptures.Tests
 {
 #if DEBUG
     [Autoload]
@@ -17,5 +18,6 @@ namespace Rejuvena.Content.Items.Accessories.Raptures.PreHardMode
     [FallbackAsset(FallbackAssetType.Default)]
     public class TestRaptureItem : RaptureItem<InheritanceRaptureTest>
     {
+        public override int ItemToDrawAs => ItemID.None;
     }
 }

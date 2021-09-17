@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\DataStructures\" />
+    <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
     <Folder Include="Content\Players\ModifyingPlayers\" />
   </ItemGroup>
 </Project>
