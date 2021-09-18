@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using ReLogic.Content.Readers;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
@@ -17,7 +16,7 @@ using TomatoLib.Core.Threading;
 
 namespace Rejuvena.Common.Shaders
 {
-    [Autoload(Side = ModSide.Client)]
+    [Autoload(false, Side = ModSide.Client)]
     public sealed class ShaderContainer : SingletonSystem<ShaderContainer>
     {
         public Ref<Effect> OutlineEffect { get; private set; }
@@ -37,15 +36,19 @@ namespace Rejuvena.Common.Shaders
 
         public void Apply(ShaderData shader, [CanBeNull] Entity entity = null, DrawData? drawData = null)
         {
-            if (shader is null)
-                Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-            else if (shader is ArmorShaderData armorShader)
+            switch (shader)
             {
-                if (armorShader.GetSecondaryShader(entity) is null)
-                    armorShader.Apply(entity, drawData);
-                else
-                    armorShader.GetSecondaryShader(entity).Apply(entity, drawData);
+                case null:
+                    Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+                    break;
 
+                case ArmorShaderData armorShader when armorShader.GetSecondaryShader(entity) is null:
+                    armorShader.Apply(entity, drawData);
+                    break;
+
+                case ArmorShaderData armorShader:
+                    armorShader.GetSecondaryShader(entity).Apply(entity, drawData);
+                    break;
             }
 
             // TODO: Add more.

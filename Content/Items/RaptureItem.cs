@@ -9,16 +9,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Common.DataStructures;
 using Rejuvena.Common.Raptures;
-using Rejuvena.Common.Shaders;
 using Rejuvena.Common.Utilities;
 using ReLogic.Content;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using TomatoLib.Core.Drawing;
 
 namespace Rejuvena.Content.Items
 {
@@ -70,7 +66,8 @@ namespace Rejuvena.Content.Items
             SetDefaultsFromEnum(Defaults.Accessory);
         }
 
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor,
+        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame,
+            Color drawColor, Color itemColor,
             Vector2 origin, float scale)
         {
             if (ItemToDrawAs == ItemID.None)
@@ -80,7 +77,7 @@ namespace Rejuvena.Content.Items
 
             DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, position, 0f, origin, scale, frame);
 
-            Matrix matrix = Main.LocalPlayer.gravDir >= 1f
+            /*Matrix matrix = Main.LocalPlayer.gravDir >= 1f
                 ? Main.GameViewMatrix.ZoomMatrix
                 : Main.GameViewMatrix.TransformationMatrix;
 
@@ -99,21 +96,23 @@ namespace Rejuvena.Content.Items
 
             ArmorShaderData shader = ShaderContainer.Instance.OutlineShader;
             shader.UseColor(Main.DiscoColor);
-            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);
+            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);*/
 
-            sb.Draw(itemTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(itemTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
 
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale,
+        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor,
+            ref float rotation, ref float scale,
             int whoAmI)
         {
             if (ItemToDrawAs == ItemID.None)
                 return true;
 
-            SpriteEffects sEffects = Main.LocalPlayer.gravity <= -1f ? SpriteEffects.FlipVertically : SpriteEffects.None;
-            
+            SpriteEffects sEffects =
+                Main.LocalPlayer.gravity <= -1f ? SpriteEffects.FlipVertically : SpriteEffects.None;
+
             Asset<Texture2D> itemTexture = TextureAssets.Item[ItemToDrawAs].ForceRequest();
 
             Item.GetInWorldDrawData(out Rectangle frame, out Rectangle _, out Vector2 origin);
@@ -121,7 +120,7 @@ namespace Rejuvena.Content.Items
             DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, Item.position - Main.screenPosition, rotation,
                 origin, scale, frame);
 
-            SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
+            /*SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 SamplerState.LinearClamp, spriteBatch.GraphicsDevice.DepthStencilState,
                 spriteBatch.GraphicsDevice.RasterizerState, null, Main.UIScaleMatrix);
 
@@ -136,7 +135,7 @@ namespace Rejuvena.Content.Items
 
             ArmorShaderData shader = ShaderContainer.Instance.OutlineShader;
             shader.UseColor(Main.DiscoColor);
-            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);
+            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);*/
 
             spriteBatch.Draw(itemTexture.Value, Item.position - Main.screenPosition, frame, alphaColor, rotation,
                 origin, new Vector2(scale), sEffects, 0f);

@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using On.Terraria;
 using ReLogic.Content;
 using Terraria.ModLoader;
 using TomatoLib.Common.Assets;
