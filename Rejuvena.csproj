@@ -1,32 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="../tModLoader.targets" />
+
   <PropertyGroup>
     <AssemblyName>Rejuvena</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <TargetFramework>net5.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="Rejuvena.Build\**" />
     <Compile Remove="Rejuvena.Tests\**" />
     <Compile Remove="TomatoLib\**" />
+    <EmbeddedResource Remove="Rejuvena.Build\**" />
     <EmbeddedResource Remove="Rejuvena.Tests\**" />
     <EmbeddedResource Remove="TomatoLib\**" />
+    <None Remove="Rejuvena.Build\**" />
     <None Remove="Rejuvena.Tests\**" />
     <None Remove="TomatoLib\**" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
     <PackageReference Include="JetBrains.ExternalAnnotations" Version="10.2.100" />
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="TomatoLib\TomatoLib.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Common\DataStructures\" />
     <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
     <Folder Include="Content\Players\ModifyingPlayers\" />
   </ItemGroup>
+
+  <Target Name="GenerateBuild" AfterTargets="PreBuildEvent">
+    <Exec Command="dotnet build &quot;$(SolutionDir)Rejuvena.Build\Rejuvena.Build.csproj&quot; --configuration &quot;Release&quot;" />
+    <Exec Command="dotnet &quot;$(SolutionDir)Rejuvena.Build\bin\Release\net5.0\Rejuvena.Build.dll&quot; -v &quot;$(AssemblyVersion)&quot; -o &quot;$(SolutionDir)build.txt&quot;" />
+  </Target>
+
 </Project>
