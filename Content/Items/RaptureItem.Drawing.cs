@@ -1,16 +1,13 @@
 ﻿#region License
+
 // Copyright (C) 2021 Tomat and Contributors
 // GNU General Public License Version 3, 29 June 2007
+
 #endregion
 
-using System;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.DataStructures.ItemCollections;
-using Rejuvena.Common.Raptures;
 using Rejuvena.Common.Utilities;
-using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -21,9 +18,9 @@ using TomatoLib.Core.Drawing;
 
 namespace Rejuvena.Content.Items
 {
-    public abstract class RaptureItem<TMainRapture> : RejuvenaItem where TMainRapture : IItemRapture, new()
+    public abstract partial class RaptureItem<TMainRapture>
     {
-        public virtual TMainRapture MainRapture { get; } = new();
+        public abstract int ItemToDrawAs { get; }
 
         public override string Texture => ItemToDrawAs switch
         {
@@ -31,45 +28,6 @@ namespace Rejuvena.Content.Items
             ItemID.None => base.Texture,
             _ => $"Terraria/Images/Item_{ItemToDrawAs}"
         };
-
-        public abstract int ItemToDrawAs { get; }
-
-        [CanBeNull]
-        public virtual TReturn ExecuteFromInheritedRaptures<TReturn>(Func<IRapture, TReturn, TReturn> action,
-            IRapture rapture = default, int inheritCount = -1)
-        {
-            rapture ??= MainRapture;
-            inheritCount++;
-
-            if (inheritCount > 50)
-                throw new Exception("Recursive watchdog for raptures triggered.");
-
-            TReturn retVal = default;
-
-            foreach (IRapture iRapture in rapture.InheritedRaptures)
-            {
-                retVal = action(iRapture, retVal);
-                retVal = ExecuteFromInheritedRaptures(action, iRapture, inheritCount);
-            }
-
-            return retVal;
-        }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            ItemID.Sets.ItemNoGravity[Type] = true;
-        }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            SetDefaultsFromEnum(Defaults.Accessory);
-
-            Item.Size = ItemToDrawAs == ItemID.None ? new Vector2(20f) : ContentSamples.ItemsByType[ItemToDrawAs].Size;
-        }
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 pos, Rectangle frame, Color drawColor,
             Color itemColor, Vector2 orig, float scale)
@@ -169,98 +127,6 @@ namespace Rejuvena.Content.Items
 
             for (float i = 0.0f; i < 1.0; i += 0.34f)
                 DrawTheThing(i, new Color(140, 120, 255, 77));
-        }
-
-        public override void Update(ref float gravity, ref float maxFallSpeed)
-        {
-            base.Update(ref gravity, ref maxFallSpeed);
-
-            ExecuteFromInheritedRaptures<object>((rapture, _) =>
-            {
-                if (rapture is IUpdateableRapture<ModItem> modItemRapture)
-                    modItemRapture.Update(this);
-
-                return null;
-            });
-
-            MainRapture.Update(this);
-
-            float passedGravity = gravity;
-            float passedFallSpeed = maxFallSpeed;
-
-            ExecuteFromInheritedRaptures<object>((rapture, _) =>
-            {
-                if (rapture is IItemRapture itemRapture)
-                    itemRapture.UpdateInWorld(this, ref passedGravity, ref passedFallSpeed);
-
-                return null;
-            });
-
-            MainRapture.UpdateInWorld(this, ref gravity, ref maxFallSpeed);
-        }
-
-        public override void UpdateInventory(Player player)
-        {
-            base.UpdateInventory(player);
-
-            ExecuteFromInheritedRaptures<object>((rapture, _) =>
-            {
-                if (rapture is IItemRapture itemRapture)
-                    itemRapture.UpdateInInventory(this, player);
-
-                return null;
-            });
-
-            MainRapture.UpdateInInventory(this, player);
-        }
-
-        public override void UpdateEquip(Player player)
-        {
-            base.UpdateEquip(player);
-
-            ExecuteFromInheritedRaptures<object>((rapture, _) =>
-            {
-                if (rapture is IItemRapture itemRapture)
-                    itemRapture.UpdateWhenEquipped(this, player);
-
-                return null;
-            });
-
-            MainRapture.UpdateWhenEquipped(this, player);
-        }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
-            base.UpdateAccessory(player, hideVisual);
-
-            ExecuteFromInheritedRaptures<object>((rapture, _) =>
-            {
-                if (rapture is IItemRapture itemRapture)
-                    itemRapture.UpdateAsAccessory(this, player, hideVisual);
-
-                return null;
-            });
-
-            MainRapture.UpdateAsAccessory(this, player, hideVisual);
-        }
-
-        public override void AddRecipes()
-        {
-            base.AddRecipes();
-
-            Recipe recipe = CreateRecipe();
-
-            foreach (ItemCollectionProfile profile in MainRapture.AssociatedItems)
-            {
-                if (!profile.CanBeApplied())
-                    continue;
-
-                foreach ((int item, int count) in profile.ItemData)
-                    recipe.AddIngredient(item, count);
-            }
-
-            recipe.AddTile(TileID.DemonAltar);
-            recipe.Register();
         }
     }
 }
