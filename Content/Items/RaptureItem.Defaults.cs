@@ -6,6 +6,7 @@
 #endregion
 
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 
 namespace Rejuvena.Content.Items
@@ -27,7 +28,11 @@ namespace Rejuvena.Content.Items
 
             SetDefaultsFromEnum(Defaults.Accessory);
 
-            Item.Size = ItemToDrawAs == ItemID.None ? new Vector2(20f) : ContentSamples.ItemsByType[ItemToDrawAs].Size;
+            Item.Size = ItemToDrawAs == ItemID.None
+                ? new Vector2(20f)
+                : ContentSamples.ItemsByType.TryGetValue(ItemToDrawAs, out Item item)
+                    ? item.Size
+                    : new Item(ItemToDrawAs).Size;
         }
     }
 }

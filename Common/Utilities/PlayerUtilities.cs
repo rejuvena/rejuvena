@@ -4,6 +4,7 @@
 #endregion
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace Rejuvena.Common.Utilities
@@ -19,5 +20,9 @@ namespace Rejuvena.Common.Utilities
         public static Matrix GetMatrix(this Player player) => player.gravDir >= 1f
             ? Main.GameViewMatrix.ZoomMatrix
             : Main.GameViewMatrix.TransformationMatrix;
+
+        public static SpriteEffects GetEffects(this Player player) => player.gravity <= -1f
+            ? SpriteEffects.FlipVertically
+            : SpriteEffects.None;
     }
 }

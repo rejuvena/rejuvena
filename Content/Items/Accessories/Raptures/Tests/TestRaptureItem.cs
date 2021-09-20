@@ -5,8 +5,8 @@
 
 using Rejuvena.Assets;
 using Rejuvena.Content.Raptures.Tests;
-using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Default;
 
 namespace Rejuvena.Content.Items.Accessories.Raptures.Tests
 {
@@ -18,6 +18,6 @@ namespace Rejuvena.Content.Items.Accessories.Raptures.Tests
     [FallbackAsset(FallbackAssetType.Default)]
     public class TestRaptureItem : RaptureItem<InheritanceRaptureTest>
     {
-        public override int ItemToDrawAs => ItemID.None;
+        public override int ItemToDrawAs => ModContent.ItemType<UnloadedItem>();
     }
 }

@@ -35,28 +35,21 @@ namespace Rejuvena.Content.Items
             if (ItemToDrawAs == ItemID.None)
                 return true;
 
-            drawColor = drawColor.Multiply(Color.DarkGray.Multiply(Main.DiscoColor));
-            drawColor.A = 220;
-
+            drawColor = GetWantedColor(drawColor);
             Texture2D tex = TextureAssets.Item[ItemToDrawAs].ForceRequest().Value;
-
-            SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                SamplerState.LinearClamp, spriteBatch.GraphicsDevice.DepthStencilState,
-                spriteBatch.GraphicsDevice.RasterizerState, null, Main.UIScaleMatrix);
 
             DrawTreasureBagLikeEffect(spriteBatch, tex, pos, 0f, orig, scale, frame);
 
-            using DisposableSpriteBatch sb = new(spriteBatch, immediate);
-            DrawData data = new()
-            {
-                position = pos,
-                scale = new Vector2(scale),
-                sourceRect = frame,
-                texture = tex
-            };
+            using DisposableSpriteBatch sb = ApplyShader(Main.spriteBatch,
+                SamplerState.LinearClamp,
+                Main.UIScaleMatrix,
+                Main.LocalPlayer,
+                pos,
+                scale,
+                frame,
+                tex
+            );
 
-            GameShaders.Armor.GetSecondaryShader(ContentSamples.ItemsByType[ItemID.PhaseDye].dye, Main.LocalPlayer)
-                .Apply(Main.LocalPlayer, data);
             sb.Draw(tex, pos, frame, drawColor, 0f, orig, scale, SpriteEffects.None, 0f);
 
             return false;
@@ -68,38 +61,72 @@ namespace Rejuvena.Content.Items
             if (ItemToDrawAs == ItemID.None)
                 return true;
 
-            alpha = alpha.Multiply(Main.DiscoColor);
-            alpha.A = 220;
-
-            SpriteEffects effects =
-                Main.LocalPlayer.gravity <= -1f ? SpriteEffects.FlipVertically : SpriteEffects.None;
-
+            alpha = GetWantedColor(alpha);
+            SpriteEffects effects = Main.LocalPlayer.GetEffects();
             Texture2D tex = TextureAssets.Item[ItemToDrawAs].ForceRequest().Value;
             Vector2 drawPos = Item.position - Main.screenPosition;
-
-            SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                SamplerState.PointClamp, spriteBatch.GraphicsDevice.DepthStencilState,
-                spriteBatch.GraphicsDevice.RasterizerState, null, Main.LocalPlayer.GetMatrix());
 
             Item.GetInWorldDrawData(out Rectangle frame, out Rectangle _, out Vector2 orig);
             DrawTreasureBagLikeEffect(spriteBatch, tex, drawPos, rot, orig, scale, frame);
 
-            using DisposableSpriteBatch sb = new(spriteBatch, immediate);
-            DrawData data = new()
-            {
-                position = drawPos,
-                scale = new Vector2(scale),
-                sourceRect = frame,
-                texture = tex
-            };
+            using DisposableSpriteBatch sb = ApplyShader(Main.spriteBatch,
+                SamplerState.PointClamp,
+                Main.LocalPlayer.GetMatrix(),
+                Main.player[Item.playerIndexTheItemIsReservedFor],
+                drawPos,
+                scale,
+                frame,
+                tex
+            );
 
-            GameShaders.Armor
-                .GetSecondaryShader(ContentSamples.ItemsByType[ItemID.PhaseDye].dye,
-                    Main.player[Item.playerIndexTheItemIsReservedFor])
-                .Apply(Main.player[Item.playerIndexTheItemIsReservedFor], data);
             sb.Draw(tex, drawPos, frame, alpha, rot, orig, new Vector2(scale), effects, 0f);
 
             return false;
+        }
+
+        public static DisposableSpriteBatch ApplyShader(
+            SpriteBatch spriteBatch,
+            SamplerState samplerState,
+            Matrix matrix,
+            Player player,
+            Vector2 position,
+            float scale,
+            Rectangle sourceFrame,
+            Texture2D texture)
+        {
+            SpriteBatchSnapshot immediate = new(
+                SpriteSortMode.Immediate,
+                BlendState.AlphaBlend,
+                samplerState,
+                spriteBatch.GraphicsDevice.DepthStencilState,
+                spriteBatch.GraphicsDevice.RasterizerState,
+                null,
+                matrix
+            );
+
+            DisposableSpriteBatch sb = new(spriteBatch, immediate);
+
+            DrawData data = new()
+            {
+                position = position,
+                scale = new Vector2(scale),
+                sourceRect = sourceFrame,
+                texture = texture
+            };
+
+            int dye = ContentSamples.ItemsByType[ItemID.PhaseDye].dye;
+
+            ArmorShaderData shader = GameShaders.Armor.GetSecondaryShader(dye, player);
+            shader.Apply(player, data);
+
+            return sb;
+        }
+
+        public static Color GetWantedColor(Color color)
+        {
+            color = color.Multiply(Main.DiscoColor);
+            color.A = 220;
+            return color;
         }
 
         public virtual void DrawTreasureBagLikeEffect(SpriteBatch spriteBatch, Texture2D texture, Vector2 position,
