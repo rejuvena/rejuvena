@@ -44,5 +44,15 @@ namespace Rejuvena.Common.Utilities
 
             origin = frame.Size() / 2f;
         }
+
+        public static Color Multiply(this Color colorOne, Color colorTwo, bool multiplyAlpha = false) =>
+            new(ByteToFloat(colorOne.R) * ByteToFloat(colorTwo.R),
+                ByteToFloat(colorOne.B) * ByteToFloat(colorTwo.G),
+                ByteToFloat(colorOne.B) * ByteToFloat(colorTwo.G),
+                multiplyAlpha ? ByteToFloat(colorOne.R) * ByteToFloat(colorTwo.R) : ByteToFloat(colorOne.A));
+
+        public static byte FloatToByte(float fl) => (byte) MathHelper.Clamp(fl * byte.MaxValue, 0f, byte.MaxValue);
+
+        public static float ByteToFloat(byte b) => MathHelper.Clamp(b / (float) byte.MaxValue, 0f, 1f);
     }
 }

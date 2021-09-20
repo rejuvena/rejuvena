@@ -76,28 +76,6 @@ namespace Rejuvena.Content.Items
             Asset<Texture2D> itemTexture = TextureAssets.Item[ItemToDrawAs].ForceRequest();
 
             DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, position, 0f, origin, scale, frame);
-
-            /*Matrix matrix = Main.LocalPlayer.gravDir >= 1f
-                ? Main.GameViewMatrix.ZoomMatrix
-                : Main.GameViewMatrix.TransformationMatrix;
-
-            SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                SamplerState.PointClamp, spriteBatch.GraphicsDevice.DepthStencilState,
-                spriteBatch.GraphicsDevice.RasterizerState, null, matrix);
-
-            using DisposableSpriteBatch sb = new(spriteBatch, immediate);
-            DrawData data = new()
-            {
-                position = position,
-                scale = new Vector2(scale),
-                sourceRect = frame,
-                texture = itemTexture.Value
-            };
-
-            ArmorShaderData shader = ShaderContainer.Instance.OutlineShader;
-            shader.UseColor(Main.DiscoColor);
-            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);*/
-
             spriteBatch.Draw(itemTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
 
             return false;
@@ -119,24 +97,6 @@ namespace Rejuvena.Content.Items
 
             DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, Item.position - Main.screenPosition, rotation,
                 origin, scale, frame);
-
-            /*SpriteBatchSnapshot immediate = new(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                SamplerState.LinearClamp, spriteBatch.GraphicsDevice.DepthStencilState,
-                spriteBatch.GraphicsDevice.RasterizerState, null, Main.UIScaleMatrix);
-
-            using DisposableSpriteBatch sb = new(spriteBatch, immediate);
-            DrawData data = new()
-            {
-                position = Item.position - Main.screenPosition,
-                scale = new Vector2(scale),
-                sourceRect = frame,
-                texture = itemTexture.Value
-            };
-
-            ArmorShaderData shader = ShaderContainer.Instance.OutlineShader;
-            shader.UseColor(Main.DiscoColor);
-            ShaderContainer.Instance.Apply(shader, Main.player[Item.playerIndexTheItemIsReservedFor], data);*/
-
             spriteBatch.Draw(itemTexture.Value, Item.position - Main.screenPosition, frame, alphaColor, rotation,
                 origin, new Vector2(scale), sEffects, 0f);
 
@@ -160,10 +120,11 @@ namespace Rejuvena.Content.Items
                 position + PosOffset(i) * rotationModifier, frame, color, rotation, origin, scale, SpriteEffects.None,
                 0.0f);
 
-            for (float num4 = 0.0f; num4 < 1.0; num4 += 0.25f)
-                DrawTheThing(num4, new Color(90, 70, 255, 50));
-            for (float num4 = 0.0f; num4 < 1.0; num4 += 0.34f)
-                DrawTheThing(num4, new Color(140, 120, 255, 77));
+            for (float i = 0.0f; i < 1.0; i += 0.25f)
+                DrawTheThing(i, new Color(90, 70, 255, 50).Multiply(Color.Red));
+
+            for (float i = 0.0f; i < 1.0; i += 0.34f)
+                DrawTheThing(i, new Color(140, 120, 255, 77).Multiply(Color.Yellow));
         }
 
         public override void Update(ref float gravity, ref float maxFallSpeed)
