@@ -144,12 +144,12 @@ namespace Rejuvena.Content.Items
             float rotation, Vector2 origin, float scale, Rectangle frame)
         {
             float rotationSpeed = Main.GlobalTimeWrappedHourly;
-            float rotationDistance = Main.GlobalTimeWrappedHourly * 4f % 4f / 2f;
+            //float rotationDistance = Main.GlobalTimeWrappedHourly * 4f % 4f / 2f;
 
-            if (rotationDistance >= 1f)
-                rotationDistance = 2f - rotationDistance;
+            //if (rotationDistance >= 1f)
+            //    rotationDistance = 2f - rotationDistance;
 
-            float rotationModifier = rotationDistance * 0.5f + 0.5f;
+            const float rotationModifier = /*rotationDistance * 0.5f +*/ 0.5f;
 
             Vector2 PosOffset(float i) => new Vector2(0f, 8f).RotatedBy((i + rotationSpeed) * MathHelper.TwoPi);
 
