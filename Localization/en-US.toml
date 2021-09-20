@@ -2,11 +2,13 @@
 Whirlwind = "Whirlwind Tome"
 JadeGemstone = "Unrefined Jade Gemstone"
 TestRaptureItem = "Test Rapture"
+WoodenRaptureItem = "Wooden Rapture"
 
 [ItemTooltip]
 Whirlwind = "Summons a gust of wind"
 JadeGemstone = "It glimmers a pale green"
 TestRaptureItem = "Hope it works!"
+WoodenRaptureItem = "'Check the safety manual!'"
 
 [NPCName]
 JadeConstruct = "Jade Construct"

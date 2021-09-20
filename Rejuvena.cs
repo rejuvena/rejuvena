@@ -45,8 +45,8 @@ namespace Rejuvena
         {
             base.Load();
 
-            AssetReaderCollection assetReaders =
-                Assets.GetFieldValue<AssetRepository, AssetReaderCollection>("_readers");
+            AssetReaderCollection assetReaders = Assets.GetFieldValue<AssetRepository,
+                AssetReaderCollection>("_readers");
             assetReaders.RegisterReader(new EffectContentLoader(), ".xnb", "xnb");
         }
 
