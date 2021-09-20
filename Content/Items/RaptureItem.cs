@@ -67,6 +67,8 @@ namespace Rejuvena.Content.Items
             base.SetDefaults();
 
             SetDefaultsFromEnum(Defaults.Accessory);
+
+            Item.Size = ItemToDrawAs == ItemID.None ? new Vector2(20f) : ContentSamples.ItemsByType[ItemToDrawAs].Size;
         }
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 pos, Rectangle frame, Color drawColor,
@@ -76,6 +78,7 @@ namespace Rejuvena.Content.Items
                 return true;
 
             drawColor = drawColor.Multiply(Color.DarkGray.Multiply(Main.DiscoColor));
+            drawColor.A = 220;
 
             Texture2D tex = TextureAssets.Item[ItemToDrawAs].ForceRequest().Value;
 
@@ -108,6 +111,7 @@ namespace Rejuvena.Content.Items
                 return true;
 
             alpha = alpha.Multiply(Main.DiscoColor);
+            alpha.A = 220;
 
             SpriteEffects effects =
                 Main.LocalPlayer.gravity <= -1f ? SpriteEffects.FlipVertically : SpriteEffects.None;
