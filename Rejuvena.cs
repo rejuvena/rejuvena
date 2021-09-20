@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Content.Readers;
 using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 using TomatoLib;
 using TomatoLib.Common.Utilities.Extensions;
 
@@ -46,6 +48,13 @@ namespace Rejuvena
             AssetReaderCollection assetReaders =
                 Assets.GetFieldValue<AssetRepository, AssetReaderCollection>("_readers");
             assetReaders.RegisterReader(new EffectContentLoader(), ".xnb", "xnb");
+        }
+
+        public override void PostSetupContent()
+        {
+            base.PostSetupContent();
+
+            ItemID.Sets.Deprecated = new bool[ItemLoader.ItemCount];
         }
     }
 }
