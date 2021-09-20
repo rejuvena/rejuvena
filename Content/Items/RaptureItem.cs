@@ -66,39 +66,35 @@ namespace Rejuvena.Content.Items
             SetDefaultsFromEnum(Defaults.Accessory);
         }
 
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame,
-            Color drawColor, Color itemColor,
-            Vector2 origin, float scale)
+        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 pos, Rectangle frame, Color drawColor,
+            Color itemColor, Vector2 orig, float scale)
         {
             if (ItemToDrawAs == ItemID.None)
                 return true;
 
             Asset<Texture2D> itemTexture = TextureAssets.Item[ItemToDrawAs].ForceRequest();
 
-            DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, position, 0f, origin, scale, frame);
-            spriteBatch.Draw(itemTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, pos, 0f, orig, scale, frame);
+            spriteBatch.Draw(itemTexture.Value, pos, frame, drawColor, 0f, orig, scale, SpriteEffects.None, 0f);
 
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor,
-            ref float rotation, ref float scale,
-            int whoAmI)
+        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color light, Color alpha, ref float rot,
+            ref float scale, int whoAmI)
         {
             if (ItemToDrawAs == ItemID.None)
                 return true;
 
-            SpriteEffects sEffects =
+            SpriteEffects effects =
                 Main.LocalPlayer.gravity <= -1f ? SpriteEffects.FlipVertically : SpriteEffects.None;
 
-            Asset<Texture2D> itemTexture = TextureAssets.Item[ItemToDrawAs].ForceRequest();
+            Texture2D tex = TextureAssets.Item[ItemToDrawAs].ForceRequest().Value;
+            Vector2 drawPos = Item.position - Main.screenPosition;
 
-            Item.GetInWorldDrawData(out Rectangle frame, out Rectangle _, out Vector2 origin);
-
-            DrawTreasureBagLikeEffect(spriteBatch, itemTexture.Value, Item.position - Main.screenPosition, rotation,
-                origin, scale, frame);
-            spriteBatch.Draw(itemTexture.Value, Item.position - Main.screenPosition, frame, alphaColor, rotation,
-                origin, new Vector2(scale), sEffects, 0f);
+            Item.GetInWorldDrawData(out Rectangle frame, out Rectangle _, out Vector2 orig);
+            DrawTreasureBagLikeEffect(spriteBatch, tex, drawPos, rot, orig, scale, frame);
+            spriteBatch.Draw(tex, drawPos, frame, alpha, rot, orig, new Vector2(scale), effects, 0f);
 
             return false;
         }
@@ -109,16 +105,19 @@ namespace Rejuvena.Content.Items
             float rotationSpeed = Main.GlobalTimeWrappedHourly;
             float rotationDistance = Main.GlobalTimeWrappedHourly * 4f % 4f / 2f;
 
-            if (rotationDistance >= 1.0)
+            if (rotationDistance >= 1f)
                 rotationDistance = 2f - rotationDistance;
 
-            float rotationModifier = (float) (rotationDistance * 0.5 + 0.5);
+            float rotationModifier = rotationDistance * 0.5f + 0.5f;
 
-            Vector2 PosOffset(float i) => new Vector2(0.0f, 8f).RotatedBy((i + rotationSpeed) * MathHelper.TwoPi);
+            Vector2 PosOffset(float i) => new Vector2(0f, 8f).RotatedBy((i + rotationSpeed) * MathHelper.TwoPi);
 
-            void DrawTheThing(float i, Color color) => spriteBatch.Draw(texture,
-                position + PosOffset(i) * rotationModifier, frame, color, rotation, origin, scale, SpriteEffects.None,
-                0.0f);
+            void DrawTheThing(float i, Color color)
+            {
+                Vector2 drawPos = position + PosOffset(i) * rotationModifier;
+
+                spriteBatch.Draw(texture, drawPos, frame, color, rotation, origin, scale, SpriteEffects.None, 0f);
+            }
 
             for (float i = 0.0f; i < 1.0; i += 0.25f)
                 DrawTheThing(i, new Color(90, 70, 255, 50).Multiply(Color.Red));
