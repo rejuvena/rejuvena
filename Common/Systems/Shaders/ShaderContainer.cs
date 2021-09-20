@@ -14,8 +14,9 @@ using Terraria.ModLoader;
 using TomatoLib.Common.Systems;
 using TomatoLib.Core.Threading;
 
-namespace Rejuvena.Common.Shaders
+namespace Rejuvena.Common.Systems.Shaders
 {
+    // TODO: Finish?
     [Autoload(false, Side = ModSide.Client)]
     public sealed class ShaderContainer : SingletonSystem<ShaderContainer>
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Common.Utilities;
@@ -9,7 +8,6 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Projectiles.Friendly.Magic
 {
-    [UsedImplicitly]
     public class WhirlwindProjectile : RejuvenaProjectile
     {
         private static Asset<Texture2D> ProjectileTexture;

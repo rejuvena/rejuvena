@@ -5,12 +5,15 @@
 
 using System;
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.DataStructures.ItemCollections;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Common.Raptures
 {
+    /// <summary>
+    ///     Default implementation of <see cref="IItemRapture"/>.
+    /// </summary>
     public abstract class ItemRapture : IItemRapture
     {
         public virtual IEnumerable<IRapture> InheritedRaptures { get; } = Array.Empty<IRapture>();

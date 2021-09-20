@@ -1,22 +1,25 @@
-﻿using JetBrains.Annotations;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Rejuvena.Assets;
 using Rejuvena.Content.Biomes;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
 namespace Rejuvena.Content.Items.Debug
 {
+#if DEBUG
+    [Autoload]
+#else
+    [Autoload(false)]
+#endif
     [FallbackAsset(FallbackAssetType.Default)]
-    [UsedImplicitly]
     public class WorldgenTest : RejuvenaItem
     {
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            Item.Size = new Vector2(28f, 32f);
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 1;
             Item.useTime = 1;

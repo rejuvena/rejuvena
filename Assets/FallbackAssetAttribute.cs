@@ -8,6 +8,9 @@ namespace Rejuvena.Assets
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class FallbackAssetAttribute : Attribute
     {
+        /// <summary>
+        ///     The chosen asset type.
+        /// </summary>
         public FallbackAssetType AssetType { get; }
 
         public FallbackAssetAttribute(FallbackAssetType assetType)

@@ -4,14 +4,23 @@
 #endregion
 
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.DataStructures.ItemCollections;
 
 namespace Rejuvena.Common.Raptures
 {
+    /// <summary>
+    ///     Bare-bones rapture.
+    /// </summary>
     public interface IRapture
     {
+        /// <summary>
+        ///     All raptures this rapture inherits the effects of.
+        /// </summary>
         IEnumerable<IRapture> InheritedRaptures { get; }
 
+        /// <summary>
+        ///     All items associated with this rapture.
+        /// </summary>
         IEnumerable<ItemCollectionProfile> AssociatedItems { get; }
     }
 }

@@ -4,7 +4,7 @@
 #endregion
 
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Terraria.ID;
 

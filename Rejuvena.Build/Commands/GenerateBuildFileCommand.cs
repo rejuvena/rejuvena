@@ -3,7 +3,6 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -12,6 +11,7 @@ using CliFx.Attributes;
 using CliFx.Infrastructure;
 using Rejuvena.BuildConfigurer;
 using Spectre.Console;
+using SysVer = System.Version;
 
 namespace Rejuvena.Build.Commands
 {
@@ -47,14 +47,12 @@ namespace Rejuvena.Build.Commands
 
         public virtual async ValueTask ExecuteAsync(IConsole console)
         {
-            RejuvenaBuild build = new()
-            {
-                Version = System.Version.Parse(Version)
-            };
-
             AnsiConsole.WriteLine($"Writing to file: {OutputDir}");
 
-            await File.WriteAllTextAsync(OutputDir, build.WriteFile());
+            await File.WriteAllTextAsync(OutputDir, new RejuvenaBuild
+            {
+                Version = SysVer.Parse(Version)
+            }.WriteFile());
         }
     }
 }

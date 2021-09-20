@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Common.Utilities;
@@ -17,7 +16,6 @@ using TomatoLib.Common.Systems.DrawEffects;
 
 namespace Rejuvena.Content.NPCs.Hostile.Jungle
 {
-    [UsedImplicitly]
     public class JadeConstruct : RejuvenaNPC
     {
         private static Asset<Texture2D> CoreTexture;

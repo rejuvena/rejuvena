@@ -6,9 +6,6 @@ using TomatoLib.Common.Assets;
 using TomatoLib.Common.Systems;
 using TomatoLib.Core.Threading;
 
-// ReSharper disable CommentTypo
-// ReSharper disable UnusedMember.Global
-
 namespace Rejuvena.Common.Systems.Noise
 {
     /// <summary>
@@ -16,8 +13,6 @@ namespace Rejuvena.Common.Systems.Noise
     /// </summary>
     public sealed class NoiseSampler : SingletonSystem<NoiseSampler>
     {
-        public bool Initialized;
-
         public NoiseAsset DefaultPerlinMask;
 
         public override async void Load()

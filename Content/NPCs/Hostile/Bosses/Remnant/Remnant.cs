@@ -1,12 +1,10 @@
-﻿using JetBrains.Annotations;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.Localization;
 
 namespace Rejuvena.Content.NPCs.Hostile.Bosses.Remnant
 {
-    [UsedImplicitly]
     public class Remnant : RejuvenaNPC
     {
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

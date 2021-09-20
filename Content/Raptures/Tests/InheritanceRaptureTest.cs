@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Rejuvena.Content.Raptures.Items.PreHardMode.Wood;
 using Terraria;

@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rejuvena.Content.DrawEffects;
@@ -12,7 +11,6 @@ namespace Rejuvena.Content.Items.Materials.Jungle
     /// <summary>
     ///     Basic material dropped outside of the tower on the Island.
     /// </summary>
-    [UsedImplicitly]
     public class JadeGemstone : RejuvenaItem
     {
         /// <summary>

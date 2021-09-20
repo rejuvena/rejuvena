@@ -8,6 +8,9 @@ using Terraria.ModLoader;
 
 namespace Rejuvena.Common.Raptures
 {
+    /// <summary>
+    ///     Item-focused rapture.
+    /// </summary>
     public interface IItemRapture : IUpdateableRapture<ModItem>
     {
         void UpdateInWorld(ModItem modItem, ref float gravity, ref float maxFallSpeed);

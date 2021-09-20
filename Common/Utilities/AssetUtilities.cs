@@ -11,6 +11,9 @@ namespace Rejuvena.Common.Utilities
 {
     public static class AssetUtilities
     {
+        /// <summary>
+        ///     Request an async-loaded asset. Immediate-load the asset if it has not already been loaded.
+        /// </summary>
         public static Asset<T> LoadAsset<T>(this IAssetRepository repository, string path) where T : class
         {
             Asset<T> asyncLoadedAsset = repository.Request<T>(path);
@@ -23,6 +26,9 @@ namespace Rejuvena.Common.Utilities
             return asyncLoadedAsset;
         }
 
+        /// <summary>
+        ///     Request an async-loaded asset. Immediate-load the asset if it has not already been loaded.
+        /// </summary>
         public static Asset<T> LoadAsset<T>(string path) where T : class
         {
             Asset<T> asyncLoadedAsset = ModContent.Request<T>(path);
@@ -35,6 +41,9 @@ namespace Rejuvena.Common.Utilities
             return asyncLoadedAsset;
         }
 
+        /// <summary>
+        ///     Forcefully load the given asset.
+        /// </summary>
         public static Asset<T> ForceRequest<T>(this Asset<T> asset) where T : class
         {
             if (asset.IsLoaded)

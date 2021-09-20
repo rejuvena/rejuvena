@@ -3,31 +3,21 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using JetBrains.Annotations;
-using Rejuvena.Content.Items.Weapons.Magic;
+using System.Linq;
+using Rejuvena.Common.Utilities;
 using Terraria;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Globals.NPCs
 {
-    [UsedImplicitly]
     public class DropModifierNPC : GlobalNPC
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             base.ModifyNPCLoot(npc, npcLoot);
-
-            switch (npc.type)
-            {
-                case NPCID.Harpy:
-                    ModifyHarpyLoot(ref npcLoot);
-                    break;
-            }
+            
+            // ReSharper disable once AccessToModifiedClosure - Justification: NPCLoot is readonly and will never be modified.
+            ModContent.GetContent<LootModifier>().Where(x => x.NPCMatcher.Match(npc.type)).ForEach(x => x.ModifyNPCLoot(npc, npcLoot));
         }
-
-        public static void ModifyHarpyLoot(ref NPCLoot npcLoot) =>
-            npcLoot.Add(new CommonDrop(ModContent.ItemType<Whirlwind>(), 90));
     }
 }

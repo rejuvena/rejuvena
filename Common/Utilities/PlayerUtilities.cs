@@ -9,6 +9,9 @@ namespace Rejuvena.Common.Utilities
 {
     public static class PlayerUtilities
     {
+        /// <summary>
+        ///     Cancel the usage of an item currently in use.
+        /// </summary>
         public static void CancelItemUsage(this Player player) =>
             player.itemAnimation = player.itemTime = player.reuseDelay = 0;
     }

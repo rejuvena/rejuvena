@@ -7,7 +7,7 @@ using System;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Rejuvena.Common.DataStructures;
+using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Rejuvena.Common.Utilities;
 using ReLogic.Content;

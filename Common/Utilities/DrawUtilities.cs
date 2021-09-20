@@ -11,6 +11,9 @@ namespace Rejuvena.Common.Utilities
 {
     public static class DrawUtilities
     {
+        /// <summary>
+        ///     Linearly interpolates the <see cref="Vector2.X"/> and <see cref="Vector2.Y"/> values of two vectors by the <c>X</c> and <c>Y</c> values of <paramref name="byValue"/>.
+        /// </summary>
         public static Vector2 Vector2Lerp(Vector2 fromValue, Vector2 toValue, Vector2 byValue)
         {
             Vector2 from = fromValue;
@@ -21,9 +24,15 @@ namespace Rejuvena.Common.Utilities
             return from;
         }
 
+        /// <summary>
+        ///     Linearly interpolates the <see cref="Vector2.X"/> and <see cref="Vector2.Y"/> values of two vectors by the value of <paramref name="byValue"/>.
+        /// </summary>
         public static Vector2 Vector2Lerp(Vector2 fromValue, Vector2 toValue, float byValue) =>
             Vector2Lerp(fromValue, toValue, new Vector2(byValue));
 
+        /// <summary>
+        ///     Get item draw data provided by <see cref="Main.DrawItem_GetBasics"/>.
+        /// </summary>
         public static void GetInWorldDrawData(this Item item, out Rectangle frame, out Rectangle glowMaskFrame,
             out Vector2 origin)
         {
