@@ -36,10 +36,8 @@ namespace Rejuvena.Content.Items
             return retVal;
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public virtual void UpdateInWorld(ref float gravity, ref float maxFallSpeed)
         {
-            base.Update(ref gravity, ref maxFallSpeed);
-
             ExecuteFromInheritedRaptures<object>((rapture, _) =>
             {
                 if (rapture is IUpdateableRapture<ModItem> modItemRapture)

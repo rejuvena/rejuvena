@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
+    <Folder Include="Content\Recipes\" />
     <Folder Include="Content\Players\ModifyingPlayers\" />
   </ItemGroup>
 

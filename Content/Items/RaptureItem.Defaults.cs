@@ -34,5 +34,13 @@ namespace Rejuvena.Content.Items
                     ? item.Size
                     : new Item(ItemToDrawAs).Size;
         }
+
+        public override void Update(ref float gravity, ref float maxFallSpeed)
+        {
+            base.Update(ref gravity, ref maxFallSpeed);
+
+            UpdateInWorld(ref gravity, ref maxFallSpeed);
+            UpdateOnSpawn(ref gravity, ref maxFallSpeed);
+        }
     }
 }
