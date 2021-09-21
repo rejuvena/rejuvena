@@ -48,7 +48,8 @@ namespace Rejuvena.Content.Items
                     break;
 
                 case 180:
-                    DustUtilities.DrawStar(Item.position, DustID.Shadowflame);
+                    DustUtilities.DrawStar(Item.position, DustID.Shadowflame, mainSize: 3f, dustDensity: 3f);
+                    DustUtilities.DrawCircle(Item.position, DustID.Shadowflame, mainSize: 3f, dustDensity: 3f);
                     SoundEngine.PlaySound(new LegacySoundStyle(SoundID.Item, 14));
                     break;
 
