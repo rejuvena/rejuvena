@@ -17,7 +17,7 @@ namespace Rejuvena.Content.Globals.NPCs
             base.ModifyNPCLoot(npc, npcLoot);
             
             // ReSharper disable once AccessToModifiedClosure - Justification: NPCLoot is readonly and will never be modified.
-            ModContent.GetContent<LootModifier>().Where(x => x.NPCMatcher.Match(npc.type)).ForEach(x => x.ModifyNPCLoot(npc, npcLoot));
+            ModContent.GetContent<LootModifier>().Where(x => x.NpcMatcher.Match(npc.type)).ForEach(x => x.ModifyNpcLoot(npc, npcLoot));
         }
     }
 }

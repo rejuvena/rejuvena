@@ -11,7 +11,7 @@ namespace Rejuvena.Content.Items.Debug
 #if DEBUG
     [Autoload]
 #else
-    [Autoload(false)]
+[Autoload(false)]
 #endif
     [FallbackAsset(FallbackAssetType.Default)]
     public class WorldgenTest : RejuvenaItem

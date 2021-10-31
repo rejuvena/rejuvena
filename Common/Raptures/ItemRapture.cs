@@ -5,9 +5,9 @@
 
 using System;
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Terraria;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Common.Raptures
 {

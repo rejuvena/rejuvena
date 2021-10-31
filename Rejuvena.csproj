@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../tModLoader.targets" />
 
@@ -34,9 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Systems\Deprecation\" />
     <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
     <Folder Include="Content\Recipes\" />
     <Folder Include="Content\Players\ModifyingPlayers\" />
+    <Folder Include="Core\Cutscenes\" />
   </ItemGroup>
 
   <Target Name="GenerateBuild" AfterTargets="PreBuildEvent">

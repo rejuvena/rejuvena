@@ -5,11 +5,11 @@
 
 using System;
 using JetBrains.Annotations;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Content.Items
 {

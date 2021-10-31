@@ -37,9 +37,14 @@ namespace Rejuvena.Content.Items.Materials.Jungle
             Item.value = Item.sellPrice(copper: 75);
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor,
-            float rotation, float scale,
-            int whoAmI)
+        public override void PostDrawInWorld(
+            SpriteBatch spriteBatch,
+            Color lightColor,
+            Color alphaColor,
+            float rotation,
+            float scale,
+            int whoAmI
+        )
         {
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
 
@@ -99,7 +104,7 @@ namespace Rejuvena.Content.Items.Materials.Jungle
         }
 
         /// <summary>
-        ///     Sets/resets initial NPC-dropped spawn effects.
+        ///     Sets/resets initial Npc-dropped spawn effects.
         /// </summary>
         public void SetInitialSpawn()
         {

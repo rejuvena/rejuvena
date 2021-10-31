@@ -4,12 +4,13 @@
 #endregion
 
 using System;
+using JetBrains.Annotations;
 
 namespace Rejuvena.Common.Utilities
 {
     public static class Builder
     {
-        public static T Do<T>(T instance, Action action)
+        public static T Do<T>([NotNull] T instance, [NotNull] Action action)
         {
             action();
             return instance;

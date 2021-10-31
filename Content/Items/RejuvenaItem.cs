@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Rejuvena.Assets;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Content.Items
 {

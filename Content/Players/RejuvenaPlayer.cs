@@ -27,17 +27,17 @@ namespace Rejuvena.Content.Players
         {
             base.OnHitPvp(item, target, damage, crit);
 
-            OnHitAnythingWithDamage(damage, 0f, crit);
+            OnHitAnythingWithDamage(damage, null, crit);
         }
 
         public override void OnHitPvpWithProj(Projectile proj, Player target, int damage, bool crit)
         {
             base.OnHitPvpWithProj(proj, target, damage, crit);
 
-            OnHitAnythingWithDamage(damage, 0f, crit);
+            OnHitAnythingWithDamage(damage, null, crit);
         }
 
-        public virtual void OnHitAnythingWithDamage(int damage, float knockback, bool crit)
+        public virtual void OnHitAnythingWithDamage(int damage, float? knockback, bool crit)
         {
         }
     }

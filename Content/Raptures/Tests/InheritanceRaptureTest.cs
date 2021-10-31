@@ -5,11 +5,11 @@
 
 using System;
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Rejuvena.Content.Raptures.Items.PreHardMode.Wood;
 using Terraria;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Content.Raptures.Tests
 {

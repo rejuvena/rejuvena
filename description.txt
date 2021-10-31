@@ -1,3 +1,31 @@
 Rejuvena is a content mod that adds sexy men.
+W.I.P. Trelamium 2 content has moved into this mod. Think of it as "Trelamium 3 + Other Content That Came Before It: Return of the Jedi".
 
 This mod utilizes FastNoiseLite, a single-file library for generating noise, licensed under the MIT license. Copyright 2020 Jorden Peck (jordan.me2@gmail.com) and FastNoiseLite contributors.
+
+Rejuvena Full Credits:
+Tomat - Head Developer & Main Programmer
+ENNWAY - Composer & Programmer
+
+Trelamium Developers (unspecified listing):
+Signia (Sig)
+HugeKraken
+Blossom
+MountainyBear49
+Tiredghostdude
+Lemmy
+musicman
+iFlicky
+OneDiamondBoi
+ShockedHorizon5
+HondaCivicMoment
+RighteousRyan
+Tobias.
+Pyxis
+
+Trelamium Contributors & Members (unspecified listing):
+Aanka
+Arcri
+ExitiumTheCat
+Andrizinho16
+TacoBurritoGuacamole

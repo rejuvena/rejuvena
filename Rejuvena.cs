@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Rejuvena.Common.Systems.Deprecation;
 using ReLogic.Content;
 using ReLogic.Content.Readers;
 using Terraria;
@@ -45,16 +46,19 @@ namespace Rejuvena
         {
             base.Load();
 
-            AssetReaderCollection assetReaders = Assets.GetFieldValue<AssetRepository,
-                AssetReaderCollection>("_readers");
+            AssetReaderCollection assetReaders = Assets.GetFieldValue<
+                AssetRepository,
+                AssetReaderCollection
+            >("_readers");
+
             assetReaders.RegisterReader(new EffectContentLoader(), ".xnb", "xnb");
         }
 
         public override void PostSetupContent()
         {
             base.PostSetupContent();
-
-            ItemID.Sets.Deprecated = new bool[ItemLoader.ItemCount];
+        
+            ItemDeprecator.Instance.Remove(ItemID.FirstFractal);
         }
     }
 }

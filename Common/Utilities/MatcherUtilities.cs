@@ -3,8 +3,8 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using Rejuvena.Common.DataStructures.Matching;
-using Rejuvena.Common.DataStructures.Matching.Implementation;
+using TomatoLib.Common.Utilities.Matching;
+using TomatoLib.Common.Utilities.Matching.Implementation;
 
 namespace Rejuvena.Common.Utilities
 {

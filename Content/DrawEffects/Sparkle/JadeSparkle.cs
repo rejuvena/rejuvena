@@ -11,10 +11,10 @@ namespace Rejuvena.Content.DrawEffects
     public class JadeSparkle : EntityDrawEffect
     {
         public override Asset<Texture2D> Asset { get; set; } =
-            ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle");
+            ModContent.Request<Texture2D>("Rejuvena/Content/DrawEffects/Sparkle/Sparkle");
 
         public float Timer;
-        public NPC NPC;
+        public NPC Npc;
         public Vector2 TargetScale = new(Main.rand.NextFloat(0.2f, 0.5f));
         public float RotationIncrementation = Main.rand.NextFloat(-3f, 3f);
 
@@ -39,16 +39,16 @@ namespace Rejuvena.Content.DrawEffects
             {
                 Scale = DrawUtilities.Vector2Lerp(Scale, TargetScale, 0.3f);
 
-                if (NPC != null)
-                    position += NPC.velocity;
+                if (Npc != null)
+                    position += Npc.velocity;
             }
             else
             {
                 RotationIncrementation *= 0.93f;
                 Scale = DrawUtilities.Vector2Lerp(Scale, TargetScale, -0.23f);
 
-                if (NPC != null)
-                    position += NPC.velocity * 0.6f;
+                if (Npc != null)
+                    position += Npc.velocity * 0.6f;
 
                 if (Scale.X <= 0 || Scale.Y <= 0)
                     Destroy();

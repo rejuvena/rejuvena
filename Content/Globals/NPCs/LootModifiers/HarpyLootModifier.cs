@@ -3,21 +3,21 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using Rejuvena.Common.DataStructures.Matching;
 using Rejuvena.Common.Utilities;
 using Rejuvena.Content.Items.Weapons.Magic;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.Matching;
 
 namespace Rejuvena.Content.Globals.NPCs.LootModifiers
 {
     public class HarpyLootModifier : LootModifier
     {
-        public override Matcher<int> NPCMatcher => new Matcher<int>().MatchExact(NPCID.Harpy);
+        public override Matcher<int> NpcMatcher => new Matcher<int>().MatchExact(NPCID.Harpy);
 
-        public override void ModifyNPCLoot(NPC npc, NPCLoot loot) =>
+        public override void ModifyNpcLoot(NPC npc, NPCLoot loot) =>
             loot.Add(new CommonDrop(ModContent.ItemType<Whirlwind>(), 90));
     }
 }

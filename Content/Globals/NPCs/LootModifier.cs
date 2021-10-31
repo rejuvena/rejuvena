@@ -3,15 +3,15 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using Rejuvena.Common.DataStructures.Matching;
 using Terraria;
 using Terraria.ModLoader;
+using TomatoLib.Common.Utilities.Matching;
 
 namespace Rejuvena.Content.Globals.NPCs
 {
     public abstract class LootModifier : ILoadable
     {
-        public abstract Matcher<int> NPCMatcher { get; }
+        public abstract Matcher<int> NpcMatcher { get; }
 
         public virtual void Load(Mod mod)
         {
@@ -21,6 +21,6 @@ namespace Rejuvena.Content.Globals.NPCs
         {
         }
 
-        public abstract void ModifyNPCLoot(NPC npc, NPCLoot loot);
+        public abstract void ModifyNpcLoot(NPC npc, NPCLoot loot);
     }
 }

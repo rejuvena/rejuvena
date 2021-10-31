@@ -4,9 +4,9 @@
 #endregion
 
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Terraria.ID;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Content.Raptures.Items.PreHardMode.Wood
 {

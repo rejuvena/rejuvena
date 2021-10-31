@@ -31,7 +31,7 @@ namespace Rejuvena.Assets
         {
         }
         
-        [MustUseReturnValue("Otherwise pointless async request.")]
+        [MustUseReturnValue("Otherwise pointless async-loading request.")]
         public Asset<Texture2D> GetTexture() => ModContent.Request<Texture2D>(Path);
 
         [MustUseReturnValue("Otherwise pointless retrieval.")]

@@ -56,7 +56,7 @@ namespace Rejuvena.Common.Systems.Shaders
         }
 
         public async Task<Ref<Effect>> Get(string path) =>
-            await GLCallLocker.Instance.InvokeAsync(() =>
+            await GlThreadLocker.Instance.InvokeAsync(() =>
                 new Ref<Effect>(Mod.Assets.Request<Effect>(path, AssetRequestMode.ImmediateLoad).Value));
     }
 }

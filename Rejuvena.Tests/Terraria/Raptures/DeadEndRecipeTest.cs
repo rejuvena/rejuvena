@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Rejuvena.Common.DataStructures.ItemCollections;
 using Rejuvena.Common.Raptures;
 using Terraria.ID;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Tests.Terraria.Raptures
 {

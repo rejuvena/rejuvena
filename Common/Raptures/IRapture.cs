@@ -4,7 +4,7 @@
 #endregion
 
 using System.Collections.Generic;
-using Rejuvena.Common.DataStructures.ItemCollections;
+using TomatoLib.Common.Utilities.ItemCollections;
 
 namespace Rejuvena.Common.Raptures
 {
