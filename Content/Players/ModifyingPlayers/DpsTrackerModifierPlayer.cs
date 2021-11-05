@@ -27,7 +27,7 @@ namespace Rejuvena.Content.Players.ModifyingPlayers
             On.Terraria.Player.getDPS += DpsHijacker;
         }
 
-        public override void OnHitAnythingWithDamage(int damage, float knockback, bool crit)
+        public override void OnHitAnythingWithDamage(int damage, float? knockback, bool crit)
         {
             base.OnHitAnythingWithDamage(damage, knockback, crit);
 
