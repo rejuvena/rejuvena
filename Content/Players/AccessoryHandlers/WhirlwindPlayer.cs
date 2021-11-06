@@ -1,10 +1,8 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
-using TomatoLib.Core.Implementation.Compatibility.Calls;
 
 namespace Rejuvena.Content.Players.AccessoryHandlers
 {
-    public class WhirlwindPlayer : ModPlayerWithCalls
+    public class WhirlwindPlayer : RejuvenaPlayer
     {
         #region ModPlayer
 
@@ -37,33 +35,6 @@ namespace Rejuvena.Content.Players.AccessoryHandlers
                 hitDirection *= -1; // flip sign
 
             return orig(self, damage, knockback, hitDirection, crit, noEffect, fromNet);
-        }
-
-        #endregion
-
-        #region CallHandler
-
-        public override string Accessor => "WhirlwindPlayer";
-
-        public override object Action(Mod mod, params object[] args)
-        {
-            DefaultModCaller.AssertArguments(args, typeof(Player), typeof(string));
-            Player player = args[0] as Player;
-
-            switch (((string)args[1]).ToLower())
-            {
-                // ReSharper disable once StringLiteralTypo
-                case "setchance" when args[2] is int chance:
-                    player!.GetModPlayer<WhirlwindPlayer>().InXChance = chance;
-                    break;
-
-                // ReSharper disable once StringLiteralTypo
-                case "setenabled" when args[2] is bool enabled:
-                    player!.GetModPlayer<WhirlwindPlayer>().Whirlwind = enabled;
-                    break;
-            }
-
-            return null;
         }
 
         #endregion

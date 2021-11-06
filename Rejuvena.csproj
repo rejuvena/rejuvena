@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\ArmorSets\" />
     <Folder Include="Common\Systems\Deprecation\" />
     <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
     <Folder Include="Content\Cutscenes\" />
