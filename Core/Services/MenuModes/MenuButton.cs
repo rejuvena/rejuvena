@@ -62,7 +62,7 @@ namespace Rejuvena.Core.Services.MenuModes
         public bool ReadonlyText = true;
 
         /// <summary>
-        /// Similar to <see cref="readonlyText"/>, but just disallows clicking and hovering while still keeping the menu button color the same.
+        /// Similar to <see cref="ReadonlyText"/>, but just disallows clicking and hovering while still keeping the menu button color the same.
         /// </summary>
         public bool UnhoverableText = true;
 

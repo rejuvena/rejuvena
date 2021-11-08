@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using System.Collections.Generic;
+using Terraria;
 
 namespace Rejuvena.Core.Services.MenuModes
 {
@@ -20,16 +21,6 @@ namespace Rejuvena.Core.Services.MenuModes
         {
         }
 
-        public abstract void ModifyMenu(
-            Main main,
-            int selectedMenu,
-            string[] buttonNames,
-            float[] buttonScales,
-            int[] buttonVerticalSpacing,
-            ref int offY,
-            ref int spacing,
-            ref int numButtons,
-            ref bool backButtonDown
-        );
+        public abstract void ModifyMenu(List<MenuButton> buttons);
     }
 }

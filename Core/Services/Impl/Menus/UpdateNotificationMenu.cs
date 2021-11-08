@@ -1,21 +1,11 @@
-﻿using Rejuvena.Core.Services.MenuModes;
-using Terraria;
+﻿using System.Collections.Generic;
+using Rejuvena.Core.Services.MenuModes;
 
 namespace Rejuvena.Core.Services.Impl.Menus
 {
     public class UpdateNotificationMenu : Menu
     {
-        public override void ModifyMenu(
-            Main main,
-            int selectedMenu,
-            string[] buttonNames,
-            float[] buttonScales,
-            int[] buttonVerticalSpacing,
-            ref int offY,
-            ref int spacing,
-            ref int numButtons, 
-            ref bool backButtonDown
-        )
+        public override void ModifyMenu(List<MenuButton> buttons)
         {
             
         }

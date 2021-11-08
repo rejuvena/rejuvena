@@ -10,7 +10,7 @@ namespace Rejuvena.Core.Services.MenuModes
 {
     public class MenuModeHandler : Service
     {
-        public List<Menu> Menus = new();
+        public static List<Menu> Menus = new();
 
         public override void Load()
         {
@@ -37,33 +37,6 @@ namespace Rejuvena.Core.Services.MenuModes
             base.Unload();
 
             Menus.Clear();
-        }
-
-        public void DrawMenus(
-            Main main,
-            int selectedMenu,
-            string[] buttonNames,
-            float[] buttonScales,
-            int[] buttonVerticalSpacing,
-            ref int offY,
-            ref int spacing,
-            ref int numButtons,
-            ref bool backButtonDown
-        )
-        {
-            Menu? menu = Menus.FirstOrDefault(x => x.Id == selectedMenu);
-
-            menu?.ModifyMenu(
-                main,
-                selectedMenu,
-                buttonNames,
-                buttonScales,
-                buttonVerticalSpacing,
-                ref offY,
-                ref spacing,
-                ref numButtons,
-                ref backButtonDown
-            );
         }
 
         public static List<MenuButton> ButtonList(
@@ -113,8 +86,9 @@ namespace Rejuvena.Core.Services.MenuModes
                 button.YOffsetPos = yOffsetPos[i];
                 buttons.Add(button);
             }
-
-            // TODO: Modification method goes here.
+            
+            Menu? menu = Menus.FirstOrDefault(x => x.Id == Main.menuMode);
+            menu?.ModifyMenu(buttons);
 
             // Resize and repopulate arrays with new data.
             numButtons = buttons.Count;
@@ -131,7 +105,6 @@ namespace Rejuvena.Core.Services.MenuModes
             onLeftClick = new Action[numButtons];
             onRightClick = new Action[numButtons];
             onHover = new Action[numButtons];
-
 
             for (int i = 0; i < numButtons; i++)
             {
