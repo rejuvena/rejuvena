@@ -116,7 +116,21 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
             #region Color Modification
 
-            
+            ILLabel? matchedLabel = null;
+
+            // Jump out of the switch case.
+            c.GotoNext(x => x.MatchBr(out _));
+            c.GotoNext(x => x.MatchBrfalse(out _));
+            c.GotoNext(x => x.MatchSwitch(out _));
+            c.GotoNext(x => x.MatchBr(out _));
+            c.GotoNext(x => x.MatchBr(out matchedLabel));
+
+            c.GotoLabel(matchedLabel);
+
+            c.Emit(OpCodes.Ldloc, buttonColorIndex);
+            c.Emit(OpCodes.Ldloc, 673); // index int
+            c.Emit(OpCodes.Ldelem_Any, typeof(Color));
+            c.Emit(OpCodes.Stloc, 678); // Color
 
             #endregion
         }

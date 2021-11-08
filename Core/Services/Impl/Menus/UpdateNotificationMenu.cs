@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Rejuvena.Core.Services.MenuModes;
 using Terraria.ModLoader;
 
@@ -10,7 +11,12 @@ namespace Rejuvena.Core.Services.Impl.Menus
         {
             buttons.Clear();
 
-            buttons.Add(new MenuButton(ModContent.GetInstance<Rejuvena>(), "TestButton", "Test"));
+            MenuButton button = new(ModContent.GetInstance<Rejuvena>(), "TestButton", "Test")
+            {
+                Color = Color.Goldenrod
+            };
+
+            buttons.Add(button);
         }
     }
 }
