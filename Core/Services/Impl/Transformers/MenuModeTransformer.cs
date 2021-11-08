@@ -1,9 +1,6 @@
-﻿using System;
-using System.Reflection;
-using Rejuvena.Core.Services.MenuModes;
+﻿using System.Reflection;
 using Rejuvena.Core.Services.Transformers;
 using Terraria;
-using Terraria.ModLoader;
 using TomatoLib.Common.Utilities.Extensions;
 
 namespace Rejuvena.Core.Services.Impl.Transformers
