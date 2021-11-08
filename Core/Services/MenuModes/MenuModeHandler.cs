@@ -12,6 +12,9 @@ namespace Rejuvena.Core.Services.MenuModes
     {
         public static List<Menu> Menus = new();
 
+        public static TMenu? GetMenu<TMenu>() where TMenu : Menu =>
+            Menus.FirstOrDefault(x => x.GetType() == typeof(TMenu)) as TMenu;
+
         public override void Load()
         {
             base.Load();
@@ -59,6 +62,14 @@ namespace Rejuvena.Core.Services.MenuModes
         {
             List<MenuButton> buttons = new();
 
+            buttonColor = new Color[16];
+            onLeftClick = new Action?[16];
+            onRightClick = new Action?[16];
+            onHover = new Action?[16];
+
+            for (int i = 0; i < 16; i++)
+                buttonColor[i] = defaultColor;
+
             for (int i = 0; i < numButtons; i++)
             {
                 string buttonText = text[i]; // Can't use ref params in lambdas.
@@ -91,7 +102,7 @@ namespace Rejuvena.Core.Services.MenuModes
             menu?.ModifyMenu(buttons);
 
             // Resize and repopulate arrays with new data.
-            numButtons = buttons.Count;
+            /*numButtons = buttons.Count;
             readonlyText = new bool[numButtons];
             unhoverableText = new bool[numButtons];
             loweredAlpha = new bool[numButtons];
@@ -104,7 +115,7 @@ namespace Rejuvena.Core.Services.MenuModes
             text = new string[numButtons];
             onLeftClick = new Action[numButtons];
             onRightClick = new Action[numButtons];
-            onHover = new Action[numButtons];
+            onHover = new Action[numButtons];*/
 
             for (int i = 0; i < numButtons; i++)
             {

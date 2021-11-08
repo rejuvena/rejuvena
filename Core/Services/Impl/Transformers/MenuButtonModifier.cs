@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Rejuvena.Core.Services.MenuModes;
 using Rejuvena.Core.Services.Transformers;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using TomatoLib.Common.Utilities.Extensions;
 
@@ -51,8 +51,15 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
             // Praise the lords for I have found this godly anchor point.
             c.GotoNext(x => x.MatchCall<Color>("get_Black"));
-            c.GotoPrev(MoveType.Before, x => x.MatchLdcI4(0)); // Move out of the for-each loop.
-            
+            c.GotoNext(x => x.MatchCall<Color>("get_Black"));
+            c.GotoNext(x => x.MatchCall<Color>("get_Black"));
+            c.GotoNext(x => x.MatchCall<Color>("get_Black"));
+            c.GotoNext(x => x.MatchCall<Color>("get_Black"));
+            c.GotoPrev(x => x.MatchLdcI4(0));
+            c.GotoPrev(MoveType.After, x => x.MatchStloc(out _)); // Move out of the for-each loop.
+
+            #region List Initialization
+
             c.Emit(OpCodes.Ldloca, 8); // ref numButtons int
             c.Emit(OpCodes.Ldloca, 16); // readonlyText bool[]
             c.Emit(OpCodes.Ldloca, 17); // ref unhoverableText bool[]
@@ -104,6 +111,14 @@ namespace Rejuvena.Core.Services.Impl.Transformers
             ));
 
             c.Emit(OpCodes.Stloc, buttonsIndex);
+
+            #endregion
+
+            #region Color Modification
+
+            
+
+            #endregion
         }
     }
 }

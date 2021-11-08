@@ -1,8 +1,9 @@
 using System.Linq;
 using Rejuvena.Core.Services;
 using Rejuvena.Core.Services.Impl;
+using Rejuvena.Core.Services.Impl.Menus;
+using Rejuvena.Core.Services.MenuModes;
 using Terraria;
-using Terraria.GameContent.UI.States;
 using Terraria.ID;
 using TomatoLib;
 
@@ -19,8 +20,7 @@ namespace Rejuvena
                 if (Main.menuMode != MenuID.Title) 
                     return false;
 
-                Main.menuMode = MenuID.FancyUI;
-                Main.MenuUI.SetState(new UIAchievementsMenu());
+                Main.menuMode = MenuModeHandler.GetMenu<UpdateNotificationMenu>()?.Id ?? MenuID.Title;
 
                 return true;
             });
