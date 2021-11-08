@@ -21,7 +21,7 @@ namespace Rejuvena
                 // Display update menu for debugging or if an update menu is actually available.
                 bool update = GetService<RejuvenaVersionVerifier>().NeedsUpdating || Debugger.IsAttached;
                 
-                if (Main.menuMode != MenuID.Title)
+                if (Main.menuMode != MenuID.Title || !update)
                     return false;
 
                 Main.menuMode = MenuModeHandler.GetMenu<UpdateNotificationMenu>()?.Id ?? MenuID.Title;
