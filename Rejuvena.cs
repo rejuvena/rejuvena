@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using Rejuvena.Core.Services;
 using Rejuvena.Core.Services.Impl;
@@ -17,7 +18,10 @@ namespace Rejuvena
 
             GetService<TaskScheduler>().Tasks.Add(() =>
             {
-                if (Main.menuMode != MenuID.Title) 
+                // Display update menu for debugging or if an update menu is actually available.
+                bool update = GetService<RejuvenaVersionVerifier>().NeedsUpdating || Debugger.IsAttached;
+                
+                if (Main.menuMode != MenuID.Title)
                     return false;
 
                 Main.menuMode = MenuModeHandler.GetMenu<UpdateNotificationMenu>()?.Id ?? MenuID.Title;
