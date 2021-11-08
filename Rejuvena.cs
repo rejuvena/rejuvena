@@ -1,16 +1,11 @@
-using Rejuvena.Common.Systems.Deprecation;
-using Terraria.ID;
+using System.Linq;
+using Rejuvena.Core.Services;
 using TomatoLib;
 
 namespace Rejuvena
 {
     public class Rejuvena : TomatoMod
     {
-        public override void PostSetupContent()
-        {
-            base.PostSetupContent();
-        
-            ItemDeprecator.Instance.Remove(ItemID.FirstFractal);
-        }
+        public TService GetService<TService>() where TService : Service => GetContent<TService>().FirstOrDefault();
     }
 }

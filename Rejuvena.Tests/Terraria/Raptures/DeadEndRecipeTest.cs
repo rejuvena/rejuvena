@@ -3,19 +3,11 @@
 // GNU General Public License Version 3, 29 June 2007
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using Rejuvena.Common.Raptures;
-using Terraria.ID;
-using TomatoLib.Common.Utilities.ItemCollections;
-
 namespace Rejuvena.Tests.Terraria.Raptures
 {
     public static class DeadEndRecipeTest
     {
-        public static List<int> BlacklistedItems { get; } = new();
+        /*public static List<int> BlacklistedItems { get; } = new();
 
         public static Dictionary<int, bool> ResolvedItems { get; } = new();
 
@@ -62,6 +54,6 @@ namespace Rejuvena.Tests.Terraria.Raptures
 
             for (int i = 0; i < ItemID.Count; i++)
                 Console.WriteLine($"Item \"{ItemID.Search.GetName(i)}\" ({i}) in rapture: {ResolvedItems[i]}");
-        }
+        }*/
     }
 }

@@ -1,0 +1,1 @@
+﻿Contains loadable services for various tasks that only need to run once. Usually upon mod load.

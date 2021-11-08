@@ -4,11 +4,12 @@
 
   <PropertyGroup>
     <AssemblyName>Rejuvena</AssemblyName>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>0.0.0.1</AssemblyVersion>
     <TargetFramework>net5.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release</Configurations>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,13 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\ArmorSets\" />
-    <Folder Include="Common\Systems\Deprecation\" />
-    <Folder Include="Content\Items\Accessories\Raptures\PreHardMode\Wood\" />
-    <Folder Include="Content\Cutscenes\" />
-    <Folder Include="Content\Recipes\" />
-    <Folder Include="Content\Players\ModifyingPlayers\" />
-    <Folder Include="Core\Cutscenes\" />
+    <Folder Include="Core\Services\Impl\Transformers\" />
   </ItemGroup>
 
   <Target Name="GenerateBuild" AfterTargets="PreBuildEvent">
