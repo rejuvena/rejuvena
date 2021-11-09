@@ -1,11 +1,6 @@
-using System.Diagnostics;
 using System.Linq;
 using Rejuvena.Core.Services;
 using Rejuvena.Core.Services.Impl;
-using Rejuvena.Core.Services.Impl.Menus;
-using Rejuvena.Core.Services.MenuModes;
-using Terraria;
-using Terraria.ID;
 using TomatoLib;
 
 namespace Rejuvena
@@ -18,6 +13,8 @@ namespace Rejuvena
 
             GetService<TaskScheduler>().Tasks.Add(() =>
             {
+                return true;
+                /*
                 // Display update menu for debugging or if an update menu is actually available.
                 bool update = GetService<RejuvenaVersionVerifier>().NeedsUpdating || Debugger.IsAttached;
                 
@@ -27,6 +24,7 @@ namespace Rejuvena
                 Main.menuMode = MenuModeHandler.GetMenu<UpdateNotificationMenu>()?.Id ?? MenuID.Title;
 
                 return true;
+                */
             });
         }
 
