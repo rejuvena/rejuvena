@@ -23,38 +23,15 @@ namespace Rejuvena.Core.Services.Impl.Transformers
         public static void ModifyVersionText(ILContext il)
         {
             ILCursor c = new(il);
-            ILLabel jumpLabel = c.DefineLabel();
 
             c.GotoNext(x => x.MatchStloc(741));
 
             for (int i = 0; i < 2; i++)
                 c.GotoNext(x => x.MatchLdsfld<Main>("spriteBatch"));
 
-            c.Emit(OpCodes.Br_S, jumpLabel);
-
-            c.GotoNext(x => x.MatchCall(
-                    typeof(DynamicSpriteFontExtensionMethods).GetMethod(
-                        "DrawString",
-                        BindingFlags.Static | BindingFlags.Public,
-                        null,
-                        new[]
-                        {
-                            typeof(SpriteBatch),
-                            typeof(DynamicSpriteFont),
-                            typeof(string),
-                            typeof(Vector2),
-                            typeof(Color),
-                            typeof(float),
-                            typeof(Vector2),
-                            typeof(float),
-                            typeof(SpriteEffects),
-                            typeof(float)
-                        }, null)
-                )
-            );
-
-            c.Index++;
-            c.MarkLabel(jumpLabel);
+            c.GotoNext(MoveType.After, x => x.MatchLdloc(741));
+            c.Emit(OpCodes.Pop);
+            c.Emit(OpCodes.Ldstr, ""); // Replace draw text with empty string (lazy).
 
             c.Emit(OpCodes.Ldloc, 734); // num107 (for index)
             c.Emit(OpCodes.Ldloc, 736); // x offset
