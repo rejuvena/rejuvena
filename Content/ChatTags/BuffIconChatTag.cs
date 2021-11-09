@@ -21,7 +21,7 @@ namespace Rejuvena.Content.ChatTags
 
             Asset<Texture2D> buffIcon = TextureAssets.Buff[buffId];
 
-            if (buffIcon is null || buffIcon.Value is null)
+            if (buffIcon?.Value is null)
                 return new TextSnippet("null texture")
                 {
                     Color = Color.Red
