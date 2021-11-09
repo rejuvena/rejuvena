@@ -15,18 +15,17 @@ namespace Rejuvena.Core.Services.Impl.Menus
             
             Mod mod = ModContent.GetInstance<Rejuvena>();
 
-            MenuButton button = new(mod, "UpdateNotif", "Update available!")
+            buttons.Add(new MenuButton(mod, "UpdateAvailable", "An update for Rejuvena is available.")
             {
-                Color = Color.Goldenrod
-            };
-
-            buttons.Add(new MenuButton(mod, "UpdateAvailable", "An update for Rejuvena is available."));
+                Color = Color.Goldenrod,
+                NoCenterOffset = true
+            });
             
             // TODO: Continue button after we finish some other IL stuff.
             buttons.Add(new MenuButton(mod, "ContinueButton", "Continue")
             {
                 Scale = 0.55f,
-                XOffsetPos = 80,
+                YOffsetPos = 80,
                 ReadonlyText = false,
                 UnhoverableText = false
             });

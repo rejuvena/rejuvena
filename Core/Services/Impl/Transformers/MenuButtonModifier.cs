@@ -78,37 +78,8 @@ namespace Rejuvena.Core.Services.Impl.Transformers
             c.Emit(OpCodes.Ldloca, onRightClickIndex); // out
             c.Emit(OpCodes.Ldloca, onHoverIndex); // out
 
-            c.EmitDelegate<Cancer>((ref int numButtons,
-                ref bool[] readonlyText,
-                ref bool[] unhoverabletext,
-                ref bool[] loweredAlpha,
-                ref int[] xOffsetPos,
-                ref int[] yOffsetPos,
-                ref byte[] color,
-                ref float[] scale,
-                ref bool[] noCenterOffset,
-                ref string[] text,
-                Color defaultColor,
-                out Color[] buttonColor,
-                out Action?[] onLeftClick,
-                out Action?[] onRightClick,
-                out Action?[] onHover) => MenuModeHandler.ButtonList(
-                ref numButtons,
-                ref readonlyText,
-                ref unhoverabletext,
-                ref loweredAlpha,
-                ref yOffsetPos,
-                ref xOffsetPos,
-                ref color,
-                ref scale,
-                ref noCenterOffset,
-                ref text,
-                defaultColor,
-                out buttonColor,
-                out onLeftClick,
-                out onRightClick,
-                out onHover
-            ));
+            // c.EmitDelegate<Cancer>(MenuModeHandler.ButtonList);
+            c.Emit(OpCodes.Call, new Cancer(MenuModeHandler.ButtonList).Method);
 
             c.Emit(OpCodes.Stloc, buttonsIndex);
 
