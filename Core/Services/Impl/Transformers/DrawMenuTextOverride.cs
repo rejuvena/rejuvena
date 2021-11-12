@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Rejuvena.Core.Services.Transformers;
-using ReLogic.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
@@ -19,6 +18,8 @@ namespace Rejuvena.Core.Services.Impl.Transformers
         public override MethodInfo? MethodToTransform => typeof(Main).GetCachedMethod("DrawMenu");
 
         public override MethodInfo TransformingMethod => GetType().GetCachedMethod(nameof(ModifyVersionText));
+
+        public override bool ThreadSafe => false;
 
         public static void ModifyVersionText(ILContext il)
         {

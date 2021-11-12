@@ -11,6 +11,8 @@ namespace Rejuvena.Core.Services.Transformers
 
         MethodInfo TransformingMethod { get; }
 
+        bool ThreadSafe { get; }
+
         void Transform(MethodInfo transformedMethod, MethodInfo transformingMethod);
 
         void Load();

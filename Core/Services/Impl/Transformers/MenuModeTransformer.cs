@@ -25,6 +25,8 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
         public override MethodInfo TransformingMethod => GetType().GetCachedMethod(nameof(AppendModdedMenus));
 
+        public override bool ThreadSafe => false;
+
         private static void AppendModdedMenus(
             Orig orig,
             Main main,

@@ -5,7 +5,7 @@
   <PropertyGroup>
     <AssemblyName>Rejuvena</AssemblyName>
     <AssemblyVersion>0.0.0.1</AssemblyVersion>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release</Configurations>

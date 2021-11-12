@@ -41,8 +41,22 @@ namespace Rejuvena.Core.Services.Transformers
                     continue;
                 }
 
-                Mod.Logger.Debug("Applying transformer: " + transformer.GetType().FullName);
-                transformer.Transform(transformer.MethodToTransform, transformer.TransformingMethod);
+                if (!transformer.ThreadSafe)
+                {
+                    Mod.Logger.Debug("Transformer is not thread-safe: " + transformer.GetType().FullName);
+                    Mod.Logger.Debug("Proceeding to schedule transformer to apply on the main thread.");
+
+                    Main.QueueMainThreadAction(() =>
+                    {
+                        Mod.Logger.Debug("Apply thread-unsafe transformer: " + transformer.GetType().FullName);
+                        transformer.Transform(transformer.MethodToTransform, transformer.TransformingMethod);
+                    });
+                }
+                else
+                {
+                    Mod.Logger.Debug("Applying transformer: " + transformer.GetType().FullName);
+                    transformer.Transform(transformer.MethodToTransform, transformer.TransformingMethod);
+                }
             }
 
             Mod.Logger.Debug("Finished applying transformers.");

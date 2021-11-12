@@ -34,7 +34,9 @@ namespace Rejuvena.Core.Services.Impl.Transformers
         public override MethodInfo? MethodToTransform => typeof(Main).GetCachedMethod("DrawMenu");
 
         public override MethodInfo TransformingMethod => GetType().GetCachedMethod(nameof(InjectMenuButtons));
-        
+
+        public override bool ThreadSafe => false;
+
         private static void InjectMenuButtons(ILContext il)
         {
             // Goal: Imitate https://github.com/tModLoader/tModLoader/pull/1358/files#diff-e3389e7ea64819b97386e48546a4c037936825946f9d14219333bf0404292724
