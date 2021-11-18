@@ -10,6 +10,9 @@ JadeGemstone = "It glimmers a pale green"
 TestRaptureItem = "Hope it works!"
 WoodenRaptureItem = "'Check the safety manual!'"
 
+[Tooltips]
+BuffTooltip = "{0} - Lasts for {1}"
+
 [NPCName]
 JadeConstruct = "Jade Construct"
 Remnant = "Remnant"

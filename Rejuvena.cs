@@ -1,6 +1,7 @@
 using System.Linq;
 using Rejuvena.Core.Services;
 using Rejuvena.Core.Services.Impl;
+using Terraria.Localization;
 using TomatoLib;
 
 namespace Rejuvena
@@ -29,5 +30,8 @@ namespace Rejuvena
         }
 
         public TService GetService<TService>() where TService : Service => GetContent<TService>().First();
+
+        public static string GetText(string key, params object[] args) =>
+            Language.GetTextValue("Mods.Rejuvena." + key, args);
     }
 }

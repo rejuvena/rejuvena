@@ -35,7 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Wrappers\" />
     <Folder Include="Content\Components\Items\" />
+    <Folder Include="Content\Components\Base\" />
     <Folder Include="Content\Components\NPCs\" />
     <Folder Include="Core\Services\Impl\Menus\" />
     <Folder Include="Core\Services\Impl\Transformers\" />

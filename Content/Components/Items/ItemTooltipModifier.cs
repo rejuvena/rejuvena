@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using Rejuvena.Common;
+using Rejuvena.Common.Wrappers;
+using Rejuvena.Content.Components.Base;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace Rejuvena.Content.Components.Items
 {
-    public class ItemTooltipModifier : GlobalItem
+    public class ItemTooltipModifier : RejuvenaGlobalItem
     {
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        public override void ModifyTooltips(Item item, ToolTipWrapper tooltips)
         {
             base.ModifyTooltips(item, tooltips);
 
             AddBuffTooltip(item, tooltips);
         }
 
-        public void AddBuffTooltip(Item item, List<TooltipLine> tooltips)
+        public void AddBuffTooltip(Item item, ToolTipWrapper tooltips)
         {
             if (item.buffType < 0 || item.buffTime <= 0)
                 return;
@@ -35,10 +37,10 @@ namespace Rejuvena.Content.Components.Items
             TooltipLine line = new(
                 Mod,
                 $"{Mod.Name}:BuffTooltip",
-                $"[buff:{item.buffType}] - Lasts for {timeString}"
+                Rejuvena.GetText("Tooltips.BuffTooltip", $"[buff:{item.buffType}]", timeString)
             );
 
-            tooltips.Add(line);
+            tooltips.InsertBefore(new Identifier("Terraria", "JourneyResearch"), line);
         }
     }
 }

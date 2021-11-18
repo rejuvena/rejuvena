@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Rejuvena.Core.Services.Transformers;
