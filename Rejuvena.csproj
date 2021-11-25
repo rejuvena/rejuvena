@@ -39,6 +39,7 @@
     <Folder Include="Content\Components\Items\" />
     <Folder Include="Content\Components\Base\" />
     <Folder Include="Content\Components\NPCs\" />
+    <Folder Include="Content\Items\Test\" />
     <Folder Include="Core\Services\Impl\Menus\" />
     <Folder Include="Core\Services\Impl\Transformers\" />
   </ItemGroup>

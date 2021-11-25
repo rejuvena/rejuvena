@@ -101,9 +101,9 @@ namespace Rejuvena.Core.Services.Impl.Transformers
             c.GotoLabel(matchedLabel);
 
             c.Emit(OpCodes.Ldloc, buttonColorIndex);
-            c.Emit(OpCodes.Ldloc, 673); // index int
+            c.Emit(OpCodes.Ldloc, 667); // index int
             c.Emit(OpCodes.Ldelem_Any, typeof(Color));
-            c.Emit(OpCodes.Stloc, 678); // Color
+            c.Emit(OpCodes.Stloc, 668); // Color
 
             #endregion
         }

@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Rejuvena.Core.Services.Transformers;
+using ReLogic.Graphics;
 using Terraria;
-using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using TomatoLib.Common.Utilities.Extensions;
 
@@ -14,28 +16,30 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 {
     public class DrawMenuTextOverride : ILTransformerMethod
     {
-        public override MethodInfo? MethodToTransform => typeof(Main).GetCachedMethod("DrawMenu");
+        public override MethodInfo? MethodToTransform => typeof(Main).GetCachedMethod("DrawVersionNumber");
 
         public override MethodInfo TransformingMethod => GetType().GetCachedMethod(nameof(ModifyVersionText));
 
         public override bool ThreadSafe => false;
 
+        public static string? HoveredSocialsText = null;
+
         public static void ModifyVersionText(ILContext il)
         {
             ILCursor c = new(il);
 
-            c.GotoNext(x => x.MatchStloc(741));
+            c.GotoNext(x => x.MatchStloc(3));
+            c.GotoNext(x => x.MatchLdsfld<Main>("spriteBatch"));
 
-            for (int i = 0; i < 2; i++)
-                c.GotoNext(x => x.MatchLdsfld<Main>("spriteBatch"));
-
-            c.GotoNext(MoveType.After, x => x.MatchLdloc(741));
+            c.GotoNext(MoveType.After, x => x.MatchLdloc(3));
             c.Emit(OpCodes.Pop);
             c.Emit(OpCodes.Ldstr, ""); // Replace draw text with empty string (lazy).
 
-            c.Emit(OpCodes.Ldloc, 734); // num107 (for index)
-            c.Emit(OpCodes.Ldloc, 736); // x offset
-            c.Emit(OpCodes.Ldloc, 741); // text to draw
+            c.GotoNext(MoveType.After, x => x.MatchCall(typeof(DynamicSpriteFontExtensionMethods), "DrawString"));
+
+            c.Emit(OpCodes.Ldloc, 5); // i (for index)
+            c.Emit(OpCodes.Ldloc, 7); // x offset
+            c.Emit(OpCodes.Ldloc, 3); // text to draw
             c.EmitDelegate<Action<int, int, string>>((index, xOffset, text) =>
             {
                 // Only draw when the white text would draw
@@ -74,26 +78,29 @@ namespace Rejuvena.Core.Services.Impl.Transformers
         private static void DrawVersionText(int xOffset, string text)
         {
             // Split the text into a list of strings divided by newlines, reverse to order them properly, then convert them to an array
-            string[] lines = text.Split('\n').Reverse().ToArray();
+            IEnumerable<string> linesEnum = text.Split('\n').Reverse();
+            linesEnum = linesEnum.Append($"[c/{Color.Goldenrod.Hex3()}:Rejuvena {ModContent.GetInstance<Rejuvena>().Version}]");
 
+            string? hoveredText = HoveredSocialsText;
+            string? socialsText = hoveredText is not null
+                ? $"[c/{Color.Yellow.Hex3()}:{Language.GetTextValue(hoveredText)}]"
+                : null;
+
+            if (socialsText is not null) 
+                linesEnum = linesEnum.Prepend(socialsText);
+            
+            linesEnum = linesEnum.Prepend(""); // empty line for added spacing
+
+            List<string> lines = linesEnum.ToList();
+            
             // Draw text for each line, offsetting it on the y-axis as well
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Count; i++)
                 Utils.DrawBorderString(
-                    Main.spriteBatch, lines[i],
-                    new Vector2(xOffset + 10f, Main.screenHeight - 2f - 28f * (i + 1)),
+                    Main.spriteBatch, 
+                    lines[i],
+                    new Vector2(xOffset + 10f, Main.screenHeight - 6f - 28f * (i + 1)),
                     Color.White
                 );
-
-            // Finally, draw our text at the very top
-            Utils.DrawBorderString(
-                Main.spriteBatch,
-                $"Rejuvena {ModContent.GetInstance<Rejuvena>().Version}",
-                new Vector2(
-                    xOffset + 10f,
-                    Main.screenHeight - 28f - 2f - FontAssets.MouseText.Value.MeasureString(text).Y
-                ),
-                Color.Goldenrod
-            );
         }
     }
 }
