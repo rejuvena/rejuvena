@@ -8,6 +8,7 @@ using MonoMod.Cil;
 using Rejuvena.Core.Services.Transformers;
 using ReLogic.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using TomatoLib.Common.Utilities.Extensions;
@@ -91,7 +92,8 @@ namespace Rejuvena.Core.Services.Impl.Transformers
             if (socialsText is not null) 
                 linesEnum = linesEnum.Prepend(socialsText);
             
-            linesEnum = linesEnum.Prepend(""); // empty line for added spacing
+            if (Main.menuMode == MenuID.Title) 
+                linesEnum = linesEnum.Prepend(""); // empty line for added spacing
 
             List<string> lines = linesEnum.ToList();
             
@@ -100,7 +102,7 @@ namespace Rejuvena.Core.Services.Impl.Transformers
                 Utils.DrawBorderString(
                     Main.spriteBatch, 
                     lines[i],
-                    new Vector2(xOffset + 10f, Main.screenHeight - 6f - 28f * (i + 1)),
+                    new Vector2(xOffset + 10f, Main.screenHeight - 6f - (Main.menuMode == MenuID.Title ? 0f : 4f) - 28f * (i + 1)),
                     Color.White
                 );
         }
