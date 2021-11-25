@@ -26,3 +26,6 @@ UndroppableModification = "This drop is handled specially and cannot be modified
 
 [UI]
 GeneratingSkyTower = "Generating sky tower..."
+
+[TitleLinkButtons]
+Discord = "Rejuvena Discord"

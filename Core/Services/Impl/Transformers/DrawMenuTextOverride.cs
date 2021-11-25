@@ -85,7 +85,7 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
             string? hoveredText = HoveredSocialsText;
             string? socialsText = hoveredText is not null
-                ? $"[c/{Color.Yellow.Hex3()}:{Language.GetTextValue(hoveredText)}]"
+                ? $"[c/{HoveredSocialsColor.Hex3()}:{Language.GetTextValue(hoveredText)}]"
                 : null;
 
             if (socialsText is not null) 

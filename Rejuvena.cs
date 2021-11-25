@@ -1,6 +1,9 @@
 using System.Linq;
+using Rejuvena.Content.TitleLinkButtons;
 using Rejuvena.Core.Services;
 using Rejuvena.Core.Services.Impl;
+using Terraria;
+using Terraria.Initializers;
 using Terraria.Localization;
 using TomatoLib;
 
@@ -27,6 +30,16 @@ namespace Rejuvena
                 return true;
                 */
             });
+            
+            Main.TitleLinks.Add(new RejuvenaDiscordButton());
+        }
+
+        public override void Unload()
+        {
+            base.Unload();
+            
+            Main.TitleLinks.Clear();
+            LinkButtonsInitializer.Load();
         }
 
         public TService GetService<TService>() where TService : Service => GetContent<TService>().First();
