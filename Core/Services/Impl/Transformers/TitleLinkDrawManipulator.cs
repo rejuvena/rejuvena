@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Rejuvena.Content.Components.Generic;
+using Rejuvena.Content.Components.TitleLinkButtons;
 using Rejuvena.Core.Services.Transformers;
 using Terraria;
 using Terraria.DataStructures;
@@ -36,6 +38,11 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
             #endregion
 
+            #region Drawing
+
+            IColoredLinkButton? colorProvider = self as IColoredLinkButton;
+            Color drawColor = colorProvider?.GetDrawColor() ?? Color.White;
+            
             Rectangle imageFrame = self.Image.Frame();
             
             if (self.FrameWhenNotSelected.HasValue) 
@@ -60,10 +67,15 @@ namespace Rejuvena.Core.Services.Impl.Transformers
                 frame = framingRectangle.Value;
             
             Texture2D texture = self.Image.Value;
-            spriteBatch.Draw(texture, anchorPosition, frame, Color.White, 0f, frame.Size() / 2f, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, anchorPosition, frame, drawColor, 0f, frame.Size() / 2f, 1f, SpriteEffects.None, 0f);
 
-            if (hovering)
-                DrawMenuTextOverride.HoveredSocialsText = self.TooltipTextKey;
+            if (!hovering)
+                return;
+            
+            DrawMenuTextOverride.HoveredSocialsText = self.TooltipTextKey;
+            DrawMenuTextOverride.HoveredSocialsColor = colorProvider?.GetHoverColor() ?? Color.Yellow;
+
+            #endregion
         }
     }
 }

@@ -24,6 +24,8 @@ namespace Rejuvena.Core.Services.Impl.Transformers
 
         public static string? HoveredSocialsText = null;
 
+        public static Color HoveredSocialsColor = Color.Yellow;
+
         public static void ModifyVersionText(ILContext il)
         {
             ILCursor c = new(il);
